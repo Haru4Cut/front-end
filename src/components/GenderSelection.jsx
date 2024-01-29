@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Man from "../assets/images/ManCharacter.png";
 import Woman from "../assets/images/WomanCharacter.png";
-
+import CharacterAlert from "./CharacterAlert";
 export default function GenderSelection() {
   return (
     <>
@@ -17,6 +17,7 @@ export default function GenderSelection() {
           <ContentText marginTop="8px">남자</ContentText>
         </ManWrap>
       </CharacterWrap>
+      <CharacterAlert />
     </>
   );
 }
@@ -35,10 +36,13 @@ const ContentText = styled.div`
   font-weight: 400;
   text-align: center;
 `;
+
 const CharacterWrap = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 44px;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
 `;
 
 const WomanWrap = styled.div`
