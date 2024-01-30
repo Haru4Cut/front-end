@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "../components/Button";
-import CharacterSelectionText from "../components/CharacterSelectionText";
-import GenderSelection from "../components/GenderSelection";
-import AgeSelection from "../components/AgeSelection";
-import HairSelection from "../components/HairSelection";
-import SkinSelection from "../components/SkinSelection";
-import EtcSelection from "../components/EtcSelection";
-import SubmitButton from "../components/SubmitButton";
-import HairColor from "../components/HairColor";
-import HairStyle from "../components/HairStyle";
+import Button from "../components/common/Button";
+import CharacterSelectionText from "../components/character/CharacterSelectionText";
+import GenderSelection from "../components/character/GenderSelection";
+import AgeSelection from "../components/character/AgeSelection";
+import HairSelection from "../components/character/HairSelection";
+import SkinSelection from "../components/character/SkinSelection";
+import EtcSelection from "../components/character/EtcSelection";
+import SubmitButton from "../components/character/SubmitButton";
+import HairColor from "../components/character/HairColor";
+import HairStyle from "../components/character/HairStyle";
 
 export default function CharacterSelection() {
   const [selectionStep, setselectionStep] = useState(1);
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedAge, setSelectedAge] = useState(null);
+  const [selectedHairStyle, setSelectedHairStyle] = useState(null);
+  const [selectedHairColor, setSelectedHairColor] = useState(null);
+  const [selectedSkin, setSelectedSkin] = useState(null);
+  const [etcText, setEtcText] = useState("");
+
   const PageNum = 4;
   const handleNextStep = () => {
     if (selectionStep < PageNum) {
@@ -35,14 +42,20 @@ export default function CharacterSelection() {
   if (selectionStep === 1) {
     currentStep = (
       <SelectionBox>
-        <GenderSelection />
+        <GenderSelection
+          setSelectedGender={setSelectedGender}
+          selectedGender={selectedGender}
+        />
         <CircleNum selectionStep={selectionStep} PageNum={PageNum} />
       </SelectionBox>
     ); // 1이면 성별 선택
   } else if (selectionStep === 2) {
     currentStep = (
       <SelectionBox>
-        <AgeSelection />
+        <AgeSelection
+          setSelectedAge={setSelectedAge}
+          selectedAge={selectedAge}
+        />
         <CircleNum selectionStep={selectionStep} PageNum={PageNum} />
       </SelectionBox>
     ); // 2이면 나이 선택
@@ -54,7 +67,10 @@ export default function CharacterSelection() {
           marginBottom="0px"
           height="275px"
         >
-          <HairStyle />
+          <HairStyle
+            setSelectedHairStyle={setSelectedHairStyle}
+            selectedHairStyle={selectedHairStyle}
+          />
         </SelectionBox>
         <SelectionBox
           height="110px"
@@ -62,7 +78,10 @@ export default function CharacterSelection() {
           marginBottom="35px"
           padding="10px 30px 10px 30px"
         >
-          <HairColor />
+          <HairColor
+            setSelectedHairColor={setSelectedHairColor}
+            selectedHairColor={selectedHairColor}
+          />
           <CircleNum selectionStep={selectionStep} PageNum={PageNum} />
         </SelectionBox>
       </>
@@ -71,7 +90,10 @@ export default function CharacterSelection() {
     currentStep = (
       <>
         <SelectionBox padding="20px 30px" marginBottom="0px" height="110px">
-          <SkinSelection />
+          <SkinSelection
+            setSelectedSkin={setSelectedSkin}
+            selectedSkin={selectedSkin}
+          />
         </SelectionBox>
         <SelectionBox
           height="275px"
@@ -79,7 +101,7 @@ export default function CharacterSelection() {
           marginBottom="35px"
           padding="20px 30px"
         >
-          <EtcSelection />
+          <EtcSelection setEtcText={setEtcText} etcText={etcText} />
           <CircleNum selectionStep={selectionStep} PageNum={PageNum} />
         </SelectionBox>
       </>
@@ -94,7 +116,16 @@ export default function CharacterSelection() {
       {selectionStep < PageNum ? (
         <Button onClick={handleNextStep}>다음</Button>
       ) : (
-        selectionStep === PageNum && <SubmitButton />
+        selectionStep === PageNum && (
+          <SubmitButton
+            selectedGender={selectedGender}
+            selectedAge={selectedAge}
+            selectedHairStyle={selectedHairStyle}
+            selectedHairColor={selectedHairColor}
+            selectedSkin={selectedSkin}
+            etcText={etcText}
+          />
+        )
       )}
     </CharacterSelectionWrap>
   );
@@ -134,4 +165,13 @@ const Circle = styled.div`
   border-radius: 50%;
   background-color: ${(props) => (props.isSelected ? "#555555" : "#D9D9D9")};
   margin: 0 2px;
+`;
+const ClickedWrap = styled.div`
+  position: absolute;
+  width: 87px;
+  height: 136px;
+  border: 2px solid #5370d4;
+  border-radius: 10px;
+  background: rgba(83, 112, 212, 0.1);
+  filter: blur(1px);
 `;

@@ -1,10 +1,20 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export default function AgeSelection() {
+export default function AgeSelection({ setSelectedAge, selectedAge }) {
   const Age = ["10대", "2-30대", "4-50대", "60대 이상"];
+
+  const handleClickAge = (index) => {
+    setSelectedAge(index);
+  };
   const AgeList = Age.map((age, index) => (
-    <AgeCircle key={index}>{age}</AgeCircle>
+    <AgeCircle
+      key={index}
+      onClick={() => handleClickAge(index)}
+      isSelected={selectedAge === index}
+    >
+      {age}
+    </AgeCircle>
   ));
   return (
     <>
@@ -46,4 +56,18 @@ const AgeCircle = styled.div`
   justify-content: center;
   text-align: center;
   margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+  ${(props) =>
+    props.isSelected &&
+    css`
+      background-color: #5370d4;
+      color: white;
+      font-weight: 400;
+    `}
+  &:hover {
+    background-color: #5370d4;
+    color: white;
+    font-weight: 400;
+  }
 `;

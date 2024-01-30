@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import CharacterIcon from "../assets/images/CharacterIcon.svg";
 import styled from "styled-components";
-import Button from "../components/Button";
-import CharacterSelectionText from "../components/CharacterSelectionText";
+import Button from "../components/common/Button";
+import CharacterSelectionText from "../components/character/CharacterSelectionText";
 
 export default function Character() {
   return (

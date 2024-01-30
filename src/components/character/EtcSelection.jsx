@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function EtcSelection() {
+export default function EtcSelection({ setEtcText, etcText }) {
   const [inputCount, setInputCount] = useState(0);
   const onInputHandler = (e) => {
+    setEtcText(e.target.value);
     setInputCount(e.target.value.length);
   };
   return (
