@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
+import TodaysDiary from "../components/main/TodaysDiary";
+import MemoryDiary from "../components/main/MemoryDiary";
 export default function Main() {
   return (
     <MainWrap>
       <Header />
+      <TodaysDiary></TodaysDiary>
+      <MemoryDiary></MemoryDiary>
     </MainWrap>
   );
 }
