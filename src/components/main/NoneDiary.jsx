@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import diaryImg from "../../assets/images/diaryImg.svg";
+import { Link } from "react-router-dom";
 export default function NoneDiary() {
   return (
     <NoneDiaryWrap>
@@ -9,7 +10,7 @@ export default function NoneDiary() {
         네컷일기가 존재하지 않습니다! {"\n"}오늘의 일기를 네컷으로 기록해보세요
         :)
       </ContentText>
-      <DiaryButton>일기 만들러 가기</DiaryButton>
+      <DiaryButton to="/writting/frame">일기 만들러 가기</DiaryButton>
     </NoneDiaryWrap>
   );
 }
@@ -36,8 +37,9 @@ const ContentText = styled.div`
   margin: 18px 0px 28px 0px;
 `;
 
-const DiaryButton = styled.button`
+const DiaryButton = styled(Link)`
   text-decoration: none;
+  font-size: 14px;
   background-color: #5370d4;
   color: white;
   border: none;
