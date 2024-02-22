@@ -6,7 +6,7 @@ export default function Button(props) {
 }
 
 const StyledButton = styled(Link)`
-  width: 290px;
+  width: ${(props) => props.width || "290px"};
   height: 45px;
   background-color: ${(props) => props.backgroundColor || "#5370d4"};
   color: ${(props) => props.textColor || "white"};
