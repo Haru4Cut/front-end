@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NoneDiary from "./NoneDiary";
+import ExistDiary from "./ExistDiary";
 export default function TodaysDiary() {
   //오늘 날짜
   function getToday() {
@@ -17,6 +18,7 @@ export default function TodaysDiary() {
       <TodayDate>{getToday()}</TodayDate>
       <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
       <NoneDiary />
+      {/* <ExistDiary /> */}
     </>
   );
 }

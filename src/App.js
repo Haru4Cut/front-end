@@ -11,7 +11,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Main />} /> {/* 메인 페이지 */}
-        <Route path="/mypage" element={<MyPage />} /> {/* 메인 페이지 */}
+        <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
         <Route path="/character" element={<Character />} /> {/* 캐릭터 설정 */}
         <Route path="/character/selection" element={<CharacterSelection />} />
         <Route path="/haru4cut" element={<CompleteDiary />} />
