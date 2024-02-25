@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import "./calendarStyles.css";
 import moment from "moment";
 export default function CalendarPage() {
+  const [selectedDate, setSelectedDate] = useState();
   return (
     <CalendarWrap>
       <Header>
@@ -12,7 +13,11 @@ export default function CalendarPage() {
         <MyPageText>캘린더</MyPageText>
       </Header>
       <CalendarBox>
-        <Calendar formatDay={(locale, date) => moment(date).format("D")} />
+        <Calendar
+          formatDay={(locale, date) => moment(date).format("D")}
+          value={selectedDate}
+          onChange={setSelectedDate}
+        />
       </CalendarBox>
     </CalendarWrap>
   );
