@@ -5,6 +5,7 @@ import Character from "./pages/Character";
 import CharacterSelection from "./pages/CharacterSelection";
 import CompleteDiary from "./pages/CompleteDiary";
 import MyPage from "./pages/MyPage";
+import Calendar from "./pages/CalendarPage";
 function App() {
   return (
     <div className="App">
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} /> {/* 메인 페이지 */}
         <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
+        <Route path="/calendar" element={<Calendar />} /> {/* 캘린더 페이지 */}
         <Route path="/character" element={<Character />} /> {/* 캐릭터 설정 */}
         <Route path="/character/selection" element={<CharacterSelection />} />
         <Route path="/haru4cut" element={<CompleteDiary />} />
