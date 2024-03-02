@@ -12,6 +12,7 @@ import HairColor from "../components/character/HairColor";
 import HairStyle from "../components/character/HairStyle";
 
 export default function CharacterSelection() {
+  const [nickName, setNickName] = useState("");
   const [selectionStep, setselectionStep] = useState(1);
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedAge, setSelectedAge] = useState(null);
@@ -41,13 +42,28 @@ export default function CharacterSelection() {
   let currentStep;
   if (selectionStep === 1) {
     currentStep = (
-      <SelectionBox>
-        <GenderSelection
-          setSelectedGender={setSelectedGender}
-          selectedGender={selectedGender}
-        />
-        <CircleNum selectionStep={selectionStep} PageNum={PageNum} />
-      </SelectionBox>
+      <>
+        <SelectionBox
+          padding="0px 30px 0px 30px"
+          marginBottom="0px"
+          height="150px"
+        >
+          <TitleText>닉네임을 입력하세요</TitleText>
+          <Alertext>5글자 이하로 입력해주세요 :)</Alertext>
+          <NickNameInput
+            maxLength={5}
+            onChange={(e) => setNickName(e.target.value)}
+          ></NickNameInput>
+        </SelectionBox>
+
+        <SelectionBox marginTop="10px" height="280px">
+          <GenderSelection
+            setSelectedGender={setSelectedGender}
+            selectedGender={selectedGender}
+          />
+          <CircleNum selectionStep={selectionStep} PageNum={PageNum} />
+        </SelectionBox>
+      </>
     ); // 1이면 성별 선택
   } else if (selectionStep === 2) {
     currentStep = (
@@ -166,12 +182,31 @@ const Circle = styled.div`
   background-color: ${(props) => (props.isSelected ? "#555555" : "#D9D9D9")};
   margin: 0 2px;
 `;
-const ClickedWrap = styled.div`
-  position: absolute;
-  width: 87px;
-  height: 136px;
-  border: 2px solid #5370d4;
-  border-radius: 10px;
-  background: rgba(83, 112, 212, 0.1);
-  filter: blur(1px);
+const TitleText = styled.div`
+  color: #272727;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+`;
+
+const NickNameInput = styled.input`
+  margin-right: 10px;
+  font-family: "KotraHope";
+  width: 100px;
+  font-size: 21px;
+  color: #3a3a3a;
+  text-align: center;
+  border: none;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #a5a5a5;
+  outline: none;
+`;
+const Alertext = styled.div`
+  color: #9c9c9c;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  white-space: pre-wrap;
 `;

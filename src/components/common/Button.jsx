@@ -8,6 +8,7 @@ export default function Button(props) {
 const StyledButton = styled(Link)`
   width: ${(props) => props.width || "290px"};
   height: 45px;
+  margin-bottom: ${(props) => props.marginBottom || "0px"};
   background-color: ${(props) => props.backgroundColor || "#5370d4"};
   color: ${(props) => props.textColor || "white"};
   color: white;

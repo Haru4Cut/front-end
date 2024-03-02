@@ -4,7 +4,6 @@ import BackButton from "../components/common/BackButton";
 import Calendar from "react-calendar";
 import "./calendarStyles.css";
 import moment from "moment";
-import { ReactComponent as FavoriteIcon } from "../assets/images/FavoriteIcon.svg";
 import Button from "../components/common/Button";
 
 export default function CalendarPage() {
@@ -17,6 +16,7 @@ export default function CalendarPage() {
   ];
   const [isheartToggle, SetIsheartToggle] = useState(true);
   const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
+  const diaryId = 3;
   return (
     <CalendarWrap>
       <Header>
@@ -38,11 +38,12 @@ export default function CalendarPage() {
             {DiaryImgList.map((imgUrl, index) => (
               <>
                 <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
-                <StyledFavoriteIcon fill={heartIconColor} alt="heart icon" />
               </>
             ))}
           </ImgWrap>
-          <Button width="260px">자세히 보기</Button>
+          <Button width="260px" to={`/haru4cut/${diaryId}`}>
+            자세히 보기
+          </Button>
         </CalendarDiaryBox>
       )}
     </CalendarWrap>
@@ -51,7 +52,6 @@ export default function CalendarPage() {
 
 const CalendarWrap = styled.div`
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
   height: 100vh;
@@ -78,23 +78,17 @@ const Date = styled.div`
   font-weight: 600;
   margin-top: 20px;
 `;
+
 const DiaryImage = styled.img`
-  margin: 10px 0px;
+  margin: 5px;
 `;
+
 const ImgWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 260px;
-  margin: 20px 0px 20px 20px;
-`;
-const StyledFavoriteIcon = styled(FavoriteIcon)`
-  width: 22px;
-  height: 22px;
-  position: relative;
-  top: 105px;
-  left: -21px;
-  cursor: pointer;
+  margin: 20px 0px 20px 0px;
 `;
 
 const Todays4CutDiary = styled.div`
