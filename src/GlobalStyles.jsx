@@ -28,7 +28,16 @@ body {
     font-family: 'Pretendard';
     margin: 0;
     font-size: 16px;
+    .wrap{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f5f6;
+    }
 }
+
 
 `;
 
