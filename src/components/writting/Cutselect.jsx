@@ -52,7 +52,10 @@ const CutSelect = () => {
           ))}
         </div>
         <FrameContainer>
-          <FrameImage src={`/images/${cutNum}cut.png`} alt={`${cutNum}cut`} />
+          <FrameImage
+            src={`/images/${cutNum}cutframe.png`}
+            alt={`${cutNum}cut`}
+          />
         </FrameContainer>
         <SubmitButton to="/writting/date">선택</SubmitButton>
       </CutSelectWrap>
@@ -69,6 +72,7 @@ const SubmitButton = styled(Link)`
   color: white;
   border: none;
   border-radius: 20px;
+  margin-top: 20px;
   padding: 11px 69px;
   cursor: pointer;
   font-family: Pretendard;
@@ -82,8 +86,8 @@ const CutButton = styled(Button)`
   margin-left: 4vw;
   margin-right: 4vw;
   height: 3vh;
-  width: 10vw;
-  font-size: 2rem;
+  width: 5vw;
+  //font-size: 2rem;
   border-radius: 20px;
 `;
 
@@ -100,7 +104,7 @@ const FrameContainer = styled.div`
   height: 50vh; /* 프레임의 초기 높이 설정 */
   margin-top: 5vh;
   margin-bottom: 5vh;
-  overflow: hidden; /* 프레임을 넘는 컨텐츠 숨김 */
+  //overflow: hidden; /* 프레임을 넘는 컨텐츠 숨김 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,4 +114,5 @@ const FrameImage = styled.img`
   object-fit: contain; /* 이미지가 프레임 내에 맞게 조절됨 */
   width: 100%; /* 이미지의 너비를 프레임의 너비에 맞게 조절 */
   height: 100%; /* 이미지의 높이를 프레임의 높이에 맞게 조절 */
+  margin-top: 20px;
 `;

@@ -38,7 +38,13 @@ body {
     }
 }
 
-
+.start{
+  opacity: 0;
+}
+.end{
+  opacity: 1;
+  transition : opacity 5s;
+}
 `;
 
 export default GlobalStyle;

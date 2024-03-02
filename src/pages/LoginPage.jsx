@@ -5,6 +5,14 @@ const LoginPage = () => {
   return (
     <div className="wrap">
       <LoginWrap>
+        <img
+          src={"/images/Haru4Cut.png"}
+          style={{ width: "30%", height: "15%" }}
+        />
+        <img
+          src={"/images/logincontainer.png"}
+          style={{ width: "25%", height: "50%", marginTop: "3%" }}
+        />
         <KakaoLogin />
       </LoginWrap>
     </div>

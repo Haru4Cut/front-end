@@ -11,6 +11,7 @@ const KeywordInput = () => {
             <TopText>오늘 무슨 일이 있었나요?</TopText>
             <MiddleText>당신의 하루를 기록해주세요!</MiddleText>
           </TopBox>
+
           <WrittingContainer>
             <Form /> {/*컷 정보 & 네 가지 인풋이 들어감*/}
           </WrittingContainer>
@@ -24,22 +25,15 @@ export default KeywordInput;
 
 const KeywordInputWrap = styled.div`
   display: flex;
-
   justify-content: center;
   align-items: center;
   flex-direction: column;
 `;
 
 const WrittingContainer = styled.div`
-  background-color: pink;
-  //width: 75vw; /* 프레임의 초기 너비 설정 */
-  height: 65vh; /* 프레임의 초기 높이 설정 */
-  margin-top: 5%;
-  margin-bottom: 5%;
   overflow: hidden; /* 프레임을 넘는 컨텐츠 숨김 */
   display: flex;
   justify-content: center;
-
   align-items: center;
 `;
 const TopBox = styled.div`
@@ -47,6 +41,7 @@ const TopBox = styled.div`
   flex-direction: column;
   justify-content: space-around; /* 수평 중앙 정렬 */
   align-items: center; /* 수직 중앙 정렬 */
+  margin-bottom: 7%;
 `;
 
 const TopText = styled.div`

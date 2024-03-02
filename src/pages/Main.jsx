@@ -51,3 +51,15 @@ const MemoryDiaryWrap = styled.div`
   margin-top: 12px;
   margin-bottom: 20px;
 `;
+
+const StartButton = styled.div`
+  text-decoration: none;
+  font-size: 14px;
+  background-color: #5370d4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 11px 69px;
+  cursor: pointer;
+  font-family: Pretendard;
+`;

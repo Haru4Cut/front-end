@@ -36,7 +36,7 @@ const FourInput = ({
               }}
               onBlur={handleInputBlur}
               isFocused={focusedInput === "other"}
-              placeholder="ex) 아빠랑"
+              placeholder="  ex) 동기랑"
             />
           </InputGroup>
           <InputGroup>
@@ -51,7 +51,7 @@ const FourInput = ({
               }}
               onBlur={handleInputBlur}
               isFocused={focusedInput === "place"}
-              placeholder="ex) 산에서"
+              placeholder="  ex) 도서관에서"
             />
           </InputGroup>
           <InputGroup>
@@ -66,7 +66,7 @@ const FourInput = ({
               }}
               onBlur={handleInputBlur}
               isFocused={focusedInput === "action"}
-              placeholder="ex) 등산을"
+              placeholder="   ex) 공부를"
             />
           </InputGroup>
           <InputGroup>
@@ -129,19 +129,18 @@ const InputGroup = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-top: 3vh;
-  margin-right: 5vw;
-  align-items: flex-end; /* 오른쪽 정렬을 위해 수정 */
+  // margin-right: 5vw;
+  //align-items: flex-end; /* 오른쪽 정렬을 위해 수정 */
 `;
 const CategoryTitle = styled.div`
-  align-self: flex-start;
-  margin-left: 10%;
-  margin-bottom: 5%;
+  margin-bottom: 10px;
+  width: 60%;
 `;
 const StyledInput = styled.input`
   border-radius: 5px;
   border: ${({ isFocused }) =>
     isFocused ? "2px solid blue" : "1px solid gray"};
-  width: 90%;
+  width: 60%;
   height: 5vh;
 `;
 
@@ -149,13 +148,13 @@ const StyledSelect = styled.select`
   border-radius: 5px;
   border: ${({ isFocused }) =>
     isFocused ? "2px solid blue" : "1px solid gray"};
-  width: 90%;
+  width: 60%;
   //height: 50%; /* Input 스타일과 동일하게 변경 */
   height: 5vh;
 `;
 const CutInfoText = styled.div`
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
-  margin-top: 5vh;
-  margin-left: 40%;
+
+  font-family: "KotraHope";
 `;

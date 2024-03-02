@@ -9,7 +9,6 @@ const KeywordInputPage = () => {
       <KeywordInputWrap>
         <div>
           <KeywordInput />
-          <div>ㅎㅇ</div>
         </div>
       </KeywordInputWrap>
     </div>
@@ -28,4 +27,6 @@ const KeywordInputWrap = styled.div`
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
   width: 85%;
   height: 85%;
+  padding-top: 15px;
 `;
+

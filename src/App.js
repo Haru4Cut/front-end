@@ -10,13 +10,14 @@ import KeywordInputPage from "./pages/KeywordInputPage";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import SubmitLoadingPage from "./pages/SubmitLoading";
-
+import OnboardingPage from "./pages/OnboardingPage";
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<Main />} /> {/* 메인 페이지 */}
+        <Route path="/" element={<OnboardingPage />} /> {/* 메인 페이지 */}
+        <Route path="/home" element={<Main />} /> {/* 메인 페이지 */}
         <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
         <Route path="/login" element={<LoginPage />} /> {/* 마이 페이지 */}
         <Route path="/character" element={<Character />} /> {/* 캐릭터 설정 */}
@@ -24,7 +25,7 @@ function App() {
         <Route path="/writting/frame" element={<CutSelectPage />} />
         <Route path="/writting/date" element={<DateSelectPage />} />
         <Route path="/writting/keyword" element={<KeywordInputPage />} />
-        <Route path="/submit" element={<SubmitLoadingPage />} />
+        <Route path="/loading" element={<SubmitLoadingPage />} />
         <Route path="/haru4cut" element={<CompleteDiary />} />
         {/* 일기 완성 */}
       </Routes>

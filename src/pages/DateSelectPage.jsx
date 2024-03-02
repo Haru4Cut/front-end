@@ -15,7 +15,6 @@ const DateSelectPage = () => {
           <div>
             {" "}
             {/* cutNum이 존재할 경우에만 출력합니다. */}
-            <div>안녕</div>
             {cutNum && <p>Cut Number: {cutNum}</p>}
           </div>
         </div>

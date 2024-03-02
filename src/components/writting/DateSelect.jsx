@@ -43,7 +43,6 @@ const DateSelect = () => {
   return (
     <div>
       <DateSelectWrap>
-        <div>날짜 정보 선택하기</div>
         <h1>날짜를 입력하세요</h1>
         <DateContainer>
           <Select value={selectedYear} onChange={handleYearChange}>

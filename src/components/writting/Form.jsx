@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import FourInput from "./FourInput";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 //KwywordInput > Form > FourInputNcut
 const Form = (props) => {
   //4input + 컷 정보 + 좌우 버튼
-
+  const navigate = useNavigate();
   const cutNum = useSelector((state) => state.cutNum);
 
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
@@ -54,39 +54,51 @@ const Form = (props) => {
       // 변경된 부분: cut의 date 속성을 직접 백엔드에 보냄
     }));
     console.log("API 요청 보내기:", requestData);
+    navigate("/loading");
   };
+
   return (
     <TotalWrap>
       <FormWrap>
-        <MoveCursor onClick={handlePrevButtonClick}>{"<"}</MoveCursor>
-
+        <PrevButton
+          src={"/images/PrevButton.png"}
+          onClick={handleNextButtonClick}
+        />
         <FourInput
           cut={cutForms[currentCutIdx]}
           currentCutIdx={currentCutIdx}
           handleInputChange={handleInputChange}
           handleEmotionChange={handleEmotionChange}
         />
-        <MoveCursor onClick={handleNextButtonClick}>{">"}</MoveCursor>
+        <NextButton
+          src={"/images/Nextbutton.png"}
+          onClick={handleNextButtonClick}
+        />
       </FormWrap>
 
-      <SubmitButton to="/submit" onClick={handleSubmit}>
-        제출하기
-      </SubmitButton>
+      <SubmitButton onClick={handleSubmit}>제출하기</SubmitButton>
     </TotalWrap>
   );
 };
 
 export default Form;
 
-const MoveCursor = styled.div`
-  cursor: pointer;
-  margin-right: 2vw;
-`;
-
 const FormWrap = styled.div`
   display: flex;
+  margin-bottom: 20px;
 `;
-const SubmitButton = styled(Link)`
+const PrevButton = styled.img`
+  height: 100px;
+  cursor: pointer;
+  margin-top: 20%; /* Add margin to move the arrow image slightly downwards */
+`;
+const NextButton = styled.img`
+  height: 100px;
+  cursor: pointer;
+  margin-top: 20%; /* Add margin to move the arrow image slightly downwards */
+`;
+
+const SubmitButton = styled.div`
   text-decoration: none;
   font-size: 14px;
   background-color: #5370d4;
@@ -96,11 +108,9 @@ const SubmitButton = styled(Link)`
   padding: 11px 69px;
   cursor: pointer;
   font-family: Pretendard;
-  margin-top: 7vh;
 `;
 const TotalWrap = styled.div`
   display: flex;
   flex-direction: column;
-
   align-items: center;
 `;
