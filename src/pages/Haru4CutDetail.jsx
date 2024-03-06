@@ -13,8 +13,8 @@ export default function Haru4CutDetail({ selectedDate }) {
     "https://ifh.cc/g/4bZ6CR.png",
     "https://ifh.cc/g/4bZ6CR.png",
   ];
-  const [isheartToggle, SetIsheartToggle] = useState(true);
-  const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
+  const ImgNum = 4;
+  const [heartStates, setHeartStates] = useState(Array(ImgNum).fill(true));
   const defaultTextAreaValue = `자세한 이 날 스토리, 네컷일기에 대한 \n느낌 등 일기를 더 기록해보세요 :) \n\n기록할 것이 없다면 줄글 일기 없이\n사진만으로도 일기를 완성할 수 있어요!`;
 
   // 글자수 표시
@@ -38,6 +38,14 @@ export default function Haru4CutDetail({ selectedDate }) {
   // 일기 공유하기 버튼
   const onShareButtonClick = () => {};
 
+  // 좋아요
+  const onClickHeart = (index) => {
+    setHeartStates((prevStates) => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
+  };
   const diaryId = 3;
 
   return (
@@ -50,7 +58,11 @@ export default function Haru4CutDetail({ selectedDate }) {
           {DiaryImgList.map((imgUrl, index) => (
             <>
               <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
-              <StyledFavoriteIcon fill={heartIconColor} alt="heart icon" />
+              <StyledFavoriteIcon
+                onClick={() => onClickHeart(index)}
+                fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
+                alt="heart icon"
+              />
             </>
           ))}
         </ImgWrap>
