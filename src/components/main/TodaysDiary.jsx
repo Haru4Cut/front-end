@@ -7,10 +7,8 @@ export default function TodaysDiary() {
   function getToday() {
     var date = new Date();
     var year = date.getFullYear().toString().slice(-2);
-
     var month = ("0" + (1 + date.getMonth())).slice(-2);
     var day = ("0" + date.getDate()).slice(-2);
-
     return year + "." + month + "." + day;
   }
   return (

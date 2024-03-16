@@ -15,7 +15,6 @@ export default function Exist() {
           <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
         ))}
       </ImgWrap>
-
       <DiaryButton>자세히 보기</DiaryButton>
     </ExistDiaryWrap>
   );
