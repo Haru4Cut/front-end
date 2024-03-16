@@ -3,8 +3,8 @@ import Header from "../components/common/Header";
 import DateSelect from "../components/writting/DateSelect";
 import { useLocation } from "react-router-dom";
 const DateSelectPage = () => {
-  const location = useLocation();
-  const cutNum = location.state && location.state.cutNum;
+  // const location = useLocation();
+  // const cutNum = location.state && location.state.cutNum;
   return (
     <div className="wrap">
       <Header />
@@ -15,7 +15,7 @@ const DateSelectPage = () => {
           <div>
             {" "}
             {/* cutNum이 존재할 경우에만 출력합니다. */}
-            {cutNum && <p>Cut Number: {cutNum}</p>}
+            {/* {cutNum && <p>Cut Number: {cutNum}</p>} */}
           </div>
         </div>
       </DateSelectWrap>

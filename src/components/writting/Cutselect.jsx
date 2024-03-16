@@ -7,11 +7,9 @@ import { setCutNum } from "../../store";
 
 const CutSelect = () => {
   const [clickedIdx, setClickedIdx] = useState(0);
-  //const [cutNum, setCutNum] = useState(1);
   const cutNum = useSelector((state) => {
     return state.cutNum;
-  }); // Redux 상태를 읽어옵니다.
-
+  }); // Redux 상태를 읽어옴
   const dispatch = useDispatch();
 
   const handleCutClick = (index) => {

@@ -30,7 +30,7 @@ const KakaoLogin = () => {
           cursor: "pointer",
           width: "25%",
           height: "5%",
-          marginTop: "5%",
+          marginTop: "10%",
         }} // Show cursor as pointer on hover
       />
     </>

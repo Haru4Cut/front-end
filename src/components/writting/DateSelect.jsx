@@ -15,15 +15,13 @@ const DateSelect = () => {
     const formattedDay = day < 10 ? `0${day}` : day;
     return `${year}-${formattedMonth}-${formattedDay}`;
   };
-  // const [date, setDate] = useState(
-  //   formatDate(selectedYear, selectedMonth, selectedDay)
-  // );
 
   useEffect(() => {
     const formattedDate = formatDate(selectedYear, selectedMonth, selectedDay);
     dispatch(setDate(formattedDate));
     console.log(formattedDate);
   }, [selectedYear, selectedMonth, selectedDay]);
+
   const handleYearChange = (e) => {
     setSelectedYear(parseInt(e.target.value));
   };

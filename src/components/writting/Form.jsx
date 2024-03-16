@@ -62,7 +62,7 @@ const Form = (props) => {
       <FormWrap>
         <PrevButton
           src={"/images/PrevButton.png"}
-          onClick={handleNextButtonClick}
+          onClick={handlePrevButtonClick}
         />
         <FourInput
           cut={cutForms[currentCutIdx]}
@@ -88,14 +88,14 @@ const FormWrap = styled.div`
   margin-bottom: 20px;
 `;
 const PrevButton = styled.img`
-  height: 100px;
+  height: 70px;
   cursor: pointer;
-  margin-top: 20%; /* Add margin to move the arrow image slightly downwards */
+  margin-top: 30%; /* Add margin to move the arrow image slightly downwards */
 `;
 const NextButton = styled.img`
-  height: 100px;
+  height: 70px;
   cursor: pointer;
-  margin-top: 20%; /* Add margin to move the arrow image slightly downwards */
+  margin-top: 30%; /* Add margin to move the arrow image slightly downwards */
 `;
 
 const SubmitButton = styled.div`

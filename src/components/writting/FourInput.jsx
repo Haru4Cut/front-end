@@ -137,19 +137,20 @@ const CategoryTitle = styled.div`
   width: 60%;
 `;
 const StyledInput = styled.input`
-  border-radius: 5px;
-  border: ${({ isFocused }) =>
-    isFocused ? "2px solid blue" : "1px solid gray"};
+  border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
   width: 60%;
   height: 5vh;
+  border-radius: 30px;
+  padding-left: 10px;
+  background-color: rgba(239, 244, 252, 1);
 `;
 
 const StyledSelect = styled.select`
-  border-radius: 5px;
-  border: ${({ isFocused }) =>
-    isFocused ? "2px solid blue" : "1px solid gray"};
+  border-radius: 30px;
+  border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
   width: 60%;
-  //height: 50%; /* Input 스타일과 동일하게 변경 */
+  background-color: rgba(239, 244, 252, 1);
+  padding-left: 10px;
   height: 5vh;
 `;
 const CutInfoText = styled.div`

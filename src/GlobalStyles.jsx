@@ -45,6 +45,7 @@ body {
   opacity: 1;
   transition : opacity 5s;
 }
+
 `;
 
 export default GlobalStyle;
