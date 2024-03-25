@@ -27,6 +27,7 @@ export default function CharacterSelection() {
       setselectionStep(selectionStep + 1);
     }
   };
+  const userId = 10;
 
   const CircleNum = ({ selectionStep, PageNum }) => (
     <CircleWrap>
@@ -140,6 +141,7 @@ export default function CharacterSelection() {
             selectedHairColor={selectedHairColor}
             selectedSkin={selectedSkin}
             etcText={etcText}
+            userId={userId}
           />
         )
       )}

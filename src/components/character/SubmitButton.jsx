@@ -7,6 +7,7 @@ export default function SubmitButton({
   selectedHairColor,
   selectedSkin,
   etcText,
+  userId,
 }) {
   const onSubmit = () => {
     const characterData = {
@@ -20,7 +21,7 @@ export default function SubmitButton({
 
     console.log(JSON.stringify(characterData));
 
-    const serverURL = " ";
+    const serverURL = `http://52.79.154.88:8080/character/${userId}`;
 
     axios
       .post(serverURL, characterData)
