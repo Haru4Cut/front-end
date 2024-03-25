@@ -24,7 +24,7 @@ const MainWrap = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: #f3f5f6;
+  background-color: #f6f3f4;
 `;
 
 const TodaysDiaryWrap = styled.div`
@@ -51,4 +51,3 @@ const MemoryDiaryWrap = styled.div`
   margin-top: 12px;
   margin-bottom: 20px;
 `;
-

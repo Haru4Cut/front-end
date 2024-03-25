@@ -8,15 +8,15 @@ import CutSelectPage from "./pages/CutSelectPage";
 import DateSelectPage from "./pages/DateSelectPage";
 import KeywordInputPage from "./pages/KeywordInputPage";
 import MyPage from "./pages/MyPage";
-<<<<<<< HEAD
+
 import LoginPage from "./pages/LoginPage";
 import SubmitLoadingPage from "./pages/SubmitLoading";
 import OnboardingPage from "./pages/OnboardingPage";
-=======
+
 import Calendar from "./pages/CalendarPage";
 import Haru4CutDetail from "./pages/Haru4CutDetail";
 import Share from "./pages/Share";
->>>>>>> 22571fa4be75ba5b85328f017b23c03683b034d5
+
 function App() {
   return (
     <div className="App">
@@ -25,15 +25,12 @@ function App() {
         <Route path="/" element={<OnboardingPage />} /> {/* 메인 페이지 */}
         <Route path="/home" element={<Main />} /> {/* 메인 페이지 */}
         <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
-<<<<<<< HEAD
         <Route path="/login" element={<LoginPage />} /> {/* 마이 페이지 */}
-=======
         <Route path="/calendar" element={<Calendar />} /> {/* 캘린더 페이지 */}
         <Route path="/haru4cut/:diaryid" element={<Haru4CutDetail />} />
         {/* 일기 상세보기 페이지 */}
         <Route path="/haru4cut/:diaryid/share" element={<Share />} />
         {/* 일기 공유 페이지 */}
->>>>>>> 22571fa4be75ba5b85328f017b23c03683b034d5
         <Route path="/character" element={<Character />} /> {/* 캐릭터 설정 */}
         <Route path="/character/selection" element={<CharacterSelection />} />
         <Route path="/writting/frame" element={<CutSelectPage />} />
