@@ -7,7 +7,7 @@ const LoginPage = () => {
       <LoginWrap>
         <img
           src={"/images/Haru4Cut.png"}
-          style={{ width: "30%", height: "15%" }}
+          style={{ width: "20%", height: "10%" }}
         />
 
         <KakaoLogin />

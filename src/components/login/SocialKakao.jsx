@@ -28,9 +28,9 @@ const KakaoLogin = () => {
         onClick={handleLogin}
         style={{
           cursor: "pointer",
-          width: "25%",
+          width: "20%",
           height: "5%",
-          marginTop: "10%",
+          marginTop: "5%",
         }} // Show cursor as pointer on hover
       />
     </>
