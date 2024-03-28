@@ -3,21 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
-<<<<<<< HEAD
     "bootstrap": "^5.3.3",
-=======
     "file-saver": "^2.0.5",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
->>>>>>> 964c20cef2b8ccd3304e40bbe1c769049677ef10
     "inline-style-prefixer": "^7.0.0",
     "moment": "^2.30.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
     "react-calendar": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-fade": "^1.1.1",
