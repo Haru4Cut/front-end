@@ -4,6 +4,7 @@ import editIcon from "../assets/images/editIcon.svg";
 import checkIcon from "../assets/images/checkIcon.svg";
 import Button from "../components/common/Button";
 import BackButton from "../components/common/BackButton";
+import axios from "axios";
 export default function Main() {
   const exampleData = {
     sex: 1,
@@ -29,6 +30,23 @@ export default function Main() {
     setIsNickNameEditing(false);
     alert("닉네임이 변경되었습니다.");
   };
+
+  const userId = 1;
+  const [character, setCharacter] = useState();
+  useEffect(() => {
+    const fetchDiaaryDate = async () => {
+      try {
+        const response = await axios.get(
+          `http://52.79.154.88:8080/users/${userId}/diarybydate`
+        );
+        console.log(response.data);
+        setCharacter(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiaaryDate();
+  }, []);
 
   return (
     <MyPageWrap>

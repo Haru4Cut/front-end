@@ -26,6 +26,11 @@ export default function SubmitButton({
     axios
       .post(serverURL, characterData, {
         withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+        },
       })
       .then((response) => {
         console.log(response.data);
