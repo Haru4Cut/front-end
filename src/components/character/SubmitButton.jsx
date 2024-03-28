@@ -8,6 +8,7 @@ export default function SubmitButton({
   selectedSkin,
   etcText,
 }) {
+  const userId = 1;
   const onSubmit = () => {
     const characterData = {
       sex: selectedGender,
@@ -20,9 +21,21 @@ export default function SubmitButton({
 
     console.log(JSON.stringify(characterData));
 
+<<<<<<< HEAD
     const serverURL = "http://52.79.154.88:8080/character/{userId}";
+=======
+    const serverURL = `http://52.79.154.88:8080/character/${userId}`;
+
+>>>>>>> 508af06b4afb10d0512520c8f141f1b32efc9bd4
     axios
-      .post(serverURL, characterData)
+      .post(serverURL, characterData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })

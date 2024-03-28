@@ -31,6 +31,7 @@ const Haru4cutLogo = styled(Link)`
   font-family: "PoetsenOne";
   font-size: 30px;
   color: #4a4a4a;
+  cursor: pointer;
   text-decoration: none;
 `;
 const Icon = styled.img`

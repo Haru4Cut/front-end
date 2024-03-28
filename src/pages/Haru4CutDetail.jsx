@@ -6,7 +6,10 @@ import { ReactComponent as FavoriteIcon } from "../assets/images/FavoriteIcon.sv
 import Button from "../components/common/Button";
 import DiaryEditIcon from "../assets/images/DiaryEditIcon.svg";
 import ShareIcon from "../assets/images/ShareIcon.svg";
+import axios from "axios";
+
 export default function Haru4CutDetail({ selectedDate }) {
+  const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   const DiaryImgList = [
     "https://ifh.cc/g/4bZ6CR.png",
     "https://ifh.cc/g/4bZ6CR.png",
@@ -46,8 +49,51 @@ export default function Haru4CutDetail({ selectedDate }) {
       return newStates;
     });
   };
+
+  //test diaryId
   const diaryId = 3;
 
+  //테스트 코드
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://52.79.154.88:8080/diaries/0`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+          },
+        });
+        console.log("테스트", response.data.result);
+      } catch (error) {
+        console.error("테스트", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // 연동 코드
+  useEffect(() => {
+    const fetchDiaries = async () => {
+      try {
+        const response = await axios.get(
+          `http://52.79.154.88:8080/users/${diaryId}/diaries`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Credentials": "true",
+            },
+          }
+        );
+        console.log(response.data);
+        setDiaries(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiaries();
+  }, []);
   return (
     <MainWrap>
       <Header />
