@@ -28,6 +28,22 @@ body {
     font-family: 'Pretendard';
     margin: 0;
     font-size: 16px;
+    .wrap{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f5f6;
+    }
+}
+
+.start{
+  opacity: 0;
+}
+.end{
+  opacity: 1;
+  transition : opacity 5s;
 }
 
 `;
