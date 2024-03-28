@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <HeaderWrap>
-      <Haru4cutLogo>Haru4cut</Haru4cutLogo>
+      <Haru4cutLogo to="/">Haru4cut</Haru4cutLogo>
       <IconWrap>
         <Link to="/calendar">
           <Icon src={calendarIcon} marginTop="2px" />
@@ -27,10 +27,12 @@ const HeaderWrap = styled.div`
   width: 80%;
 `;
 
-const Haru4cutLogo = styled.div`
+const Haru4cutLogo = styled(Link)`
   font-family: "PoetsenOne";
   font-size: 30px;
   color: #4a4a4a;
+  cursor: pointer;
+  text-decoration: none;
 `;
 const Icon = styled.img`
   cursor: pointer;
