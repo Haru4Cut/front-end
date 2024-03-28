@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import BackButton from "../components/common/BackButton";
 import Calendar from "react-calendar";
 import "./calendarStyles.css";
 import moment from "moment";
 import Button from "../components/common/Button";
-
+import axios from "axios";
 export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState();
   const DiaryImgList = [
@@ -16,7 +16,27 @@ export default function CalendarPage() {
   ];
   const [isheartToggle, SetIsheartToggle] = useState(true);
   const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
-  const diaryId = 3;
+  const [diaryId, setDiaryId] = useState();
+  const userId = 1;
+  useEffect(() => {
+    const fetchDiaaryDate = async () => {
+      try {
+        const response = await axios.get(
+          `http://52.79.154.88:8080/users/${userId}/diarybydate`,
+          {
+            params: {
+              date: moment(selectedDate).format("YY-MM-DD"),
+            },
+          }
+        );
+        console.log(response.data);
+        setDiaryId(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiaaryDate();
+  }, [selectedDate]);
   return (
     <CalendarWrap>
       <Header>

@@ -71,7 +71,7 @@ export default function Share() {
           앨범에 저장
         </Button>
       </DownloadButtonWrap>
-      <Button backgroundColor="#9D9D9D" marginBottom="20px">
+      <Button backgroundColor="#9D9D9D" marginBottom="20px" to="/">
         <Icon src={HomeIcon} marginBottom="3px" />
         홈으로 돌아가기
       </Button>
