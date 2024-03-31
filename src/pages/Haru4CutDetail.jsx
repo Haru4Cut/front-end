@@ -51,22 +51,22 @@ export default function Haru4CutDetail({ selectedDate }) {
   };
 
   //test diaryId
-  const diaryId = 3;
-
+  const diaryId = 5;
+  const userId = 1;
   //테스트 코드
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://52.79.154.88:8080/diaries/0`, {
+        const response = await axios.get(`/diaries/${diaryId}`, {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": "true",
           },
         });
-        console.log("테스트", response.data.result);
+        console.log(`/diaries/${diaryId}`, response.data.result);
       } catch (error) {
-        console.error("테스트", error);
+        console.error(`/diaries/${diaryId}`, error);
       }
     };
 
@@ -76,17 +76,14 @@ export default function Haru4CutDetail({ selectedDate }) {
   useEffect(() => {
     const fetchDiaries = async () => {
       try {
-        const response = await axios.get(
-          `http://52.79.154.88:8080/users/${diaryId}/diaries`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Credentials": "true",
-            },
-          }
-        );
-        console.log(response.data);
+        const response = await axios.get(`/users/${userId}/diaries`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+          },
+        });
+        console.log(`/users/${userId}/diaries`, response);
         setDiaries(response.data);
       } catch (error) {
         console.error(error);

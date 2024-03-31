@@ -21,14 +21,11 @@ export default function CalendarPage() {
   useEffect(() => {
     const fetchDiaaryDate = async () => {
       try {
-        const response = await axios.get(
-          `http://52.79.154.88:8080/users/${userId}/diarybydate`,
-          {
-            params: {
-              date: moment(selectedDate).format("YY-MM-DD"),
-            },
-          }
-        );
+        const response = await axios.get(`/users/${userId}/diarybydate`, {
+          params: {
+            date: moment(selectedDate).format("YY-MM-DD"),
+          },
+        });
         console.log(response.data);
         setDiaryId(response.data);
       } catch (error) {
