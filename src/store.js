@@ -19,13 +19,35 @@ let date = createSlice({
     },
   },
 });
+let characterData = createSlice({
+  name: "characterData",
+  initialState: {},
+  reducers: {
+    setCharacterData: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+let nickName = createSlice({
+  name: "nickName",
+  initialState: {},
+  reducers: {
+    setNickName: (state, action) => {
+      return action.payload;
+    },
+  },
+});
 
 export const { setCutNum } = cutNum.actions;
 export const { setDate } = date.actions;
+export const { setCharacterData } = characterData.actions;
+export const { setNickName } = nickName.actions;
 
 export default configureStore({
   reducer: {
     cutNum: cutNum.reducer,
     date: date.reducer,
+    characterData: characterData.reducer,
+    nickName: nickName.reducer,
   },
 });
