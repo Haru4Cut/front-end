@@ -19,6 +19,7 @@ const FourInput = ({
   const handleInputBlur = () => {
     setFocusedInput(null);
   };
+
   return (
     <>
       <CenterColWrap>

@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 import Pretendard from "./assets/fonts/Pretendard-Regular.woff";
 import PoetsenOne from "./assets/fonts/PoetsenOne-Regular.ttf";
 import KotraHope from "./assets/fonts/KOTRAHOPE.ttf";
+import OleoScriptSwashCapsBold from "./assets/fonts/OleoScriptSwashCaps-Bold.ttf";
+import OleoScriptSwashCapsRegular from "./assets/fonts/OleoScriptSwashCaps-Regular.ttf";
 const GlobalStyle = createGlobalStyle`
 @font-face { 
   font-family: "Pretendard";
@@ -22,6 +24,17 @@ const GlobalStyle = createGlobalStyle`
   font-family: "KotraHope";
   font-weight: normal;
   src: url(${KotraHope}) format("truetype");
+}
+@font-face {
+  font-family: "OleoScriptSwashCapsBold";
+  font-weight: normal;
+  src: url(${OleoScriptSwashCapsBold}) format("truetype");
+}
+
+@font-face {
+  font-family: "OleoScriptSwashCapsRegular";
+  font-weight: normal;
+  src: url(${OleoScriptSwashCapsRegular}) format("truetype");
 }
 
 body {

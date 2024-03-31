@@ -22,6 +22,7 @@ export default function SubmitButton({
     // request body 콘솔 출력
     console.log(JSON.stringify(characterData));
     dispatch(setCharacterData(characterData));
+
   };
 
   return (
