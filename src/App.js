@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles"; //전역 스타일
 import Main from "./pages/Main";
 import Character from "./pages/Character";
+import Profile from "./pages/Profile";
+
 import CharacterSelection from "./pages/CharacterSelection";
 import CompleteDiary from "./pages/CompleteDiary";
 import CutSelectPage from "./pages/CutSelectPage";
@@ -32,6 +34,8 @@ function App() {
         <Route path="/haru4cut/:diaryid/share" element={<Share />} />
         {/* 일기 공유 페이지 */}
         <Route path="/character" element={<Character />} /> {/* 캐릭터 설정 */}
+        <Route path="/character/profile" element={<Profile />} />{" "}
+        {/* 캐릭터 설정_프로필 설정 */}
         <Route path="/character/selection" element={<CharacterSelection />} />
         <Route path="/writting/frame" element={<CutSelectPage />} />
         <Route path="/writting/date" element={<DateSelectPage />} />
