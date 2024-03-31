@@ -5,8 +5,7 @@ import CompleteIcon from "../../assets/images/CompleteIcon.svg";
 import RefreshIcon from "../../assets/images/RefreshIcon.svg";
 import { useSelector } from "react-redux";
 
-export default function CompleteProfile({ imageUrl, onRefresh }) {
-  const nickName = useSelector((state) => state.nickName);
+export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
   return (
     <CompleteWrap>
       <MainText>프로필 사진</MainText>
@@ -15,13 +14,23 @@ export default function CompleteProfile({ imageUrl, onRefresh }) {
         이용될 프로필 사진이에요 :)
       </SubText>
       <ProfileBox>
-        <ProfileImage src={imageUrl} alt="ProfileImage"></ProfileImage>
+        {imageUrl ? (
+          <ProfileBox>
+            <ProfileImage src={imageUrl} alt="ProfileImage"></ProfileImage>
+          </ProfileBox>
+        ) : (
+          // imageUrl이 없을 때
+          <ErrorText>
+            이미지가 정상적으로 만들어지지 않았어요. {"\n"}새로고침 또는 하단
+            "다시 만들기" 버튼을 {"\n"}클릭해주세요 :(
+          </ErrorText>
+        )}
       </ProfileBox>
       <Button backgroundColor="#9D9D9D" marginBottom="8px" onClick={onRefresh}>
         <Icon src={RefreshIcon} />
         <ButtonText>다시 만들기</ButtonText>
       </Button>
-      <Button>
+      <Button onClick={onComplete}>
         <Icon src={CompleteIcon} />
         <ButtonText>캐릭터 완성</ButtonText>
       </Button>
@@ -46,6 +55,16 @@ const SubText = styled.div`
   font-size: 14px;
   margin-top: 15px;
   margin-bottom: 30px;
+  white-space: pre-wrap;
+  text-align: center;
+  line-height: 140%;
+`;
+
+const ErrorText = styled.div`
+  color: #4b4b4b;
+  width: 240px;
+  font-size: 14px;
+  margin: 20px 0px;
   white-space: pre-wrap;
   text-align: center;
   line-height: 140%;

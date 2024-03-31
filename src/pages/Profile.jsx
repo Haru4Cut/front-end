@@ -12,7 +12,9 @@ export default function Profile() {
   const [imageUrl, setImageUrl] = useState(""); // 프로필 이미지 url 저장 상태
   const [refreshCounter, setRefreshCounter] = useState(0); // 새로고침 counter
   const characterData = useSelector((state) => state.characterData);
-  console.log(characterData);
+  const nickName = useSelector((state) => state.nickName);
+
+  console.log("characterData", characterData);
 
   // 연동
   useEffect(() => {
@@ -35,16 +37,50 @@ export default function Profile() {
         setLoading(false);
       });
   }, [characterData, refreshCounter]);
+
+  // 새로고침 버튼 클릭 시
   const handleRefresh = () => {
     setLoading(true);
     setRefreshCounter((prevCounter) => prevCounter + 1); // 새로고침 카운터 증가
+  };
+
+  // 캐릭터 완성 버튼 클릭 시
+  const handleComplete = () => {
+    // characterData에 nickName, imageUrl 추가
+    const characterCompleteData = {
+      ...characterData,
+      nickName: nickName,
+      characterImage: imageUrl,
+    };
+    console.log("characterCompleteData", characterCompleteData);
+    // characterData 업데이트 및 새로고침
+    axios
+      .post(`/character/${userId}`, characterCompleteData, {
+        headers: {
+          Accept: "*/*",
+          "Content-Type": `application/json`,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setRefreshCounter((prevCounter) => prevCounter + 1);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <CharacterWrap>
       {loading ? (
         <LoadingProfile /> // 로딩 중
       ) : (
-        <CompleteProfile imageUrl={imageUrl} onRefresh={handleRefresh} /> // 프로필 완성 시
+        <CompleteProfile
+          imageUrl={imageUrl}
+          onRefresh={handleRefresh}
+          onComplete={handleComplete}
+        /> // 프로필 완성 시
       )}
     </CharacterWrap>
   );
