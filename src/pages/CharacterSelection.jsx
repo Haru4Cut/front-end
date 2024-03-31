@@ -21,13 +21,16 @@ export default function CharacterSelection() {
   const [selectedSkin, setSelectedSkin] = useState(null);
   const [etcText, setEtcText] = useState("");
 
-  const PageNum = 4;
+  const PageNum = 4; // 총 선택 페이지 개수 4개
+
+  // 다음 페이지로 넘어가는 함수
   const handleNextStep = () => {
     if (selectionStep < PageNum) {
       setselectionStep(selectionStep + 1);
     }
   };
 
+  // 하단 순서 바
   const CircleNum = ({ selectionStep, PageNum }) => (
     <CircleWrap>
       {Array(PageNum)
@@ -38,8 +41,7 @@ export default function CharacterSelection() {
     </CircleWrap>
   );
 
-  // 현재 선택 단계
-  let currentStep;
+  let currentStep; // 현재 선택 단계
   if (selectionStep === 1) {
     currentStep = (
       <>
@@ -64,7 +66,7 @@ export default function CharacterSelection() {
           <CircleNum selectionStep={selectionStep} PageNum={PageNum} />
         </SelectionBox>
       </>
-    ); // 1이면 성별 선택
+    ); // 1이면 닉네임 및 성별 선택
   } else if (selectionStep === 2) {
     currentStep = (
       <SelectionBox>
@@ -134,6 +136,7 @@ export default function CharacterSelection() {
       ) : (
         selectionStep === PageNum && (
           <SubmitButton
+            nickName={nickName}
             selectedGender={selectedGender}
             selectedAge={selectedAge}
             selectedHairStyle={selectedHairStyle}

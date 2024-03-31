@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 const OnboardingPage = () => {
   const [fade, setFade] = useState("start");
   const [buttonFade, setButtonFade] = useState("");
