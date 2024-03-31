@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../components/common/Header";
 import TodaysDiary from "../components/main/TodaysDiary";
 import MemoryDiary from "../components/main/MemoryDiary";
+import axios from "axios";
 export default function Main() {
   return (
     <MainWrap>

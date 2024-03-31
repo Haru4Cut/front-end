@@ -36,9 +36,7 @@ export default function Main() {
   useEffect(() => {
     const fetchDiaaryDate = async () => {
       try {
-        const response = await axios.get(
-          `http://52.79.154.88:8080/users/${userId}/diarybydate`
-        );
+        const response = await axios.get(`/users/${userId}/diarybydate`);
         console.log(response.data);
         setCharacter(response.data);
       } catch (error) {
