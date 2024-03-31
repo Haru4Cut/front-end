@@ -21,19 +21,15 @@ export default function SubmitButton({
 
     console.log(JSON.stringify(characterData));
 
-<<<<<<< HEAD
-    const serverURL = "http://52.79.154.88:8080/character/{userId}";
-=======
     const serverURL = `http://52.79.154.88:8080/character/${userId}`;
 
->>>>>>> 508af06b4afb10d0512520c8f141f1b32efc9bd4
     axios
       .post(serverURL, characterData, {
         withCredentials: true,
         headers: {
-          "Content-Type": "application/json",
+          //"Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": "true",
+          //"Access-Control-Allow-Credentials": "true",
         },
       })
       .then((response) => {
