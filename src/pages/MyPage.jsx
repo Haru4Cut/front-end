@@ -6,19 +6,8 @@ import Button from "../components/common/Button";
 import BackButton from "../components/common/BackButton";
 import axios from "axios";
 export default function Main() {
-  const exampleData = {
-    sex: 1,
-    age: 2,
-    hairColor: 3,
-    hairLength: 2,
-    skinColor: 1,
-    nickname: "하루네컷",
-    characterImage: "https://ifh.cc/g/bR7kGJ.jpg",
-    etc: "안경을쓰고있습니다안경을쓰고있습니다안경을쓰고있습니다안경을",
-  };
-
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
-  const [editedNickname, setEditedNickname] = useState(exampleData.nickname); // 수정된 닉네임을 저장하는 상태
+  const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
 
   // 닉네임 수정
   const onEditNickName = () => {
@@ -31,14 +20,16 @@ export default function Main() {
     alert("닉네임이 변경되었습니다.");
   };
 
-  const userId = 1;
+  const userId = 2;
   const [character, setCharacter] = useState();
+
   useEffect(() => {
     const fetchDiaaryDate = async () => {
       try {
-        const response = await axios.get(`/users/${userId}/diarybydate`);
+        const response = await axios.get(`/character/${userId}`);
         console.log(response.data);
         setCharacter(response.data);
+        setEditedNickname(response.data.nickName);
       } catch (error) {
         console.error(error);
       }
@@ -72,7 +63,7 @@ export default function Main() {
             </>
           )}
         </NickNameWrap>
-        <ProfileImg src={exampleData.characterImage} />
+        <ProfileImg src={character.characterImage} alt="프로필 이미지" />
       </ProfileImgWrap>
       {/*내 캐릭터 정보*/}
       <CharacterInfoWrap>
@@ -81,16 +72,16 @@ export default function Main() {
         </Box>
         <InfoTextWrap>
           <InfoBoldText>성별</InfoBoldText>
-          <InfoText>{exampleData.sex === 1 ? "여자" : "남자"}</InfoText>
+          <InfoText>{character.sex === 1 ? "여자" : "남자"}</InfoText>
         </InfoTextWrap>
         <InfoTextWrap>
           <InfoBoldText>나이</InfoBoldText>
           <InfoText>
-            {exampleData.age === 1
+            {character.age === 1
               ? "10대"
-              : exampleData.age === 2
+              : character.age === 2
               ? "20-30대"
-              : exampleData.age === 3
+              : character.age === 3
               ? "40-50대"
               : "60대 이상"}
           </InfoText>
@@ -98,18 +89,18 @@ export default function Main() {
         <InfoTextWrap>
           <InfoBoldText>머리스타일</InfoBoldText>
           <InfoText>
-            {exampleData.hairLength === 1
+            {character.hairLength === 1
               ? "숏컷"
-              : exampleData.hairLength === 2
+              : character.hairLength === 2
               ? "단발"
               : "장발"}
             <HairColorCircle
               backgroundColor={
-                exampleData.hairColor === 1
+                character.hairColor === 1
                   ? "black"
-                  : exampleData.hairColor === 2
+                  : character.hairColor === 2
                   ? "#745629"
-                  : exampleData.hairColor === 3
+                  : character.hairColor === 3
                   ? "#B40000"
                   : "#F0C734"
               }
@@ -121,9 +112,9 @@ export default function Main() {
           <InfoBoldText>피부색</InfoBoldText>
           <HairColorCircle
             backgroundColor={
-              exampleData.skinColor === 1
+              character.skinColor === 1
                 ? "#FAF4EC"
-                : exampleData.skinColor === 2
+                : character.skinColor === 2
                 ? "#F3DB9E"
                 : "#3E2809"
             }
@@ -132,7 +123,7 @@ export default function Main() {
         <InfoTextWrap>
           <InfoBoldText whiteSpace="pre-line">
             기타 정보
-            <InfoText marginTop="7px">{exampleData.etc}</InfoText>
+            <InfoText marginTop="7px">{character.etc}</InfoText>
           </InfoBoldText>
         </InfoTextWrap>
         <Box marginTop="40px">

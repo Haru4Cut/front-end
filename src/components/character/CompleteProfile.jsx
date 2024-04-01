@@ -26,7 +26,12 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
           </ErrorText>
         )}
       </ProfileBox>
-      <Button backgroundColor="#9D9D9D" marginBottom="8px" onClick={onRefresh}>
+      <Button
+        backgroundColor="#9D9D9D"
+        marginTop="80px"
+        marginBottom="8px"
+        onClick={onRefresh}
+      >
         <Icon src={RefreshIcon} />
         <ButtonText>다시 만들기</ButtonText>
       </Button>
@@ -43,6 +48,7 @@ const CompleteWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100vh;
 `;
 const MainText = styled.div`
   color: #222222;
@@ -54,7 +60,7 @@ const SubText = styled.div`
   color: #4b4b4b;
   font-size: 14px;
   margin-top: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   white-space: pre-wrap;
   text-align: center;
   line-height: 140%;
@@ -74,11 +80,10 @@ const ProfileBox = styled.div`
   background-color: white;
   border-radius: 50px;
   width: 320px;
-  height: 320px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 90px;
 `;
 
 const Icon = styled.img`
@@ -90,5 +95,4 @@ const ButtonText = styled.div`
 
 const ProfileImage = styled.img`
   width: 210px;
-  height: 210px;
 `;

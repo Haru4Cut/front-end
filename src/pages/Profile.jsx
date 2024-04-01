@@ -4,7 +4,9 @@ import LoadingProfile from "../components/character/LoadingProfile";
 import Button from "../components/common/Button";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import CompleteProfile from "../components/character/CompleteProfile";
+
 export default function Profile() {
   //test userId
   const userId = 1;
@@ -13,7 +15,7 @@ export default function Profile() {
   const [refreshCounter, setRefreshCounter] = useState(0); // 새로고침 counter
   const characterData = useSelector((state) => state.characterData);
   const nickName = useSelector((state) => state.nickName);
-
+  const navigate = useNavigate();
   console.log("characterData", characterData);
 
   // 연동
@@ -70,6 +72,7 @@ export default function Profile() {
       .catch((error) => {
         console.error(error);
       });
+    navigate("/home");
   };
   return (
     <CharacterWrap>
