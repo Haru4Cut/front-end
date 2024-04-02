@@ -40,7 +40,9 @@ export default function Main() {
   };
   // test userId
   const userId = 1;
+
   const [character, setCharacter] = useState();
+
   useEffect(() => {
     const fetchDiaaryDate = async () => {
       try {
@@ -161,6 +163,7 @@ export default function Main() {
         ) : (
           <LoadingSpinnerCharacter src={LoadingImage} alt="로딩중" />
         )}
+
       </CharacterInfoWrap>
     </MyPageWrap>
   );
