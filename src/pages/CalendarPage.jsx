@@ -84,13 +84,13 @@ const CalendarDiaryBox = styled.div`
   border-radius: 20px;
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
   width: 85%;
-  height: 45%;
+  height: 43%;
   margin-top: 10px;
-  padding: 10px 0px 20px 0px;
+  padding: 5px 0px 10px 0px;
 `;
 
 const Date = styled.div`
-  font-size: 16px;
+  font-size: 15px;
   color: #5b8fbe;
   font-weight: 600;
   margin-top: 20px;
@@ -98,14 +98,15 @@ const Date = styled.div`
 
 const DiaryImage = styled.img`
   margin: 5px;
+  width: 100px;
 `;
 
 const ImgWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 260px;
-  margin: 20px 0px 20px 0px;
+  width: 240px;
+  margin: 10px 0px 10px 0px;
 `;
 
 const Todays4CutDiary = styled.div`
@@ -113,8 +114,8 @@ const Todays4CutDiary = styled.div`
   text-align: center;
   font-family: "KotraHope";
   color: #3a3a3a;
-  font-size: 24px;
-  margin-top: 10px;
+  font-size: 22px;
+  margin-top: 5px;
 `;
 
 const Header = styled.div`
