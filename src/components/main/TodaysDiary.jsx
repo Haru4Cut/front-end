@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NoneDiary from "./NoneDiary";
 import ExistDiary from "./ExistDiary";
+import axios from "axios";
 export default function TodaysDiary() {
   //오늘 날짜
   function getToday() {
@@ -11,12 +12,34 @@ export default function TodaysDiary() {
     var day = ("0" + date.getDate()).slice(-2);
     return year + "." + month + "." + day;
   }
+  const diaryId = 1;
+  const diaryImgList = [
+    "https://ifh.cc/g/4bZ6CR.png",
+    "https://ifh.cc/g/4bZ6CR.png",
+    "https://ifh.cc/g/4bZ6CR.png",
+    "https://ifh.cc/g/4bZ6CR.png",
+  ];
+
+  const [todayDiaryData, setTodayDiaryData] = useState()
+  const userId = localStorage.getItem("userId");
+  useEffect(() => {
+    const fetchDiaaryDate = async () => {
+      try {
+        const response = await axios.get(`/users/${userId}/diarybydate`);
+        console.log(response.data);
+        setTodayDiaryData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiaaryDate();
+  }, []);
   return (
     <>
       <TodayDate>{getToday()}</TodayDate>
       <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
-      <NoneDiary />
-      {/* <ExistDiary /> */}
+      {/* <NoneDiary /> */}
+      <ExistDiary diaryId={diaryId} diaryImgList={diaryImgList}/> 
     </>
   );
 }
