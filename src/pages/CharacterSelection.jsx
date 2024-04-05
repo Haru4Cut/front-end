@@ -10,9 +10,10 @@ import EtcSelection from "../components/character/EtcSelection";
 import SubmitButton from "../components/character/SubmitButton";
 import HairColor from "../components/character/HairColor";
 import HairStyle from "../components/character/HairStyle";
+import { setNickName } from "../store";
+import { useDispatch } from "react-redux";
 
 export default function CharacterSelection() {
-  const [nickName, setNickName] = useState("");
   const [selectionStep, setselectionStep] = useState(1);
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedAge, setSelectedAge] = useState(null);
@@ -22,6 +23,7 @@ export default function CharacterSelection() {
   const [etcText, setEtcText] = useState("");
 
   const PageNum = 4; // 총 선택 페이지 개수 4개
+  const dispatch = useDispatch();
 
   // 다음 페이지로 넘어가는 함수
   const handleNextStep = () => {
@@ -54,7 +56,7 @@ export default function CharacterSelection() {
           <Alertext>5글자 이하로 입력해주세요 :)</Alertext>
           <NickNameInput
             maxLength={5}
-            onChange={(e) => setNickName(e.target.value)}
+            onChange={(e) => dispatch(setNickName(e.target.value))}
           ></NickNameInput>
         </SelectionBox>
 
@@ -136,7 +138,6 @@ export default function CharacterSelection() {
       ) : (
         selectionStep === PageNum && (
           <SubmitButton
-            nickName={nickName}
             selectedGender={selectedGender}
             selectedAge={selectedAge}
             selectedHairStyle={selectedHairStyle}

@@ -11,8 +11,8 @@ export default function EtcSelection({ setEtcText, etcText }) {
     <>
       <TitleText>기타 정보를 알려주세요!</TitleText>
       <ExampleText>
-        ex 안경, 교복 등 특징을 짧게 적어주세요{"\n"} 기타 특징은 반영이
-        안될수도있어요!
+        ex 안경, 교복 등 특징을 짧게 적어주세요{"\n"} 기타 특징은 반영이 안될
+        수도 있어요!
       </ExampleText>
       <StyledTextArea onChange={onInputHandler} maxLength={29}></StyledTextArea>
       <CountText>{inputCount}/30</CountText>

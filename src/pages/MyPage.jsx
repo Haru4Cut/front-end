@@ -4,21 +4,11 @@ import editIcon from "../assets/images/editIcon.svg";
 import checkIcon from "../assets/images/checkIcon.svg";
 import Button from "../components/common/Button";
 import BackButton from "../components/common/BackButton";
+import LoadingImage from "../assets/images/LoadingSpinner.gif";
 import axios from "axios";
 export default function Main() {
-  const exampleData = {
-    sex: 1,
-    age: 2,
-    hairColor: 3,
-    hairLength: 2,
-    skinColor: 1,
-    nickname: "하루네컷",
-    characterImage: "https://ifh.cc/g/bR7kGJ.jpg",
-    etc: "안경을쓰고있습니다안경을쓰고있습니다안경을쓰고있습니다안경을",
-  };
-
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
-  const [editedNickname, setEditedNickname] = useState(exampleData.nickname); // 수정된 닉네임을 저장하는 상태
+  const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
 
   // 닉네임 수정
   const onEditNickName = () => {
@@ -26,19 +16,40 @@ export default function Main() {
   };
 
   // 닉네임 저장
-  const onNickNameSave = () => {
+  const onNickNameSave = async () => {
     setIsNickNameEditing(false);
-    alert("닉네임이 변경되었습니다.");
+    try {
+      await axios.post(
+        `/character/${userId}/name`,
+        { nickName: editedNickname },
+        {
+          headers: {
+            Accept: "*/*",
+            "Content-Type": `application/json`,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+          },
+        }
+      );
+      alert("닉네임이 변경되었습니다.");
+      console.log(editedNickname);
+    } catch (error) {
+      console.error(error);
+      // Handle error here
+    }
   };
-
+  // test userId
   const userId = 1;
+
   const [character, setCharacter] = useState();
+
   useEffect(() => {
     const fetchDiaaryDate = async () => {
       try {
-        const response = await axios.get(`/users/${userId}/diarybydate`);
+        const response = await axios.get(`/character/${userId}`);
         console.log(response.data);
         setCharacter(response.data);
+        setEditedNickname(response.data.nickName);
       } catch (error) {
         console.error(error);
       }
@@ -54,92 +65,105 @@ export default function Main() {
       </Header>
       {/*프로필 이미지*/}
       <ProfileImgWrap>
-        <NickNameWrap>
-          {isNickNameEditing ? (
-            <>
-              <NickNameInput
-                value={editedNickname}
-                onChange={(e) => setEditedNickname(e.target.value)}
-                maxLength={5}
-              />
-              <Icon src={checkIcon} onClick={onNickNameSave} />
-            </>
-          ) : (
-            <>
-              <NickNameText>{editedNickname}</NickNameText>
-              <Text>님</Text>
-              <Icon src={editIcon} onClick={onEditNickName} />
-            </>
-          )}
-        </NickNameWrap>
-        <ProfileImg src={exampleData.characterImage} />
+        {character ? (
+          <>
+            <NickNameWrap>
+              {isNickNameEditing ? (
+                <>
+                  <NickNameInput
+                    value={editedNickname}
+                    onChange={(e) => setEditedNickname(e.target.value)}
+                    maxLength={5}
+                  />
+                  <Icon src={checkIcon} onClick={onNickNameSave} />
+                </>
+              ) : (
+                <>
+                  <NickNameText>{editedNickname}</NickNameText>
+                  <Text>님</Text>
+                  <Icon src={editIcon} onClick={onEditNickName} />
+                </>
+              )}
+            </NickNameWrap>
+            <ProfileImg src={character.characterImage} />
+          </>
+        ) : (
+          <LoadingSpinner src={LoadingImage} alt="로딩중" />
+        )}
       </ProfileImgWrap>
       {/*내 캐릭터 정보*/}
       <CharacterInfoWrap>
         <Box>
           <CharacterInfoText>내 캐릭터 정보</CharacterInfoText>
         </Box>
-        <InfoTextWrap>
-          <InfoBoldText>성별</InfoBoldText>
-          <InfoText>{exampleData.sex === 1 ? "여자" : "남자"}</InfoText>
-        </InfoTextWrap>
-        <InfoTextWrap>
-          <InfoBoldText>나이</InfoBoldText>
-          <InfoText>
-            {exampleData.age === 1
-              ? "10대"
-              : exampleData.age === 2
-              ? "20-30대"
-              : exampleData.age === 3
-              ? "40-50대"
-              : "60대 이상"}
-          </InfoText>
-        </InfoTextWrap>
-        <InfoTextWrap>
-          <InfoBoldText>머리스타일</InfoBoldText>
-          <InfoText>
-            {exampleData.hairLength === 1
-              ? "숏컷"
-              : exampleData.hairLength === 2
-              ? "단발"
-              : "장발"}
-            <HairColorCircle
-              backgroundColor={
-                exampleData.hairColor === 1
-                  ? "black"
-                  : exampleData.hairColor === 2
-                  ? "#745629"
-                  : exampleData.hairColor === 3
-                  ? "#B40000"
-                  : "#F0C734"
-              }
-              marginLeft="12px"
-            />
-          </InfoText>
-        </InfoTextWrap>
-        <InfoTextWrap>
-          <InfoBoldText>피부색</InfoBoldText>
-          <HairColorCircle
-            backgroundColor={
-              exampleData.skinColor === 1
-                ? "#FAF4EC"
-                : exampleData.skinColor === 2
-                ? "#F3DB9E"
-                : "#3E2809"
-            }
-          />
-        </InfoTextWrap>
-        <InfoTextWrap>
-          <InfoBoldText whiteSpace="pre-line">
-            기타 정보
-            <InfoText marginTop="7px">{exampleData.etc}</InfoText>
-          </InfoBoldText>
-        </InfoTextWrap>
-        <Box marginTop="40px">
-          <Button width="240px" to="/character">
-            캐릭터 변경하기
-          </Button>
-        </Box>
+        {character ? (
+          <>
+            <InfoTextWrap>
+              <InfoBoldText>성별</InfoBoldText>
+              <InfoText>{character.sex === 1 ? "여자" : "남자"}</InfoText>
+            </InfoTextWrap>
+            <InfoTextWrap>
+              <InfoBoldText>나이</InfoBoldText>
+              <InfoText>
+                {character.age === 1
+                  ? "10대"
+                  : character.age === 2
+                  ? "20-30대"
+                  : character.age === 3
+                  ? "40-50대"
+                  : "60대 이상"}
+              </InfoText>
+            </InfoTextWrap>
+            <InfoTextWrap>
+              <InfoBoldText>머리스타일</InfoBoldText>
+              <InfoText>
+                {character.hairLength === 1
+                  ? "숏컷"
+                  : character.hairLength === 2
+                  ? "단발"
+                  : "장발"}
+                <HairColorCircle
+                  backgroundColor={
+                    character.hairColor === 1
+                      ? "black"
+                      : character.hairColor === 2
+                      ? "#745629"
+                      : character.hairColor === 3
+                      ? "#B40000"
+                      : "#F0C734"
+                  }
+                  marginLeft="12px"
+                />
+              </InfoText>
+            </InfoTextWrap>
+            <InfoTextWrap>
+              <InfoBoldText>피부색</InfoBoldText>
+              <HairColorCircle
+                backgroundColor={
+                  character.skinColor === 1
+                    ? "#FAF4EC"
+                    : character.skinColor === 2
+                    ? "#F3DB9E"
+                    : "#3E2809"
+                }
+              />
+            </InfoTextWrap>
+            <InfoTextWrap>
+              <InfoBoldText whiteSpace="pre-line">
+                기타 정보
+                <InfoText marginTop="7px">{character.etc}</InfoText>
+              </InfoBoldText>
+            </InfoTextWrap>
+            <Box marginTop="40px">
+              <Button width="240px" to="/character">
+                캐릭터 변경하기
+              </Button>
+            </Box>
+          </>
+        ) : (
+          <LoadingSpinnerCharacter src={LoadingImage} alt="로딩중" />
+        )}
+
       </CharacterInfoWrap>
     </MyPageWrap>
   );
@@ -280,4 +304,16 @@ const HairColorCircle = styled.div`
   border-radius: 50px;
   margin-left: ${(props) => props.marginLeft || "0px"};
   z-index: 2;
+`;
+
+const LoadingSpinnerCharacter = styled.img`
+  width: 40px;
+  position: relative;
+  left: 46%;
+  margin-top: 80px;
+  margin-bottom: 150px;
+`;
+
+const LoadingSpinner = styled.img`
+  width: 40px;
 `;
