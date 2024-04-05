@@ -49,22 +49,24 @@ const Form = (props) => {
     });
   }; //다음 cut이 cutNum을 넘어가면 더이상 안넘어가게 하는 로직
 
-  const userId = 3; // 사용자 ID를 하드코딩
+  const userId = 2; // 사용자 ID를 하드코딩
   const handleSubmit = async (e) => {
     e.preventDefault();
     const requestData = cutForms.map((cut) => ({
-      keywords: [cut.other, cut.place, cut.action],
-      emotion: cut.emotion,
       cutNum: cutNum,
+      emotion: cut.emotion,
+      keywords: [cut.other, cut.place, cut.action],
       date: cut.date,
       orderNum: cut.orderNum,
       // 변경된 부분: cut의 date 속성을 직접 백엔드에 보냄
     }));
-
     try {
       const response = await axios.post(
-        "http://52.79.154.88:8080/diaries/${userId}/events",
-        requestData
+        `http://52.79.154.88:8080/diaries/${userId}/events`,
+        requestData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       );
       console.log("서버 응답:", response.data);
       //navigate("/loading"); // API 요청 후 페이지를 로딩 페이지로 이동

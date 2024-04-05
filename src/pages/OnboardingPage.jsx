@@ -23,7 +23,7 @@ const OnboardingPage = () => {
           src={"/images/koreanlogo.png"}
           alt="Korean Logo"
         />
-        {/* <OnboardingLogo>Haru4Cut</OnboardingLogo> */}
+
         <OnboardingMsg>내 하루를 네컷으로 기록하세요</OnboardingMsg>
         <StartButton className={buttonFade} to="/login">
           시작하기
@@ -37,30 +37,29 @@ export default OnboardingPage;
 
 const OnboardingWrap = styled.div`
   display: flex;
-  border-radius: 30px;
   background-color: #f3f5f6;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
-  width: 85%;
-  height: 85%;
+  height: 70vh;
+  // margin: 20px 0; /* 여기에 마진을 추가 */margin: 20px 0; /* 여기에 마진을 추가 */
 `;
 const OnboardingLogo = styled.div`
   font-family: "OleoScriptSwashCapsBold";
   color: #a8c9e7;
-  font-size: 3rem;
+  font-size: 2rem;
   letter-spacing: 0.1em;
 `;
 const OnboardingMsg = styled.div`
   font-family: "KotraHope";
   color: #a8c9e7;
-  font-size: 1.5rem;
+  font-size: 2rem;
   letter-spacing: 0.1em;
+  margin-bottom: 20vh;
 `;
 const StyledImg = styled.img`
-  width: 20%;
-  height: 25%;
+  width: 85%;
+  height: 20%;
   opacity: 0; /* 초기에는 투명하게 설정 */
   transition: opacity 2s; /* transition 효과 설정 */
 
@@ -74,11 +73,11 @@ const StartButton = styled(Link)`
   background-color: #5370d4;
   color: white;
   text-decoration: none;
-  width: 4vw;
   border-radius: 20px;
   padding: 12px 80px;
   text-align: center;
-
+  width: 50%;
+  //margin-bottom: 20vh;
   cursor: pointer;
   font-family: Pretendard;
   opacity: 0; /* 초기에는 투명하게 설정 */

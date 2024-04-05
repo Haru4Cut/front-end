@@ -84,8 +84,8 @@ const CutButton = styled(Button)`
   margin-left: 4vw;
   margin-right: 4vw;
   height: 3vh;
-  width: 5vw;
-  //font-size: 2rem;
+  width: 10vw;
+  font-size: 24px;
   border-radius: 20px;
 `;
 
@@ -110,7 +110,7 @@ const FrameContainer = styled.div`
 
 const FrameImage = styled.img`
   object-fit: contain; /* 이미지가 프레임 내에 맞게 조절됨 */
-  width: 100%; /* 이미지의 너비를 프레임의 너비에 맞게 조절 */
-  height: 100%; /* 이미지의 높이를 프레임의 높이에 맞게 조절 */
+  width: 80%; /* 이미지의 너비를 프레임의 너비에 맞게 조절 */
+  height: 80%; /* 이미지의 높이를 프레임의 높이에 맞게 조절 */
   margin-top: 20px;
 `;
