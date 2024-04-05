@@ -43,7 +43,7 @@ const DateSelect = () => {
       <DateSelectWrap>
         <h1>날짜를 입력하세요</h1>
         <DateContainer>
-          <Select value={selectedYear} onChange={handleYearChange}>
+          <StyledSelect value={selectedYear} onChange={handleYearChange}>
             {Array.from(
               { length: 100 },
               (_, i) => new Date().getFullYear() - i
@@ -52,21 +52,21 @@ const DateSelect = () => {
                 {year}
               </option>
             ))}
-          </Select>
-          <Select value={selectedMonth} onChange={handleMonthChange}>
+          </StyledSelect>
+          <StyledSelect value={selectedMonth} onChange={handleMonthChange}>
             {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
               <option key={month} value={month}>
                 {month}
               </option>
             ))}
-          </Select>
-          <Select value={selectedDay} onChange={handleDayChange}>
+          </StyledSelect>
+          <StyledSelect value={selectedDay} onChange={handleDayChange}>
             {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
               <option key={day} value={day}>
                 {day}
               </option>
             ))}
-          </Select>
+          </StyledSelect>
         </DateContainer>
         <SubmitButton
           to="/writting/keyword"
@@ -122,4 +122,16 @@ const DateSelectWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const StyledSelect = styled.select`
+  border-radius: 30px;
+  border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
+  width: 30%;
+  background-color: rgba(239, 244, 252, 1);
+  font-size: 2rem;
+  height: 5vh;
+  padding-left: 20px;
+  margin-left: 20px;
+  font-family: Pretendard;
 `;

@@ -5,11 +5,7 @@ const LoginPage = () => {
   return (
     <div className="wrap">
       <LoginWrap>
-        <img
-          src={"/images/Haru4Cut.png"}
-          style={{ width: "20%", height: "10%" }}
-        />
-
+        <LoginLogo>Haru4Cut</LoginLogo>
         <KakaoLogin />
       </LoginWrap>
     </div>
@@ -28,4 +24,10 @@ const LoginWrap = styled.div`
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
   width: 85%;
   height: 85%;
+`;
+const LoginLogo = styled.div`
+  font-family: "OleoScriptSwashCapsBold";
+  color: #a8c9e7;
+  font-size: 5rem;
+  letter-spacing: 0.1em;
 `;
