@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NoneDiary from "./NoneDiary";
 import ExistDiary from "./ExistDiary";
+import axios from "axios";
+
 export default function TodaysDiary() {
+  const [diaryData, setDiaryData] = useState(null);
+
   //오늘 날짜
   function getToday() {
     var date = new Date();
@@ -11,12 +15,39 @@ export default function TodaysDiary() {
     var day = ("0" + date.getDate()).slice(-2);
     return year + "." + month + "." + day;
   }
+  function getToday2() {
+    var date = new Date();
+    var year = date.getFullYear().toString().slice(-2);
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+    return year + "-" + month + "-" + day;
+  }
+
+  const userId = 1;
+
+  // 날짜에 따른 일기 얻기
+  useEffect(() => {
+    const fetchDiarybydate = async () => {
+      try {
+        const response = await axios.get(`/users/${userId}/diarybydate`, {
+          params: {
+            date: getToday2(),
+          },
+        });
+        setDiaryData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiarybydate();
+  }, []);
+
   return (
     <>
       <TodayDate>{getToday()}</TodayDate>
       <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
-      <NoneDiary />
-      {/* <ExistDiary /> */}
+      {diaryData ? <ExistDiary data={diaryData} /> : <NoneDiary />}
     </>
   );
 }
