@@ -136,6 +136,7 @@ const MyPageText = styled.div`
 `;
 
 const CalendarBox = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
