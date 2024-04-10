@@ -7,15 +7,12 @@ import Button from "../components/common/Button";
 import DiaryEditIcon from "../assets/images/DiaryEditIcon.svg";
 import ShareIcon from "../assets/images/ShareIcon.svg";
 import axios from "axios";
-
+import { useParams } from "react-router-dom";
 export default function Haru4CutDetail({ selectedDate }) {
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
-  const DiaryImgList = [
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-  ];
+  const { diaryid } = useParams(); // 현재 diaryId
+  console.log(diaryid);
+
   const ImgNum = 4;
   const [heartStates, setHeartStates] = useState(Array(ImgNum).fill(true));
   const defaultTextAreaValue = `자세한 이 날 스토리, 네컷일기에 대한 \n느낌 등 일기를 더 기록해보세요 :) \n\n기록할 것이 없다면 줄글 일기 없이\n사진만으로도 일기를 완성할 수 있어요!`;
@@ -50,40 +47,29 @@ export default function Haru4CutDetail({ selectedDate }) {
     });
   };
 
-  //test diaryId
-  const diaryId = 5;
-  const userId = 1;
-  //테스트 코드
+  // diaries.text 값에 따라 showDiary 상태 변경
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/diaries/${diaryId}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        });
-        console.log(`/diaries/${diaryId}`, response.data.result);
-      } catch (error) {
-        console.error(`/diaries/${diaryId}`, error);
-      }
-    };
+    if (diaries.text && diaries.text !== "") {
+      setShowDiary(true);
+    } else {
+      setShowDiary(false);
+    }
+  }, [diaries.text]);
+  // test userId
+  const userId = 2;
 
-    fetchData();
-  }, []);
-  // 연동 코드
+  // 현재 diaryid의 일기 가져오기
   useEffect(() => {
     const fetchDiaries = async () => {
       try {
-        const response = await axios.get(`/users/${userId}/diaries`, {
+        const response = await axios.get(`/diaries/${diaryid}`, {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": "true",
           },
         });
-        console.log(`/users/${userId}/diaries`, response);
+        console.log(`/diaries/${diaryid}`, response);
         setDiaries(response.data);
       } catch (error) {
         console.error(error);
@@ -97,47 +83,94 @@ export default function Haru4CutDetail({ selectedDate }) {
       <TodaysDiaryWrap>
         <Date>{moment(selectedDate).format("YY.MM.DD")}</Date>
         <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
-        <ImgWrap>
-          {DiaryImgList.map((imgUrl, index) => (
-            <>
-              <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
-              <StyledFavoriteIcon
-                onClick={() => onClickHeart(index)}
-                fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
-                alt="heart icon"
-              />
-            </>
-          ))}
-        </ImgWrap>
-
-        {showDiary ? (
+        {diaries && diaries.length !== 0 ? (
           <>
-            <DiaryText>{textDiary}</DiaryText>
-            <Button onClick={onEditButtonClick} marginBottom="6px">
-              <StyledIcon src={DiaryEditIcon} />
-              일기 수정하기
-            </Button>
-            <Button
-              onClick={onShareButtonClick}
-              backgroundColor="#8A8A8A"
-              marginBottom="6px"
-              to={`/haru4cut/${diaryId}/share`}
-            >
-              <StyledIcon src={ShareIcon} />
-              일기 공유하기
-            </Button>
+            <ImgWrap>
+              {/* cutNum 1일 때 */}
+              {diaries.cutNum === 1 && (
+                <>
+                  <DiaryImage1 src={diaries.imgLink[0]} alt="하루네컷 이미지" />
+                  <StyledFavoriteIcon1
+                    onClick={() => onClickHeart(0)}
+                    fill={heartStates[0] ? "#E54B4B" : "#C7C7C7"}
+                    alt="heart icon"
+                  />
+                </>
+              )}
+              {/* cutNum 2일 때 */}
+              {diaries.cutNum === 2 && (
+                <>
+                  {diaries.imgLink.map((imgUrl, index) => (
+                    <>
+                      <DiaryImage2
+                        src={imgUrl}
+                        alt="하루네컷 이미지"
+                        key={index}
+                      />
+                      <StyledFavoriteIcon2
+                        onClick={() => onClickHeart(index)}
+                        fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
+                        alt="heart icon"
+                      />
+                    </>
+                  ))}
+                </>
+              )}
+              {/* cutNum 4일 때 */}
+              {diaries.cutNum === 4 && (
+                <>
+                  {diaries.imgLink.map((imgUrl, index) => (
+                    <>
+                      <DiaryImage
+                        src={imgUrl}
+                        alt="하루네컷 이미지"
+                        key={index}
+                      />
+                      <StyledFavoriteIcon
+                        onClick={() => onClickHeart(index)}
+                        fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
+                        alt="heart icon"
+                      />
+                    </>
+                  ))}
+                </>
+              )}
+            </ImgWrap>
+
+            {showDiary ? (
+              <>
+                <DiaryText>{diaries.text}</DiaryText>
+                <Button onClick={onEditButtonClick} marginBottom="6px">
+                  <StyledIcon src={DiaryEditIcon} />
+                  일기 수정하기
+                </Button>
+                <Button
+                  onClick={onShareButtonClick}
+                  backgroundColor="#8A8A8A"
+                  marginBottom="6px"
+                  to={`/haru4cut/${diaryid}/share`}
+                >
+                  <StyledIcon src={ShareIcon} />
+                  일기 공유하기
+                </Button>
+              </>
+            ) : (
+              <>
+                <DiaryTextArea
+                  placeholder={defaultTextAreaValue}
+                  onChange={onInputHandler}
+                  maxLength={129}
+                  value={textDiary}
+                ></DiaryTextArea>
+                <CountText>{inputCount}/130</CountText>
+                <Button onClick={onCompleteButtonClick}>일기 완성하기</Button>
+              </>
+            )}
           </>
         ) : (
-          <>
-            <DiaryTextArea
-              placeholder={defaultTextAreaValue}
-              onChange={onInputHandler}
-              maxLength={129}
-              value={textDiary}
-            ></DiaryTextArea>
-            <CountText>{inputCount}/130</CountText>
-            <Button onClick={onCompleteButtonClick}>일기 완성하기</Button>
-          </>
+          <ErrorMessage>
+            잘못된 접근입니다. {"\n"} 해당 일기가 존재하지 않습니다 :(
+          </ErrorMessage>
         )}
       </TodaysDiaryWrap>
     </MainWrap>
@@ -178,11 +211,20 @@ const Todays4CutDiary = styled.div`
   font-size: 28px;
   margin-top: 10px;
 `;
+// 4컷일 때 다이어리 이미지
 const DiaryImage = styled.img`
   width: 120px;
   margin: 12px 0px;
 `;
-
+// 1컷일 때 다이어리 이미지
+const DiaryImage1 = styled.img`
+  width: 200px;
+`;
+// 2컷일 때 다이어리 이미지
+const DiaryImage2 = styled.img`
+  width: 250px;
+  margin: 5px 0px;
+`;
 const ImgWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -190,13 +232,31 @@ const ImgWrap = styled.div`
   width: 300px;
   margin: 20px 0px 20px 20px;
 `;
-
+// 4컷일 때 하트 아이콘
 const StyledFavoriteIcon = styled(FavoriteIcon)`
   width: 24px;
   height: 24px;
   position: relative;
   top: 115px;
   left: -21px;
+  cursor: pointer;
+`;
+// 1컷일 때 하트 아이콘
+const StyledFavoriteIcon1 = styled(FavoriteIcon)`
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 315px;
+  left: -30px;
+  cursor: pointer;
+`;
+// 2컷일 때 하트 아이콘
+const StyledFavoriteIcon2 = styled(FavoriteIcon)`
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 120px;
+  left: -30px;
   cursor: pointer;
 `;
 
@@ -239,4 +299,14 @@ const CountText = styled.div`
 
 const StyledIcon = styled.img`
   margin-right: 5px;
+`;
+const ErrorMessage = styled.div`
+  color: #616161;
+  font-size: 14px;
+  white-space: pre-wrap;
+  margin-top: 30px;
+  margin-bottom: 40%;
+  align-items: center;
+  text-align: center;
+  line-height: 150%;
 `;

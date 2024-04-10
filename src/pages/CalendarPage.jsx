@@ -6,8 +6,11 @@ import "./calendarStyles.css";
 import moment from "moment";
 import Button from "../components/common/Button";
 import axios from "axios";
+import NoneDiary from "../components/main/NoneDiary";
+
 export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState();
+  const [diaryExistDate, setDiaryExistData] = useState();
   const DiaryImgList = [
     "https://ifh.cc/g/4bZ6CR.png",
     "https://ifh.cc/g/4bZ6CR.png",
@@ -16,8 +19,11 @@ export default function CalendarPage() {
   ];
   const [isheartToggle, SetIsheartToggle] = useState(true);
   const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
-  const [diaryId, setDiaryId] = useState();
+  const [diary, setDiary] = useState(); // 선택한 날짜의 diary
+
   const userId = 1;
+
+  // 선택된 날짜의 diary 가져오기
   useEffect(() => {
     const fetchDiaaryDate = async () => {
       try {
@@ -27,13 +33,22 @@ export default function CalendarPage() {
           },
         });
         console.log(response.data);
-        setDiaryId(response.data);
+        setDiary(response.data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchDiaaryDate();
   }, [selectedDate]);
+
+  const extractDates = (diaryData) => {
+    if (!diaryData) return []; // 데이터 없을 때
+    return diaryData.map((item) =>
+      moment(item.date, "YY-MM-DD").format("YYYY-MM-DD")
+    );
+  };
+  const extractedDates = extractDates(diaryExistDate);
+
   return (
     <CalendarWrap>
       <Header>
@@ -45,22 +60,33 @@ export default function CalendarPage() {
           formatDay={(locale, date) => moment(date).format("D")}
           value={selectedDate}
           onChange={setSelectedDate}
+          tileClassName={({ date }) =>
+            extractedDates.includes(moment(date).format("YYYY-MM-DD"))
+              ? "selected-date"
+              : null
+          }
         />
       </CalendarBox>
       {selectedDate && (
         <CalendarDiaryBox>
           <Date>{moment(selectedDate).format("YY.MM.DD")}</Date>
           <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
-          <ImgWrap>
-            {DiaryImgList.map((imgUrl, index) => (
-              <>
-                <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
-              </>
-            ))}
-          </ImgWrap>
-          <Button width="260px" to={`/haru4cut/${diaryId}`}>
-            자세히 보기
-          </Button>
+          {!diary ? (
+            <NoneDiary />
+          ) : (
+            <>
+              <ImgWrap>
+                {diary.imgLinks.map((imgUrl, index) => (
+                  <>
+                    <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
+                  </>
+                ))}
+              </ImgWrap>
+              <Button width="260px" to={`/haru4cut/${diary.diaryId}`}>
+                자세히 보기
+              </Button>
+            </>
+          )}
         </CalendarDiaryBox>
       )}
     </CalendarWrap>
