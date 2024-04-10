@@ -1,17 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-export default function Exist() {
-  const DiaryImgList = [
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-  ];
+export default function Exist({diaryId, diaryImgList}) {
+
   return (
     <ExistDiaryWrap>
       <ImgWrap>
-        {DiaryImgList.map((imgUrl, index) => (
+        {diaryImgList.map((imgUrl, index) => (
           <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
         ))}
       </ImgWrap>

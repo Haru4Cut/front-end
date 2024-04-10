@@ -10,7 +10,6 @@ const StyledButton = styled(Link)`
   height: 45px;
   margin-bottom: ${(props) => props.marginBottom || "0px"};
   margin-top: ${(props) => props.marginTop || "0px"};
-
   background-color: ${(props) => props.backgroundColor || "#5370d4"};
   color: ${(props) => props.textColor || "white"};
   color: white;

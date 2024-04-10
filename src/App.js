@@ -18,6 +18,7 @@ import OnboardingPage from "./pages/OnboardingPage";
 import Calendar from "./pages/CalendarPage";
 import Haru4CutDetail from "./pages/Haru4CutDetail";
 import Share from "./pages/Share";
+import Redirection from "./components/login/Redirect";
 
 function App() {
   return (
@@ -25,9 +26,13 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<OnboardingPage />} /> {/* 메인 페이지 */}
-        <Route path="/home" element={<Main />} /> {/* 메인 페이지 */}
+        <Route path="/main" element={<Main />} /> {/* 메인 페이지 */}
         <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
         <Route path="/login" element={<LoginPage />} /> {/* 마이 페이지 */}
+        <Route
+          path="/login/oauth2/code/kakao"
+          element={<Redirection />}
+        ></Route>
         <Route path="/calendar" element={<Calendar />} /> {/* 캘린더 페이지 */}
         <Route path="/haru4cut/:diaryid" element={<Haru4CutDetail />} />
         {/* 일기 상세보기 페이지 */}
