@@ -186,3 +186,20 @@
   border-radius: 50px;
   background-color: #e6e6e6;
 }
+/* 일기 있는 날짜 css 속성*/
+.selected-date {
+  position: relative;
+  color: #5370d4;
+}
+
+.selected-date::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #5370d4;
+  border-radius: 50%;
+}
