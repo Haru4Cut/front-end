@@ -22,8 +22,8 @@ export default function TodaysDiary() {
     var day = ("0" + date.getDate()).slice(-2);
     return year + "-" + month + "-" + day;
   }
-
-  const userId = 1;
+  // const userId = 1;
+  const userId = localStorage.getItem("userId");
 
   // 날짜에 따른 일기 얻기
   useEffect(() => {

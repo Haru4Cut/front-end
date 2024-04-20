@@ -5,7 +5,9 @@ import axios from "axios";
 export default function MemoryDiary() {
   const memoryDate = "23.10.12";
   const [nickName, setNickName] = useState();
-  const userId = 1;
+  const [memoryDiary, setMemoryDiary] = useState();
+  // const userId = 1;
+  const userId = localStorage.getItem("userId");
   // 닉네임
   useEffect(() => {
     const fetchNickName = async () => {
@@ -19,6 +21,20 @@ export default function MemoryDiary() {
     };
     fetchNickName();
   }, []);
+  // 추억일기 (좋아요 누른 일기 전체 조회 API)
+  useEffect(() => {
+    const fetchMemoryDiaries = async () => {
+      try {
+        const response = await axios.get(`/likes/${userId}`, {});
+        setMemoryDiary(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMemoryDiaries();
+  }, []);
+
   return (
     <>
       <MemoryDiaryText>

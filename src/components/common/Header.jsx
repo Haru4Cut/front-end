@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <HeaderWrap>
-      <Haru4cutLogo to="/home">Haru4cut</Haru4cutLogo>
+      <Haru4cutLogo to="/main">Haru4cut</Haru4cutLogo>
       <IconWrap>
         <Link to="/calendar">
           <Icon src={calendarIcon} marginTop="2px" />

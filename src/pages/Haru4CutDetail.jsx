@@ -56,8 +56,8 @@ export default function Haru4CutDetail({ selectedDate }) {
     }
   }, [diaries.text]);
   // test userId
-  const userId = 2;
-
+  //const userId = 2;
+  const userId = localStorage.getItem("userId");
   // 현재 diaryid의 일기 가져오기
   useEffect(() => {
     const fetchDiaries = async () => {

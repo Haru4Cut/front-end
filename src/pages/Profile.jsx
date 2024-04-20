@@ -9,7 +9,8 @@ import CompleteProfile from "../components/character/CompleteProfile";
 
 export default function Profile() {
   //test userId
-  const userId = 1;
+  // const userId = 1;
+  const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [imageUrl, setImageUrl] = useState(""); // 프로필 이미지 url 저장 상태
   const [refreshCounter, setRefreshCounter] = useState(0); // 새로고침 counter

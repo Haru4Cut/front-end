@@ -38,8 +38,9 @@ export default function Main() {
       // Handle error here
     }
   };
+  const userId = localStorage.getItem("userId");
   // test userId
-  const userId = 1;
+  //const userId = 1;
 
   const [character, setCharacter] = useState();
 
@@ -163,7 +164,6 @@ export default function Main() {
         ) : (
           <LoadingSpinnerCharacter src={LoadingImage} alt="로딩중" />
         )}
-
       </CharacterInfoWrap>
     </MyPageWrap>
   );
