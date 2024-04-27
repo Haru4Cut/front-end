@@ -13,8 +13,7 @@ export default function Haru4CutDetail({ selectedDate }) {
   const { diaryid } = useParams(); // 현재 diaryId
   console.log(diaryid);
 
-  const ImgNum = 4;
-  const [heartStates, setHeartStates] = useState(Array(ImgNum).fill(true));
+  const [heartStates, setHeartStates] = useState(Array(4).fill(true));
   const defaultTextAreaValue = `자세한 이 날 스토리, 네컷일기에 대한 \n느낌 등 일기를 더 기록해보세요 :) \n\n기록할 것이 없다면 줄글 일기 없이\n사진만으로도 일기를 완성할 수 있어요!`;
 
   // 글자수 표시
@@ -56,8 +55,8 @@ export default function Haru4CutDetail({ selectedDate }) {
     }
   }, [diaries.text]);
   // test userId
-  const userId = 2;
-
+  //const userId = 2;
+  const userId = localStorage.getItem("userId");
   // 현재 diaryid의 일기 가져오기
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -81,7 +80,7 @@ export default function Haru4CutDetail({ selectedDate }) {
     <MainWrap>
       <Header />
       <TodaysDiaryWrap>
-        <Date>{moment(selectedDate).format("YY.MM.DD")}</Date>
+        <Date>{diaries.date}</Date>
         <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
         {diaries && diaries.length !== 0 ? (
           <>
