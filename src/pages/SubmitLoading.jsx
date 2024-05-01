@@ -8,7 +8,7 @@ const SubmitLoadingPage = () => {
     <div className="wrap">
       <Header />
       <LoadingWrap>
-        <StyledImg src={"/images/LoadingImage.png"} alt="Korean Logo" />
+        <StyledImg src={"/images/koreanlogo.png"} alt="Korean Logo" />
         <LoadingText>그림을 생성중이에요 </LoadingText>
 
         <MsgText>AI가 그림을 그리는데 시간이 걸릴 수 있습니다. </MsgText>
@@ -50,6 +50,6 @@ const MsgText = styled.div`
   color: #8c8c8c;
 `;
 const StyledImg = styled.img`
-  width: 25%;
-  height: 40%;
+  //width: 25%;
+  //height: 40%;
 `;

@@ -18,7 +18,7 @@ const getJWTToken = async (authorizationCode) => {
 
     const jwtToken = response.data.access_token;
 
-    document.cookie = `jwtToken=${jwtToken}; path=/;`;
+    //document.cookie = `jwtToken=${jwtToken}; path=/;`;
 
     // 원하는 작업 수행
   } catch (error) {

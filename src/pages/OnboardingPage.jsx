@@ -44,12 +44,7 @@ const OnboardingWrap = styled.div`
   height: 70vh;
   // margin: 20px 0; /* 여기에 마진을 추가 */margin: 20px 0; /* 여기에 마진을 추가 */
 `;
-const OnboardingLogo = styled.div`
-  font-family: "OleoScriptSwashCapsBold";
-  color: #a8c9e7;
-  font-size: 2rem;
-  letter-spacing: 0.1em;
-`;
+
 const OnboardingMsg = styled.div`
   font-family: "KotraHope";
   color: #a8c9e7;

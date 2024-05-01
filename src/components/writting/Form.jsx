@@ -13,7 +13,6 @@ const Form = (props) => {
   const date = useSelector((state) => state.date);
 
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
-
   const [cutForms, setCutForms] = useState([]);
   useEffect(() => {
     setCutForms(
@@ -49,7 +48,7 @@ const Form = (props) => {
     });
   }; //다음 cut이 cutNum을 넘어가면 더이상 안넘어가게 하는 로직
 
-  const userId = 2; // 사용자 ID를 하드코딩
+  const userId = 1;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const requestData = cutForms.map((cut) => ({
@@ -60,16 +59,26 @@ const Form = (props) => {
       orderNum: cut.orderNum,
       // 변경된 부분: cut의 date 속성을 직접 백엔드에 보냄
     }));
+    console.log("rq", JSON.stringify(requestData));
+    // 버튼을 누르자마자 '/loading' 페이지로 이동
+    navigate("/loading");
     try {
       const response = await axios.post(
-        `http://52.79.154.88:8080/diaries/${userId}/events`,
-        requestData,
+        `/diaries/${userId}/events`,
+        JSON.stringify(requestData),
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            Accept: "*/*",
+            "Content-Type": `application/json`,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+          },
         }
       );
       console.log("서버 응답:", response.data);
-      //navigate("/loading"); // API 요청 후 페이지를 로딩 페이지로 이동
+      // 응답을 받은 후 '/createdimage' 페이지로 이동
+      // 이미지 링크와 함께 '/createdImg' 페이지로 이동
+      navigate("/createdImg");
     } catch (error) {
       console.error("서버 요청 오류:", error);
       // 오류 처리 로직 추가

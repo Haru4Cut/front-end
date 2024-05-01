@@ -7,11 +7,6 @@ const FourInput = ({
   handleInputChange,
   handleEmotionChange,
 }) => {
-  //const currentCut = useSelector((state) => state.cutInput.cuts[currentCutIdx]);
-
-  // currentCut에서 각 키워드의 값을 가져옴
-  //const { other, place, action, emotion } = currentCut;
-
   const [focusedInput, setFocusedInput] = useState(null);
   const handleInputFocus = (inputName) => {
     setFocusedInput(inputName);

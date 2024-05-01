@@ -1,19 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 
 const Redirection = () => {
   const navigate = useNavigate();
-  const [accessToken, setAccessToken] = useState(null);
-  const [userId, setUserId] = useState(null);
   const code = new URL(window.location.href).searchParams.get("code");
 
   const fetchData = async () => {
+    if (!code) {
+      // code가 없다면 저장된 데이터 확인
+      checkStoredData();
+      return;
+    }
+
     try {
       const response = await axios.post(
         `/users/login/${code}`,
         {},
         {
+          withCredentials: false, // 쿠키 전송 안 함
           headers: {
             "Content-Type": "application/json",
           },
@@ -21,46 +26,37 @@ const Redirection = () => {
       );
 
       const { userId, accessToken } = response.data;
-      console.log(response.data);
-      console.log("로그인 성공");
-      localStorage.setItem("accessToken", accessToken);
-      setAccessToken(accessToken);
+      console.log("로그인 성공", response.data);
 
-      // userId가 이미 저장되어 있는지 여부 확인
-      const storedUserId = localStorage.getItem("userId");
-      if (storedUserId) {
-        // 이미 저장된 userId가 있으면 메인 페이지로 이동
-        navigate("/main");
-      } else {
-        // 저장된 userId가 없으면 현재 userId를 저장하고 캐릭터 설정 페이지로 이동
-        localStorage.setItem("userId", userId);
-        setUserId(userId);
-        navigate(`/character/${userId}`);
-      }
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userId", userId);
+
+      // 새로 로그인한 경우 캐릭터 설정 페이지로 이동
+      navigate("/character");
     } catch (error) {
-      console.log("로그인 오류 발생", error);
+      console.error("로그인 오류 발생", error);
+      // 오류 페이지나 로그인 페이지로 리디렉션 할 수 있습니다.
+      navigate("/login");
+    }
+  };
+
+  const checkStoredData = () => {
+    const storedToken = localStorage.getItem("accessToken");
+    const storedUserId = localStorage.getItem("userId");
+    if (storedToken && storedUserId) {
+      // 이미 저장된 사용자 정보가 있으면 메인 페이지로 이동
+      navigate("/main");
+    } else {
+      // 저장된 정보가 없으면 로그인 페이지로 이동
+      navigate("/login");
     }
   };
 
   useEffect(() => {
-    if (code) {
-      fetchData();
-    } else {
-      const storedToken = localStorage.getItem("accessToken");
-      const storedUserId = localStorage.getItem("userId");
-      if (storedToken && storedUserId) {
-        setAccessToken(storedToken);
-        setUserId(storedUserId);
-      }
-    }
-  }, [code]);
+    fetchData();
+  }, [code]); // useEffect가 code에만 의존하도록 변경
 
-  // 로딩 메시지 표시
-  if (!accessToken || !userId) {
-    return <div>로그인 중입니다...</div>;
-  }
-
-  // 리디렉션 후에는 아무것도 표시하지 않음
+  // UI를 렌더링할 필요가 없는 경우가 많으므로 null을 반환
   return null;
 };
 

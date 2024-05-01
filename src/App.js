@@ -46,6 +46,7 @@ function App() {
         <Route path="/writting/date" element={<DateSelectPage />} />
         <Route path="/writting/keyword" element={<KeywordInputPage />} />
         <Route path="/loading" element={<SubmitLoadingPage />} />
+        <Route path="//createdimage" element={<SubmitLoadingPage />} />
         <Route path="/haru4cut" element={<CompleteDiary />} />
         {/* 일기 완성 */}
       </Routes>
