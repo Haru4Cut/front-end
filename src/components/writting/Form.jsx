@@ -14,6 +14,7 @@ const Form = (props) => {
 
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);
+  //const [imgUrl, setImgUrl] = useState(null);
   useEffect(() => {
     setCutForms(
       Array.from({ length: cutNum }, (_, index) => ({
@@ -57,7 +58,7 @@ const Form = (props) => {
       keywords: [cut.other, cut.place, cut.action],
       date: cut.date,
       orderNum: cut.orderNum,
-      // 변경된 부분: cut의 date 속성을 직접 백엔드에 보냄
+      // 변경된 부분-> cut의 date 속성을 직접 백엔드에 보냄
     }));
     console.log("rq", JSON.stringify(requestData));
     // 버튼을 누르자마자 '/loading' 페이지로 이동
