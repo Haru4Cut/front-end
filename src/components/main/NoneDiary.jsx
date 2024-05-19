@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import diaryImg from "../../assets/images/diaryImg.svg";
 import { Link } from "react-router-dom";
+import Payment from "../common/Payment";
 export default function NoneDiary() {
+  // 모달창 state
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   return (
     <NoneDiaryWrap>
       <DiaryImg src={diaryImg} />
@@ -10,7 +19,13 @@ export default function NoneDiary() {
         네컷일기가 존재하지 않습니다! {"\n"}오늘의 일기를 네컷으로 기록해보세요
         :)
       </ContentText>
-      <DiaryButton to="/writting/frame">일기 만들러 가기</DiaryButton>
+      {/*<DiaryButton to="/writting/frame">일기 만들러 가기</DiaryButton>*/}
+      <DiaryButton onClick={openModal}>일기 만들러 가기</DiaryButton>
+      <Payment
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
     </NoneDiaryWrap>
   );
 }
