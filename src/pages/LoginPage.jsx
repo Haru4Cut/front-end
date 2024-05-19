@@ -28,6 +28,6 @@ const LoginWrap = styled.div`
 const LoginLogo = styled.div`
   font-family: "OleoScriptSwashCapsBold";
   color: #a8c9e7;
-  font-size: 5rem;
+  font-size: 2.5rem;
   letter-spacing: 0.1em;
 `;

@@ -10,20 +10,15 @@ const Redirection = () => {
     try {
       const response = await axios.post(
         `/users/login/${code}`,
-        {},
+
         {
-          withCredentials: false, // 쿠키 전송 안 함
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
 
-      const { userId, accessToken } = response.data;
       console.log("로그인 성공", response.data);
-
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userId", userId);
 
       // 새로 로그인한 경우 캐릭터 설정 페이지로 이동
       navigate("/main");

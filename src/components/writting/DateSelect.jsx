@@ -41,7 +41,7 @@ const DateSelect = () => {
   return (
     <div>
       <DateSelectWrap>
-        <h1>날짜를 입력하세요</h1>
+        <h2>날짜를 입력하세요</h2>
         <DateContainer>
           <StyledSelect value={selectedYear} onChange={handleYearChange}>
             {Array.from(
@@ -97,14 +97,12 @@ const SubmitButton = styled(Link)`
 `;
 
 const DateContainer = styled.div`
-  //sbackground-color: pink;
   width: 75vw; /* 프레임의 초기 너비 설정 */
   height: 30vh; /* 프레임의 초기 높이 설정 */
-  margin-top: 5vh;
   margin-bottom: 5vh;
   overflow: hidden; /* 프레임을 넘는 컨텐츠 숨김 */
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -127,11 +125,10 @@ const DateSelectWrap = styled.div`
 const StyledSelect = styled.select`
   border-radius: 30px;
   border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
-  width: 30%;
+  width: 100px;
+  height: 40px;
   background-color: rgba(239, 244, 252, 1);
-  font-size: 2rem;
-  height: 5vh;
-  padding-left: 20px;
-  margin-left: 20px;
+  padding-left: 10px;
+  margin-left: 10px;
   font-family: Pretendard;
 `;

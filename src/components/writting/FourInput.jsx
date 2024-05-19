@@ -119,7 +119,6 @@ const InputWrap = styled.div`
 `;
 const InputGroup = styled.div`
   width: 50vw;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,7 +133,7 @@ const CategoryTitle = styled.div`
 `;
 const StyledInput = styled.input`
   border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
-  width: 60%;
+  width: 70%;
   height: 5vh;
   border-radius: 30px;
   padding-left: 10px;
@@ -144,14 +143,13 @@ const StyledInput = styled.input`
 const StyledSelect = styled.select`
   border-radius: 30px;
   border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
-  width: 60%;
+  width: 70%;
   background-color: rgba(239, 244, 252, 1);
   padding-left: 10px;
   height: 5vh;
 `;
 const CutInfoText = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-
   font-family: "KotraHope";
 `;

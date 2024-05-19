@@ -77,9 +77,8 @@ const Form = (props) => {
         }
       );
       console.log("서버 응답:", response.data);
-      // 응답을 받은 후 '/createdimage' 페이지로 이동
-      // 이미지 링크와 함께 '/createdImg' 페이지로 이동
-      navigate("/createdImg");
+
+      navigate("/createdImg", { state: { responseData: response.data } });
     } catch (error) {
       console.error("서버 요청 오류:", error);
       // 오류 처리 로직 추가
@@ -114,17 +113,19 @@ export default Form;
 
 const FormWrap = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `;
 const PrevButton = styled.img`
-  height: 70px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
-  margin-top: 30%; /* Add margin to move the arrow image slightly downwards */
+  //margin-top: 50%; /* Add margin to move the arrow image slightly downwards */
 `;
 const NextButton = styled.img`
-  height: 70px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
-  margin-top: 30%; /* Add margin to move the arrow image slightly downwards */
+  //margin-top: 50%; /* Add margin to move the arrow image slightly downwards */
 `;
 
 const SubmitButton = styled.div`
@@ -137,6 +138,7 @@ const SubmitButton = styled.div`
   padding: 11px 69px;
   cursor: pointer;
   font-family: Pretendard;
+  margin-top: 10px;
 `;
 const TotalWrap = styled.div`
   display: flex;

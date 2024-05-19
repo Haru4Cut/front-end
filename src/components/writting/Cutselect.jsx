@@ -83,9 +83,9 @@ const CutButton = styled(Button)`
   border: none;
   margin-left: 4vw;
   margin-right: 4vw;
-  height: 3vh;
-  width: 10vw;
-  font-size: 24px;
+  height: 30px;
+  width: 50px;
+  font-size: 12px;
   border-radius: 20px;
 `;
 

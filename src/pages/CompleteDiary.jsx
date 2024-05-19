@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../components/common/Button";
+import CompleteImg from "../components/writting/CompleteImg";
+import { useLocation } from "react-router-dom";
 
 export default function CompeleteDiary() {
+  const location = useLocation();
+  const { responseData } = location.state;
+  console.log("쿼리로 전달된 응답데이터", responseData);
   return (
     <CompeleteDiaryWrap>
       <div>
@@ -10,6 +15,7 @@ export default function CompeleteDiary() {
         <Haru4CutLine></Haru4CutLine>
       </div>
       <SubText>내 하루를 네컷으로 기록하세요</SubText>
+      <CompleteImg />
     </CompeleteDiaryWrap>
   );
 }

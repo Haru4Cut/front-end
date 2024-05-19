@@ -5,7 +5,7 @@ import Character from "./pages/Character";
 import Profile from "./pages/Profile";
 
 import CharacterSelection from "./pages/CharacterSelection";
-import CompleteDiary from "./pages/CompleteDiary";
+import CompeleteDiary from "./pages/CompleteDiary";
 import CutSelectPage from "./pages/CutSelectPage";
 import DateSelectPage from "./pages/DateSelectPage";
 import KeywordInputPage from "./pages/KeywordInputPage";
@@ -19,6 +19,7 @@ import Calendar from "./pages/CalendarPage";
 import Haru4CutDetail from "./pages/Haru4CutDetail";
 import Share from "./pages/Share";
 import Redirection from "./components/login/Redirect";
+import CompleteImg from "./components/writting/CompleteImg";
 
 function App() {
   return (
@@ -46,8 +47,8 @@ function App() {
         <Route path="/writting/date" element={<DateSelectPage />} />
         <Route path="/writting/keyword" element={<KeywordInputPage />} />
         <Route path="/loading" element={<SubmitLoadingPage />} />
-        <Route path="//createdimage" element={<SubmitLoadingPage />} />
-        <Route path="/haru4cut" element={<CompleteDiary />} />
+        <Route path="/createdImg" element={<CompleteImg />} />
+        <Route path="/haru4cut" element={<CompeleteDiary />} />
         {/* 일기 완성 */}
       </Routes>
     </div>
