@@ -22,4 +22,5 @@ const StyledButton = styled(Link)`
   text-align: center;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
 `;

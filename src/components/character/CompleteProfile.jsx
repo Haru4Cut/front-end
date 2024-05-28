@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
 import CompleteIcon from "../../assets/images/CompleteIcon.svg";
 import RefreshIcon from "../../assets/images/RefreshIcon.svg";
-import { useSelector } from "react-redux";
+import EditIcon from "../../assets/images/Edit_light.png";
+import QuestionIcon from "../../assets/images/Question_fill.svg";
 
 export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
     <CompleteWrap>
       <MainText>프로필 사진</MainText>
@@ -26,6 +37,17 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
           </ErrorText>
         )}
       </ProfileBox>
+      <AlertBox isHovered={isHovered}>
+        프로필 다시 만들기에는 <b>1연필</b>이 소모돼요!
+        <QuestionBox>
+          <Icon src={QuestionIcon} alt="물음표 아이콘" />
+          <b>연필이란?</b>
+        </QuestionBox>
+        <QuestionText>
+          <div>하루네컷에서 사용되는 포인트로,</div> {"\n"} 마이페이지에서
+          결제가 가능해요 :)
+        </QuestionText>
+      </AlertBox>
       <Button
         backgroundColor="#9D9D9D"
         marginTop="80px"
@@ -34,6 +56,12 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
       >
         <Icon src={RefreshIcon} />
         <ButtonText>다시 만들기</ButtonText>
+        <PencilWrap
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img src={EditIcon} alt="연필" />1
+        </PencilWrap>
       </Button>
       <Button onClick={onComplete}>
         <Icon src={CompleteIcon} />
@@ -87,10 +115,51 @@ const ProfileBox = styled.div`
 `;
 
 const Icon = styled.img`
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 const ButtonText = styled.div`
   margin-right: 10px;
+`;
+
+const AlertBox = styled.div`
+  position: absolute;
+  top: 550px;
+  right: 0;
+  z-index: 998;
+  border-radius: 5px;
+  border: 2px solid #b4b4b4;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  padding: 9px 16px;
+  display: ${(props) => (props.isHovered ? "block" : "none")};
+`;
+
+const PencilWrap = styled.div`
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5a5a5a;
+  border-radius: 50px;
+  padding: 2px 13px 2px 8px;
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  z-index: 999;
+  white-space: pre-wrap;
+`;
+
+const QuestionBox = styled.div`
+  display: flex;
+  margin-top: 5px;
+  color: #7d7d7d;
+  align-items: center;
+`;
+
+const QuestionText = styled.div`
+  color: #acacac;
+  margin-top: 5px;
 `;
 
 const ProfileImage = styled.img`
