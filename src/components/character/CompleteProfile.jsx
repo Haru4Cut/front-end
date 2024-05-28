@@ -5,7 +5,7 @@ import CompleteIcon from "../../assets/images/CompleteIcon.svg";
 import RefreshIcon from "../../assets/images/RefreshIcon.svg";
 import EditIcon from "../../assets/images/Edit_light.png";
 import QuestionIcon from "../../assets/images/Question_fill.svg";
-
+import PencilInfo from "../common/PencilInfo";
 export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -37,17 +37,13 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
           </ErrorText>
         )}
       </ProfileBox>
-      <AlertBox isHovered={isHovered}>
-        프로필 다시 만들기에는 <b>1연필</b>이 소모돼요!
-        <QuestionBox>
-          <Icon src={QuestionIcon} alt="물음표 아이콘" />
-          <b>연필이란?</b>
-        </QuestionBox>
-        <QuestionText>
-          <div>하루네컷에서 사용되는 포인트로,</div> {"\n"} 마이페이지에서
-          결제가 가능해요 :)
-        </QuestionText>
-      </AlertBox>
+      <PencilInfo
+        isHovered={isHovered}
+        title="프로필 다시 만들기에는 <b>1연필</b>이 소모돼요!"
+        text="<div>하루네컷에서 사용되는 포인트로,</div> 마이페이지에서 결제가
+        가능해요 :)"
+        top="520px"
+      />
       <Button
         backgroundColor="#9D9D9D"
         marginTop="80px"
@@ -121,20 +117,6 @@ const ButtonText = styled.div`
   margin-right: 10px;
 `;
 
-const AlertBox = styled.div`
-  position: absolute;
-  top: 550px;
-  right: 0;
-  z-index: 998;
-  border-radius: 5px;
-  border: 2px solid #b4b4b4;
-  background: #fff;
-  color: #000;
-  font-size: 14px;
-  padding: 9px 16px;
-  display: ${(props) => (props.isHovered ? "block" : "none")};
-`;
-
 const PencilWrap = styled.div`
   color: white;
   display: flex;
@@ -148,18 +130,6 @@ const PencilWrap = styled.div`
   cursor: pointer;
   z-index: 999;
   white-space: pre-wrap;
-`;
-
-const QuestionBox = styled.div`
-  display: flex;
-  margin-top: 5px;
-  color: #7d7d7d;
-  align-items: center;
-`;
-
-const QuestionText = styled.div`
-  color: #acacac;
-  margin-top: 5px;
 `;
 
 const ProfileImage = styled.img`
