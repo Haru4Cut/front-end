@@ -6,7 +6,7 @@ import Button from "../components/common/Button";
 import BackButton from "../components/common/BackButton";
 import LoadingImage from "../assets/images/LoadingSpinner.gif";
 import axios from "axios";
-export default function Main() {
+export default function MyPage() {
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
   const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
 

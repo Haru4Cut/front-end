@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function SkinSelection({ setSelectedSkin, selectedSkin }) {
   const handleClickSkin = (index) => {
-    setSelectedSkin(index);
+    setSelectedSkin(index + 1);
   };
   return (
     <>
@@ -14,7 +14,7 @@ export default function SkinSelection({ setSelectedSkin, selectedSkin }) {
             handleClickSkin(0);
           }}
         >
-          {selectedSkin === 0 && <ClickedWrap />}
+          {selectedSkin === 1 && <ClickedWrap />}
         </Circle>
         <Circle
           backgroundColor="#F3DB9E"
@@ -22,7 +22,7 @@ export default function SkinSelection({ setSelectedSkin, selectedSkin }) {
             handleClickSkin(1);
           }}
         >
-          {selectedSkin === 1 && <ClickedWrap />}
+          {selectedSkin === 2 && <ClickedWrap />}
         </Circle>
         <Circle
           backgroundColor="#3E2809"
@@ -30,7 +30,7 @@ export default function SkinSelection({ setSelectedSkin, selectedSkin }) {
             handleClickSkin(2);
           }}
         >
-          {selectedSkin === 2 && <ClickedWrap />}
+          {selectedSkin === 3 && <ClickedWrap />}
         </Circle>
       </CircleWrap>
     </>
