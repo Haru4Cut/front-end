@@ -35,7 +35,6 @@ export const share = (dataurl, imgName) => {
 
 export default function Share() {
   const { diaryid } = useParams();
-  const [heartStates, setHeartStates] = useState(Array(4).fill(true));
   const [diaries, setDiaries] = useState(null); // 일기 데이터 초기 상태를 null로 설정
 
   useEffect(() => {
@@ -56,14 +55,6 @@ export default function Share() {
     };
     fetchDiaries();
   }, [diaryid]);
-
-  const onClickHeart = (index) => {
-    setHeartStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
-    });
-  };
 
   const onClickShareButton = () => {
     const target = document.getElementById("download");
@@ -114,17 +105,12 @@ export default function Share() {
           <div>내 하루를 네컷으로 기록하세요</div>
         </LogoWrap>
         <TodaysDiaryWrap>
-          <Date>{diaries.date}</Date>
+          <Date>{moment(diaries.date).format("YY.MM.DD")}</Date>
           <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
           <ImgWrap>
             {diaries.imgLinks && diaries.imgLinks.length === 1 && (
               <>
                 <DiaryImage1 src={diaries.imgLinks[0]} alt="하루네컷 이미지" />
-                <StyledFavoriteIcon1
-                  onClick={() => onClickHeart(0)}
-                  fill={heartStates[0] ? "#E54B4B" : "#C7C7C7"}
-                  alt="heart icon"
-                />
               </>
             )}
             {diaries.imgLinks && diaries.imgLinks.length === 2 && (
@@ -132,11 +118,6 @@ export default function Share() {
                 {diaries.imgLinks.map((imgUrl, index) => (
                   <React.Fragment key={index}>
                     <DiaryImage2 src={imgUrl} alt="하루네컷 이미지" />
-                    <StyledFavoriteIcon2
-                      onClick={() => onClickHeart(index)}
-                      fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
-                      alt="heart icon"
-                    />
                   </React.Fragment>
                 ))}
               </>
@@ -146,11 +127,6 @@ export default function Share() {
                 {diaries.imgLinks.map((imgUrl, index) => (
                   <React.Fragment key={index}>
                     <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
-                    <StyledFavoriteIcon
-                      onClick={() => onClickHeart(index)}
-                      fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
-                      alt="heart icon"
-                    />
                   </React.Fragment>
                 ))}
               </>
@@ -311,7 +287,6 @@ const DiaryImage = styled.img`
 // 1컷일 때 다이어리 이미지
 const DiaryImage1 = styled.img`
   width: 200px;
-  margin-left: 24px;
 `;
 // 2컷일 때 다이어리 이미지
 const DiaryImage2 = styled.img`
