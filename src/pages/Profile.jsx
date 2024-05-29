@@ -73,7 +73,7 @@ export default function Profile() {
         console.log(response.data);
         setRefreshCounter((prevCounter) => prevCounter + 1);
         dispatch(setIsCharacterCreated(true)); // 캐릭터 생성 완료 시 캐릭터 생성 여부 true로 바꿈
-        navigate("/home");
+        navigate("/main");
       })
       .catch((error) => {
         console.error(error);

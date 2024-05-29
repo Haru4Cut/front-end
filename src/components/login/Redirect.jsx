@@ -20,6 +20,7 @@ const Redirection = () => {
       );
 
       console.log("로그인 성공", response.data);
+      localStorage.setItem("userId", response.data.userId);
 
       // 캐릭터 생성 여부가 true이면 main으로, false이면 character로 이동
       if (isCharacterCreated) {

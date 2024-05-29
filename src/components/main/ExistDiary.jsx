@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-export default function Exist({diaryId, diaryImgList}) {
 
+export default function ExistDiary({ data }) {
+  console.log("data", data);
+  const imgLinks = data.imgLinks || [];
   return (
     <ExistDiaryWrap>
       <ImgWrap>
-        {diaryImgList.map((imgUrl, index) => (
-          <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
+        {imgLinks.map((imgUrl, index) => (
+          <DiaryImage key={index} src={imgUrl} alt="하루네컷 이미지" />
         ))}
       </ImgWrap>
-      <DiaryButton>자세히 보기</DiaryButton>
+      <DiaryButton to={`/haru4cut/${data.diaryId}`}>자세히 보기</DiaryButton>
     </ExistDiaryWrap>
   );
 }
