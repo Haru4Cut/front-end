@@ -6,13 +6,12 @@ import HomeIcon from "../assets/images/HomeIcon.svg";
 import DownloadIcon from "../assets/images/DownloadIcon.svg";
 import InstaLogo from "../assets/images/InstaLogo.svg";
 import html2canvas from "html2canvas";
-import testImage4 from "../assets/images/testimage4.png";
 import { ReactComponent as FavoriteIcon } from "../assets/images/FavoriteIcon.svg";
 import { saveAs } from "file-saver";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
 export const share = (dataurl, imgName) => {
-  // url -> file 변경하는 코드
   let arr = dataurl.split(","),
     mime = arr[0].match(/:(.*?);/)[1],
     bstr = window.atob(arr[1]),
@@ -35,16 +34,38 @@ export const share = (dataurl, imgName) => {
 };
 
 export default function Share() {
-  const { diaryid } = useParams(); // 현재 diaryId
-  const DiaryImgList = [testImage4, testImage4, testImage4, testImage4];
-  // 오늘 날짜
-  var date = new window.Date();
+  const { diaryid } = useParams();
   const [heartStates, setHeartStates] = useState(Array(4).fill(true));
-  const Text =
-    "오늘은 내 20살 생일이었다! 오전에 친구들과 클라이밍을 하고 생일파티를 했다-! 친구들이 생일 선물을 많이 줘서 기쁜 하루였다. 저녁에 아빠가 케이크를 사와서 가족들끼리 케이크도 먹었다! 행복한 생일~";
+  const [diaries, setDiaries] = useState(null); // 일기 데이터 초기 상태를 null로 설정
+
+  useEffect(() => {
+    const fetchDiaries = async () => {
+      try {
+        const response = await axios.get(`/diaries/${diaryid}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+          },
+        });
+        console.log(`/diaries/${diaryid}`, response);
+        setDiaries(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiaries();
+  }, [diaryid]);
+
+  const onClickHeart = (index) => {
+    setHeartStates((prevStates) => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
+  };
 
   const onClickShareButton = () => {
-    // 이미지를 Canvas로 변환하여 데이터 URL로 저장
     const target = document.getElementById("download");
     if (!target) {
       return alert("사진 저장에 실패했습니다.");
@@ -56,12 +77,11 @@ export default function Share() {
       useCORS: true,
     }).then((canvas) => {
       const dataUrl = canvas.toDataURL("image/png");
-      // 파일 이름 지정
       const fileName = "haru4cut.png";
-      // 공유 함수 호출
       share(dataUrl, fileName);
     });
   };
+
   const onClickDownloadButton = () => {
     const target = document.getElementById("download");
     if (!target) {
@@ -80,34 +100,10 @@ export default function Share() {
       });
     });
   };
-  const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
-  // 현재 diaryid의 일기 가져오기
-  useEffect(() => {
-    const fetchDiaries = async () => {
-      try {
-        const response = await axios.get(`/diaries/${diaryid}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        });
-        console.log(`/diaries/${diaryid}`, response);
-        setDiaries(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchDiaries();
-  }, []);
-  // 좋아요
-  const onClickHeart = (index) => {
-    setHeartStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
-    });
-  };
+
+  if (!diaries) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <MainWrap>
@@ -117,15 +113,13 @@ export default function Share() {
           <LogoUnderLine />
           <div>내 하루를 네컷으로 기록하세요</div>
         </LogoWrap>
-
         <TodaysDiaryWrap>
           <Date>{diaries.date}</Date>
           <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
           <ImgWrap>
-            {/* cutNum 1일 때 */}
-            {diaries.cutNum === 1 && (
+            {diaries.imgLinks && diaries.imgLinks.length === 1 && (
               <>
-                <DiaryImage1 src={diaries.imgLink[0]} alt="하루네컷 이미지" />
+                <DiaryImage1 src={diaries.imgLinks[0]} alt="하루네컷 이미지" />
                 <StyledFavoriteIcon1
                   onClick={() => onClickHeart(0)}
                   fill={heartStates[0] ? "#E54B4B" : "#C7C7C7"}
@@ -133,41 +127,31 @@ export default function Share() {
                 />
               </>
             )}
-            {/* cutNum 2일 때 */}
-            {diaries.cutNum === 2 && (
+            {diaries.imgLinks && diaries.imgLinks.length === 2 && (
               <>
-                {diaries.imgLink.map((imgUrl, index) => (
-                  <>
-                    <DiaryImage2
-                      src={imgUrl}
-                      alt="하루네컷 이미지"
-                      key={index}
-                    />
+                {diaries.imgLinks.map((imgUrl, index) => (
+                  <React.Fragment key={index}>
+                    <DiaryImage2 src={imgUrl} alt="하루네컷 이미지" />
                     <StyledFavoriteIcon2
                       onClick={() => onClickHeart(index)}
                       fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
                       alt="heart icon"
                     />
-                  </>
+                  </React.Fragment>
                 ))}
               </>
             )}
-            {/* cutNum 4일 때 */}
-            {diaries.cutNum === 4 && (
+            {diaries.imgLinks && diaries.imgLinks.length === 4 && (
               <>
-                {diaries.imgLink.map((imgUrl, index) => (
-                  <>
-                    <DiaryImage
-                      src={imgUrl}
-                      alt="하루네컷 이미지"
-                      key={index}
-                    />
+                {diaries.imgLinks.map((imgUrl, index) => (
+                  <React.Fragment key={index}>
+                    <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
                     <StyledFavoriteIcon
                       onClick={() => onClickHeart(index)}
                       fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
                       alt="heart icon"
                     />
-                  </>
+                  </React.Fragment>
                 ))}
               </>
             )}
@@ -327,6 +311,7 @@ const DiaryImage = styled.img`
 // 1컷일 때 다이어리 이미지
 const DiaryImage1 = styled.img`
   width: 200px;
+  margin-left: 24px;
 `;
 // 2컷일 때 다이어리 이미지
 const DiaryImage2 = styled.img`

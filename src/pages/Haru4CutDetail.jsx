@@ -8,6 +8,7 @@ import DiaryEditIcon from "../assets/images/DiaryEditIcon.svg";
 import ShareIcon from "../assets/images/ShareIcon.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+
 export default function Haru4CutDetail({ selectedDate }) {
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   const { diaryid } = useParams(); // 현재 diaryId
