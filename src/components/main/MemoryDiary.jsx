@@ -8,17 +8,18 @@ import Button from "../common/Button";
 const INTERVAL_TIME = 5000;
 
 export default function MemoryDiary() {
-  const [nickName, setNickName] = useState();
-  const [memoryDiary, setMemoryDiary] = useState([]);
+  const [nickName, setNickName] = useState("");
+  const [memoryDiary, setMemoryDiary] = useState({ imgLinks: [], date: [] });
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // const userId = 1;
   const userId = localStorage.getItem("userId");
+
   // 닉네임
   useEffect(() => {
     const fetchNickName = async () => {
       try {
-        const response = await axios.get(`/character/${userId}`, {});
+        const response = await axios.get(`/character/${userId}`);
         setNickName(response.data.nickname);
         console.log(response.data.nickname);
       } catch (error) {
@@ -26,12 +27,13 @@ export default function MemoryDiary() {
       }
     };
     fetchNickName();
-  }, []);
+  }, [userId]);
+
   // 추억일기 (좋아요 누른 일기 전체 조회 API)
   useEffect(() => {
     const fetchMemoryDiaries = async () => {
       try {
-        const response = await axios.get(`/likes/${userId}`, {});
+        const response = await axios.get(`/likes/${userId}`);
         setMemoryDiary(response.data);
         console.log(response.data);
       } catch (error) {
@@ -42,13 +44,15 @@ export default function MemoryDiary() {
   }, [userId]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide(
-        (prevSlide) => (prevSlide + 1) % memoryDiary.imgLinks.length
-      );
-    }, INTERVAL_TIME);
+    if (memoryDiary.imgLinks.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentSlide(
+          (prevSlide) => (prevSlide + 1) % memoryDiary.imgLinks.length
+        );
+      }, INTERVAL_TIME);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   }, [memoryDiary]);
 
   return (
@@ -58,14 +62,14 @@ export default function MemoryDiary() {
       </MemoryDiaryText>
 
       <div>
-        {memoryDiary.length > 0 && memoryDiary.imgLinks.length > 0 ? (
+        {memoryDiary.imgLinks.length > 0 ? (
           <>
             <ContentText>
               그동안의 네컷일기 속에 담긴 {"\n"}
               추억을 감상하세요
             </ContentText>
-            <MemoryImg src={memoryDiary[currentSlide].imgLinks[currentSlide]} />
-            <Date>{memoryDiary[currentSlide].date[currentSlide]}</Date>
+            <MemoryImg src={memoryDiary.imgLinks[currentSlide]} />
+            <Date>{memoryDiary.date[currentSlide]}</Date>
           </>
         ) : (
           <CalendarWrap>

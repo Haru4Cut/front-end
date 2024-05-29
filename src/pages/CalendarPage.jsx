@@ -11,31 +11,29 @@ import NoneDiary from "../components/main/NoneDiary";
 export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState();
   const [diaryExistDate, setDiaryExistData] = useState();
-  const DiaryImgList = [
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-    "https://ifh.cc/g/4bZ6CR.png",
-  ];
   const [isheartToggle, SetIsheartToggle] = useState(true);
   const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
   const [diary, setDiary] = useState(); // 선택한 날짜의 diary
 
-  //const userId = 1;
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId"); // userId 로컬스토리에서 가져오기
+
   // 선택된 날짜의 diary 가져오기
   useEffect(() => {
     const fetchDiaaryDate = async () => {
       try {
         const response = await axios.get(`/users/${userId}/diarybydate`, {
           params: {
-            date: moment(selectedDate).format("YY-MM-DD"),
+            date: moment(selectedDate).format("YYYY-MM-DD"),
           },
         });
         console.log(response.data);
         setDiary(response.data);
       } catch (error) {
-        console.error(error);
+        if (error.message === "Request failed with status code 500") {
+          setDiary(null); // 500 에러가 발생하면 일기가 없는 것으로 처리
+        } else {
+          console.error(error);
+        }
       }
     };
     fetchDiaaryDate();
@@ -44,10 +42,25 @@ export default function CalendarPage() {
   const extractDates = (diaryData) => {
     if (!diaryData) return []; // 데이터 없을 때
     return diaryData.map((item) =>
-      moment(item.date, "YY-MM-DD").format("YYYY-MM-DD")
+      moment(item.date, "YYYY-MM-DD").format("YYYY-MM-DD")
     );
   };
+
   const extractedDates = extractDates(diaryExistDate);
+
+  // 전체 diary 가져오기
+  useEffect(() => {
+    const fetchDiaaryDate = async () => {
+      try {
+        const response = await axios.get(`/users/${userId}/diaries`);
+        console.log(response.data);
+        setDiaryExistData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiaaryDate();
+  }, [userId]);
 
   return (
     <CalendarWrap>

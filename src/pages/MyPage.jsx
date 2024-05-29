@@ -129,7 +129,8 @@ export default function MyPage() {
           </PencilWrap>
           <Box marginTop="10px">
             <Button
-              width="240px"
+              width="230px"
+              height="38px"
               to="/"
               marginBottom="50px"
               backgroundColor="#6b6b6b"
@@ -200,7 +201,7 @@ export default function MyPage() {
               </InfoBoldText>
             </InfoTextWrap>
             <Box marginTop="20px">
-              <Button width="240px" to="/character">
+              <Button width="230px" to="/character" height="38px">
                 캐릭터 변경하기
               </Button>
             </Box>
