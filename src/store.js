@@ -38,10 +38,22 @@ let nickName = createSlice({
   },
 });
 
+// 캐릭터 생성 여부
+let isCharacterCreated = createSlice({
+  name: "isCharacterCreated",
+  initialState: false,
+  reducers: {
+    setIsCharacterCreated: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+
 export const { setCutNum } = cutNum.actions;
 export const { setDate } = date.actions;
 export const { setCharacterData } = characterData.actions;
 export const { setNickName } = nickName.actions;
+export const { setIsCharacterCreated } = isCharacterCreated.actions;
 
 export default configureStore({
   reducer: {
@@ -49,5 +61,6 @@ export default configureStore({
     date: date.reducer,
     characterData: characterData.reducer,
     nickName: nickName.reducer,
+    isCharacterCreated: isCharacterCreated.reducer,
   },
 });
