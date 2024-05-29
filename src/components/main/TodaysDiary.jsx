@@ -17,7 +17,7 @@ export default function TodaysDiary() {
   }
   function getToday2() {
     var date = new Date();
-    var year = date.getFullYear().toString().slice(-2);
+    var year = date.getFullYear().toString();
     var month = ("0" + (1 + date.getMonth())).slice(-2);
     var day = ("0" + date.getDate()).slice(-2);
     return year + "-" + month + "-" + day;

@@ -6,9 +6,22 @@ import Button from "../components/common/Button";
 import BackButton from "../components/common/BackButton";
 import LoadingImage from "../assets/images/LoadingSpinner.gif";
 import axios from "axios";
-export default function Main() {
+import pencilImg from "../assets/images/EDIT.svg";
+import questionIcon from "../assets/images/Question_fill.svg";
+import PencilInfo from "../components/common/PencilInfo";
+export default function MyPage() {
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
   const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   // 닉네임 수정
   const onEditNickName = () => {
@@ -17,10 +30,9 @@ export default function Main() {
 
   // 닉네임 저장
   const onNickNameSave = async () => {
-    setIsNickNameEditing(false);
     try {
-      await axios.post(
-        `/character/${userId}/name`,
+      await axios.patch(
+        `/character/${userId}/nickName`,
         { nickName: editedNickname },
         {
           headers: {
@@ -32,12 +44,13 @@ export default function Main() {
         }
       );
       alert("닉네임이 변경되었습니다.");
+      setIsNickNameEditing(false);
       console.log(editedNickname);
     } catch (error) {
       console.error(error);
-      // Handle error here
     }
   };
+
   const userId = localStorage.getItem("userId");
   // test userId
   //const userId = 1;
@@ -94,6 +107,37 @@ export default function Main() {
       </ProfileImgWrap>
       {/*내 캐릭터 정보*/}
       <CharacterInfoWrap>
+        <PencilInfoBox>
+          <Box>
+            <CharacterInfoText>보유 연필</CharacterInfoText>
+          </Box>
+          <PencilWrap>
+            <PencilImage src={pencilImg} alt="연필" />
+            <PencilText>20</PencilText>
+            <PencilInfo
+              isHovered={isHovered}
+              top="5px"
+              title=""
+              text="<div>하루네컷에서 사용되는 포인트로,</div> 하나의 사진을 만드는데 1연필이 쓰여요 :)"
+            />
+            <AlertIcon
+              src={questionIcon}
+              alt="물음표 아이콘"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            />
+          </PencilWrap>
+          <Box marginTop="10px">
+            <Button
+              width="240px"
+              to="/"
+              marginBottom="50px"
+              backgroundColor="#6b6b6b"
+            >
+              연필 충전하기
+            </Button>
+          </Box>
+        </PencilInfoBox>
         <Box>
           <CharacterInfoText>내 캐릭터 정보</CharacterInfoText>
         </Box>
@@ -155,7 +199,7 @@ export default function Main() {
                 <InfoText marginTop="7px">{character.etc}</InfoText>
               </InfoBoldText>
             </InfoTextWrap>
-            <Box marginTop="40px">
+            <Box marginTop="20px">
               <Button width="240px" to="/character">
                 캐릭터 변경하기
               </Button>
@@ -173,8 +217,8 @@ const MyPageWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   background-color: #f3f5f6;
+  height: 100vh;
 `;
 
 const Header = styled.div`
@@ -240,11 +284,12 @@ const ProfileImgWrap = styled.div`
   border-radius: 30px;
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
   width: 85%;
-  height: 30%;
+  height: 25%;
+  padding: 10px 0px;
 `;
 
 const ProfileImg = styled.img`
-  width: 145px;
+  width: 130px;
 `;
 
 const CharacterInfoWrap = styled.div`
@@ -255,9 +300,10 @@ const CharacterInfoWrap = styled.div`
   flex-direction: column;
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
   width: 85%;
-  height: 55%;
+  height: 80%;
   margin-top: 12px;
   margin-bottom: 20px;
+  padding: 10px 0px;
 `;
 
 const Box = styled.div`
@@ -266,15 +312,41 @@ const Box = styled.div`
   margin-top: ${(props) => props.marginTop || "0px"};
 `;
 
+const PencilInfoBox = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const CharacterInfoText = styled.div`
   color: #3a3a3a;
   font-size: 19px;
   font-weight: 600;
-  margin: 0px 0px 40px 0px;
+  margin: 0px 0px 20px 0px;
   padding: 0px 7px 5px 7px;
   border-bottom: 1px solid #5f5f5f;
 `;
 
+const PencilWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PencilImage = styled.img`
+  width: 50px;
+`;
+const PencilText = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  color: #585858;
+`;
+const AlertIcon = styled.img`
+  width: 24px;
+  margin-left: 15px;
+  cursor: pointer;
+`;
 const InfoTextWrap = styled.div`
   color: #3a3a3a;
   font-size: 16px;

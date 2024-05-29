@@ -6,20 +6,20 @@ import CharacterAlert from "./CharacterAlert";
 
 export default function GenderSelection({ setSelectedGender, selectedGender }) {
   const handleClickGender = (gender) => {
-    setSelectedGender(gender);
+    setSelectedGender(gender + 1);
   };
 
   return (
     <>
       <TitleText>성별은 무엇인가요?</TitleText>
       <CharacterWrap>
-        {selectedGender === 0 && <ClickedWrap />}
+        {selectedGender === 1 && <ClickedWrap />}
         <GenderWrap onClick={() => handleClickGender(0)}>
           <CharacterImg src={Woman} />
           <ContentText>여자</ContentText>
         </GenderWrap>
         <GenderWrap onClick={() => handleClickGender(1)}>
-          {selectedGender === 1 && <ClickedWrap />}
+          {selectedGender === 2 && <ClickedWrap />}
           <CharacterImg src={Man} />
           <ContentText>남자</ContentText>
         </GenderWrap>

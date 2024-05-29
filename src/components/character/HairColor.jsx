@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function HairColor({ setSelectedHairColor, selectedHairColor }) {
   const handleClickHairColor = (index) => {
-    setSelectedHairColor(index);
+    setSelectedHairColor(index + 1);
   };
   return (
     <>
@@ -14,7 +14,7 @@ export default function HairColor({ setSelectedHairColor, selectedHairColor }) {
             handleClickHairColor(0);
           }}
         >
-          {selectedHairColor === 0 && <ClickedWrap />}
+          {selectedHairColor === 1 && <ClickedWrap />}
         </HairColorCircle>
         <HairColorCircle
           backgroundColor="#745629"
@@ -22,7 +22,7 @@ export default function HairColor({ setSelectedHairColor, selectedHairColor }) {
             handleClickHairColor(1);
           }}
         >
-          {selectedHairColor === 1 && <ClickedWrap />}
+          {selectedHairColor === 2 && <ClickedWrap />}
         </HairColorCircle>
         <HairColorCircle
           backgroundColor="#B40000"
@@ -30,7 +30,7 @@ export default function HairColor({ setSelectedHairColor, selectedHairColor }) {
             handleClickHairColor(2);
           }}
         >
-          {selectedHairColor === 2 && <ClickedWrap />}
+          {selectedHairColor === 3 && <ClickedWrap />}
         </HairColorCircle>
         <HairColorCircle
           backgroundColor="#F0C734"
