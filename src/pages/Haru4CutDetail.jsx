@@ -12,7 +12,6 @@ import { useParams } from "react-router-dom";
 export default function Haru4CutDetail({ selectedDate }) {
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   const { diaryid } = useParams(); // 현재 diaryId
-  console.log(diaryid);
 
   const [heartStates, setHeartStates] = useState(Array(4).fill(true));
   const defaultTextAreaValue = `자세한 이 날 스토리, 네컷일기에 대한 \n느낌 등 일기를 더 기록해보세요 :) \n\n기록할 것이 없다면 줄글 일기 없이\n사진만으로도 일기를 완성할 수 있어요!`;
@@ -22,15 +21,42 @@ export default function Haru4CutDetail({ selectedDate }) {
   const [inputCount, setInputCount] = useState(0);
 
   // 일기 완성 후 표시 여부
-  const [showDiary, setShowDiary] = useState(false);
+  const [showDiary, setShowDiary] = useState(true);
   const onInputHandler = (e) => {
     setTextDiary(e.target.value);
     setInputCount(e.target.value.length);
   };
   // 일기 완성하기 버튼
-  const onCompleteButtonClick = () => {
-    setShowDiary(true);
+  const onCompleteButtonClick = async () => {
+    try {
+      const updatedDiary = {
+        diaryId: diaries.diaryId,
+        date: diaries.date,
+        text: textDiary,
+        imgLinks: diaries.imgLinks,
+      };
+
+      // PATCH 요청 보내기
+      const response = await axios.patch(
+        `/diaries/${diaries.diaryId}`,
+        updatedDiary,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+          },
+        }
+      );
+
+      console.log("일기 수정", response);
+      setShowDiary(true);
+      fetchDiaries();
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   // 일기 수정하기 버튼
   const onEditButtonClick = () => {
     setShowDiary(false);
@@ -46,36 +72,38 @@ export default function Haru4CutDetail({ selectedDate }) {
       return newStates;
     });
   };
-
-  // diaries.text 값에 따라 showDiary 상태 변경
+  // diaries.text 값에 따라 textDiary 초기 값 설정
   useEffect(() => {
     if (diaries.text && diaries.text !== "") {
-      setShowDiary(true);
+      setTextDiary(diaries.text);
+      setInputCount(diaries.text.length);
     } else {
-      setShowDiary(false);
+      setTextDiary("");
+      setInputCount(0);
     }
   }, [diaries.text]);
 
-  const userId = localStorage.getItem("userId");
   // 현재 diaryid의 일기 가져오기
+  const fetchDiaries = async () => {
+    try {
+      const response = await axios.get(`/diaries/${diaryid}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      });
+      console.log(`/diaries/${diaryid}`, response);
+      setDiaries(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchDiaries = async () => {
-      try {
-        const response = await axios.get(`/diaries/${diaryid}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        });
-        console.log(`/diaries/${diaryid}`, response);
-        setDiaries(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchDiaries();
-  }, []);
+  }, [diaryid]);
+
   return (
     <MainWrap>
       <Header />

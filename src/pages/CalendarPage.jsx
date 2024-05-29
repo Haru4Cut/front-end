@@ -42,10 +42,25 @@ export default function CalendarPage() {
   const extractDates = (diaryData) => {
     if (!diaryData) return []; // 데이터 없을 때
     return diaryData.map((item) =>
-      moment(item.date, "YY-MM-DD").format("YYYY-MM-DD")
+      moment(item.date, "YYYY-MM-DD").format("YYYY-MM-DD")
     );
   };
+
   const extractedDates = extractDates(diaryExistDate);
+
+  // 전체 diary 가져오기
+  useEffect(() => {
+    const fetchDiaaryDate = async () => {
+      try {
+        const response = await axios.get(`/users/${userId}/diaries`);
+        console.log(response.data);
+        setDiaryExistData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiaaryDate();
+  }, [userId]);
 
   return (
     <CalendarWrap>
