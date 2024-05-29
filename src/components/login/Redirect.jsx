@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsCharacterCreated } from "../../store";
+import { useSelector } from "react-redux";
 
 const Redirection = () => {
   const navigate = useNavigate();
