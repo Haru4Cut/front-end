@@ -54,8 +54,7 @@ export default function Haru4CutDetail({ selectedDate }) {
       setShowDiary(false);
     }
   }, [diaries.text]);
-  // test userId
-  //const userId = 2;
+
   const userId = localStorage.getItem("userId");
   // 현재 diaryid의 일기 가져오기
   useEffect(() => {
@@ -86,9 +85,12 @@ export default function Haru4CutDetail({ selectedDate }) {
           <>
             <ImgWrap>
               {/* cutNum 1일 때 */}
-              {diaries.cutNum === 1 && (
+              {diaries.imgLinks.length === 1 && (
                 <>
-                  <DiaryImage1 src={diaries.imgLink[0]} alt="하루네컷 이미지" />
+                  <DiaryImage1
+                    src={diaries.imgLinks[0]}
+                    alt="하루네컷 이미지"
+                  />
                   <StyledFavoriteIcon1
                     onClick={() => onClickHeart(0)}
                     fill={heartStates[0] ? "#E54B4B" : "#C7C7C7"}
@@ -97,9 +99,9 @@ export default function Haru4CutDetail({ selectedDate }) {
                 </>
               )}
               {/* cutNum 2일 때 */}
-              {diaries.cutNum === 2 && (
+              {diaries.imgLinks.length === 2 && (
                 <>
-                  {diaries.imgLink.map((imgUrl, index) => (
+                  {diaries.imgLinks.map((imgUrl, index) => (
                     <>
                       <DiaryImage2
                         src={imgUrl}
@@ -116,9 +118,9 @@ export default function Haru4CutDetail({ selectedDate }) {
                 </>
               )}
               {/* cutNum 4일 때 */}
-              {diaries.cutNum === 4 && (
+              {diaries.imgLinks.length === 4 && (
                 <>
-                  {diaries.imgLink.map((imgUrl, index) => (
+                  {diaries.imgLinks.map((imgUrl, index) => (
                     <>
                       <DiaryImage
                         src={imgUrl}
