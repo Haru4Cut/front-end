@@ -3,19 +3,20 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import FourInput from "./FourInput";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-//KwywordInput > Form > FourInputNcut
+import { useSelector } from "react-redux";
+
 const Form = (props) => {
   // Redux에서 userId 가져오기
-  //const userId = useSelector((state) => state.userId);
+
   //4input + 컷 정보 + 좌우 버튼
   const navigate = useNavigate();
   // useDispatch를 사용하여 액션을 dispatch할 수 있음
-  const dispatch = useDispatch();
-  const userId = 1;
+
   const cutNum = useSelector((state) => state.cutNum);
   const date = useSelector((state) => state.date);
-
+  //const userId = useSelector((state) => state.userId);
+  const userId = 17;
+  console.log("userId:", userId);
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);
   //const [imgUrl, setImgUrl] = useState(null);

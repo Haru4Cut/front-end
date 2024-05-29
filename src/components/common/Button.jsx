@@ -7,7 +7,7 @@ export default function Button(props) {
 
 const StyledButton = styled(Link)`
   width: ${(props) => props.width || "290px"};
-  height: 45px;
+  height: ${(props) => props.height || "45px"};
   margin-bottom: ${(props) => props.marginBottom || "0px"};
   margin-top: ${(props) => props.marginTop || "0px"};
   background-color: ${(props) => props.backgroundColor || "#5370d4"};
@@ -22,4 +22,5 @@ const StyledButton = styled(Link)`
   text-align: center;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
 `;

@@ -8,8 +8,8 @@ const CompleteImg = () => {
   const location = useLocation();
   const { responseData } = location.state;
   console.log("CompleteImg:", responseData);
-  const [imageData, setImageData] = useState([]);
-  const [heartStates, setHeartStates] = useState([]);
+
+  const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
 
   useEffect(() => {
     if (responseData && responseData.imgLinks) {
@@ -17,34 +17,41 @@ const CompleteImg = () => {
         const [number, url] = link.split(" : ");
         return { number: number.trim(), url: url.trim() };
       });
-      setImageData(imageDataArray);
-      setHeartStates(Array(imageDataArray.length).fill(true));
+      setDiaries(imageDataArray);
     }
   }, [responseData]);
-
-  const onClickHeart = (index) => {
-    setHeartStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
-    });
-  };
 
   return (
     <MainWrap>
       <TodaysDiaryWrap>
         <Todays4CutDiary>생성된 이미지</Todays4CutDiary>
         <ImgWrap>
-          {imageData.map((data, index) => (
-            <div key={data.number}>
-              <DiaryImage src={data.url} alt={`이미지 ${data.number}`} />
-              <StyledFavoriteIcon
-                onClick={() => onClickHeart(index)}
-                fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
-                alt="heart icon"
-              />
-            </div>
-          ))}
+          {/* cutNum 1일 때 */}
+          {diaries.imgLinks.length === 1 && (
+            <>
+              <DiaryImage1 src={diaries.imgLinks[0]} alt="하루네컷 이미지" />
+            </>
+          )}
+          {/* cutNum 2일 때 */}
+          {diaries.imgLinks.length === 2 && (
+            <>
+              {diaries.imgLinks.map((imgUrl, index) => (
+                <>
+                  <DiaryImage2 src={imgUrl} alt="하루네컷 이미지" key={index} />
+                </>
+              ))}
+            </>
+          )}
+          {/* cutNum 4일 때 */}
+          {diaries.imgLinks.length === 4 && (
+            <>
+              {diaries.imgLinks.map((imgUrl, index) => (
+                <>
+                  <DiaryImage src={imgUrl} alt="하루네컷 이미지" key={index} />
+                </>
+              ))}
+            </>
+          )}
         </ImgWrap>
       </TodaysDiaryWrap>
     </MainWrap>
@@ -92,16 +99,17 @@ const ImgWrap = styled.div`
   margin: 20px 0px 20px 20px;
 `;
 
+// 4컷일 때 다이어리 이미지
 const DiaryImage = styled.img`
   width: 120px;
   margin: 12px 0px;
 `;
-
-const StyledFavoriteIcon = styled(FavoriteIcon)`
-  width: 24px;
-  height: 24px;
-  position: relative;
-  top: -30px;
-  left: 50px;
-  cursor: pointer;
+// 1컷일 때 다이어리 이미지
+const DiaryImage1 = styled.img`
+  width: 200px;
+`;
+// 2컷일 때 다이어리 이미지
+const DiaryImage2 = styled.img`
+  width: 250px;
+  margin: 5px 0px;
 `;

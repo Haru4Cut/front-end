@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import styled, { css } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedBox } from "../../store";
 import CloseIcon from "../../assets/images/closeIcon.svg";
 import QuestionIcon from "../../assets/images/QuestionIcon.svg";
 import Button from "./Button";
 
 const Payment = ({ modalIsOpen, openModal, closeModal }) => {
   // 선택된 결제 Box
-  const [selectedBox, setSelectedBox] = useState(null);
+  //const [selectedBox, setSelectedBox] = useState(null);
+  const dispatch = useDispatch();
+  const selectedBox = useSelector((state) => state.selectedBox);
   // Box 클릭 시
   const handleBoxClick = (boxIndex) => {
-    setSelectedBox(boxIndex);
+    dispatch(setSelectedBox(boxIndex));
   };
   // 모달 스타일
   const customModalStyles = {

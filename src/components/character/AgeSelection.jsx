@@ -5,13 +5,13 @@ export default function AgeSelection({ setSelectedAge, selectedAge }) {
   const Age = ["10대", "2-30대", "4-50대", "60대 이상"];
 
   const handleClickAge = (index) => {
-    setSelectedAge(index);
+    setSelectedAge(index + 1);
   };
   const AgeList = Age.map((age, index) => (
     <AgeCircle
-      key={index}
+      key={index + 1}
       onClick={() => handleClickAge(index)}
-      isSelected={selectedAge === index}
+      isSelected={selectedAge === index + 1}
     >
       {age}
     </AgeCircle>

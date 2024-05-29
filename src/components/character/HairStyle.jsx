@@ -7,7 +7,7 @@ import ShortHair from "../../assets/images/ShortHair.svg";
 
 export default function HairStyle({ setSelectedHairStyle, selectedHairStyle }) {
   const handleClickHairStyle = (index) => {
-    setSelectedHairStyle(index);
+    setSelectedHairStyle(index + 1);
   };
 
   return (
@@ -19,17 +19,17 @@ export default function HairStyle({ setSelectedHairStyle, selectedHairStyle }) {
             handleClickHairStyle(0);
           }}
         >
-          {selectedHairStyle === 0 && <ClickedWrap />}
+          {selectedHairStyle === 1 && <ClickedWrap />}
           <CharacterImg src={ShortHair} />
           <CharacterText>숏컷</CharacterText>
         </CharacterBox>
         <CharacterBox onClick={() => handleClickHairStyle(1)}>
-          {selectedHairStyle === 1 && <ClickedWrap />}
+          {selectedHairStyle === 2 && <ClickedWrap />}
           <CharacterImg src={MidiumHair} />
           <CharacterText>단발</CharacterText>
         </CharacterBox>
         <CharacterBox onClick={() => handleClickHairStyle(2)}>
-          {selectedHairStyle === 2 && <ClickedWrap />}
+          {selectedHairStyle === 3 && <ClickedWrap />}
           <CharacterImg src={LongHair} />
           <CharacterText>장발</CharacterText>
         </CharacterBox>

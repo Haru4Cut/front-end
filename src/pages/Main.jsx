@@ -3,7 +3,11 @@ import styled from "styled-components";
 import Header from "../components/common/Header";
 import TodaysDiary from "../components/main/TodaysDiary";
 import MemoryDiary from "../components/main/MemoryDiary";
+import { useSelector } from "react-redux";
 export default function Main() {
+  const userId = useSelector((state) => state.userId);
+
+  console.log("userIdinmain:", userId);
   return (
     <MainWrap>
       <Header />
