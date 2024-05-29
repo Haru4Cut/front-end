@@ -32,7 +32,7 @@ export default function MyPage() {
   const onNickNameSave = async () => {
     try {
       await axios.patch(
-        `/character/${userId}/name`,
+        `/character/${userId}/nickName`,
         { nickName: editedNickname },
         {
           headers: {
