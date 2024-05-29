@@ -11,7 +11,7 @@ import DateSelectPage from "./pages/DateSelectPage";
 import KeywordInputPage from "./pages/KeywordInputPage";
 import MyPage from "./pages/MyPage";
 
-import LoginPage from "./pages/LoginPage";
+import KakaoLogin from "./components/login/SocialKakao";
 import SubmitLoadingPage from "./pages/SubmitLoading";
 import OnboardingPage from "./pages/OnboardingPage";
 
@@ -30,7 +30,7 @@ function App() {
         <Route path="/" element={<OnboardingPage />} /> {/* 메인 페이지 */}
         <Route path="/main" element={<Main />} /> {/* 메인 페이지 */}
         <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
-        <Route path="/login" element={<LoginPage />} /> {/* 마이 페이지 */}
+        <Route path="/login" element={<KakaoLogin />} /> {/* 마이 페이지 */}
         <Route path="/payment" element={<PaymentPage />} /> {/* 결제 페이지 */}
         <Route
           path="/login/oauth2/code/kakao"

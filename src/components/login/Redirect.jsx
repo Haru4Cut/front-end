@@ -9,7 +9,7 @@ const Redirection = () => {
   const dispatch = useDispatch();
 
   const code = new URL(window.location.href).searchParams.get("code");
-  const isCharacterCreated = useSelector((state) => state.isCharacterCreated);
+
   const fetchData = async () => {
     try {
       const response = await axios.post(
