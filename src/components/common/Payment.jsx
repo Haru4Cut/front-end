@@ -87,7 +87,8 @@ const Payment = ({ modalIsOpen, openModal, closeModal }) => {
               4컷 일기에는 4연필, 2컷 일기에는 2연필이 소모됩니다 :)
             </SubText>
           </IntroductionBox>
-          <Button marginTop="30px" width="260px">
+
+          <Button marginTop="30px" width="260px" to="/payment">
             결제하기
           </Button>
         </PaymentBox>

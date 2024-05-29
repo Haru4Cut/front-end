@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUserId } from "../../store";
 
 const Redirection = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const code = new URL(window.location.href).searchParams.get("code");
 
   const fetchData = async () => {
@@ -19,21 +22,22 @@ const Redirection = () => {
       );
 
       console.log("로그인 성공", response.data);
+      // 응답에서 userId 추출
+      const userId = response.data.userId;
+      // 리덕스 스토어에 userId 업데이트
+      dispatch(setUserId(userId));
 
-      // 새로 로그인한 경우 캐릭터 설정 페이지로 이동
       navigate("/main");
     } catch (error) {
       console.error("로그인 오류 발생", error);
-      // 오류 페이지나 로그인 페이지로 리디렉션 할 수 있습니다.
       navigate("/login");
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, [code]); // useEffect가 code에만 의존하도록 변경
+  }, []);
 
-  // UI를 렌더링할 필요가 없는 경우가 많으므로 null을 반환
   return null;
 };
 

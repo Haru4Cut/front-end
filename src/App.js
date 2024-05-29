@@ -20,6 +20,7 @@ import Haru4CutDetail from "./pages/Haru4CutDetail";
 import Share from "./pages/Share";
 import Redirection from "./components/login/Redirect";
 import CompleteImg from "./components/writting/CompleteImg";
+import PaymentPage from "./pages/PaymentPage";
 
 function App() {
   return (
@@ -30,14 +31,16 @@ function App() {
         <Route path="/main" element={<Main />} /> {/* 메인 페이지 */}
         <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
         <Route path="/login" element={<LoginPage />} /> {/* 마이 페이지 */}
+        <Route path="/payment" element={<PaymentPage />} /> {/* 결제 페이지 */}
         <Route
           path="/login/oauth2/code/kakao"
           element={<Redirection />}
         ></Route>
         <Route path="/calendar" element={<Calendar />} /> {/* 캘린더 페이지 */}
         <Route path="/haru4cut/:diaryid" element={<Haru4CutDetail />} />
-        {/* 일기 상세보기 페이지 */}
         <Route path="/haru4cut/:diaryid/share" element={<Share />} />
+        {/* 일기 상세보기 페이지 */}
+        <Route path="/diaries/:userId/events" element={<CompleteImg />} />
         {/* 일기 공유 페이지 */}
         <Route path="/character" element={<Character />} /> {/* 캐릭터 설정 */}
         <Route path="/character/profile" element={<Profile />} />{" "}
