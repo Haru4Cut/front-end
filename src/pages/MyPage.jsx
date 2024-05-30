@@ -74,7 +74,7 @@ export default function MyPage() {
     if (pencilWrapRef.current) {
       const rect = pencilWrapRef.current.getBoundingClientRect();
       return {
-        top: rect.top - 300, 
+        top: rect.top - 330, 
         left: rect.left - 80
       };
     }
@@ -124,7 +124,7 @@ export default function MyPage() {
           </Box>
           <PencilWrap ref={pencilWrapRef}>
             <PencilImage src={pencilImg} alt="연필" />
-            <PencilText>{character.pencils}</PencilText>
+            <PencilText>{character?.pencils}</PencilText>
             <PencilInfo
               isHovered={isHovered}
               position={getPosition()}
