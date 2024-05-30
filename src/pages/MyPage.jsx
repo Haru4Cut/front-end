@@ -143,7 +143,7 @@ export default function MyPage() {
               width="230px"
               height="38px"
               to="/"
-              marginBottom="50px"
+              marginBottom="35px"
               backgroundColor="#6b6b6b"
             >
               연필 충전하기
@@ -315,7 +315,7 @@ const CharacterInfoWrap = styled.div`
   height: 80%;
   margin-top: 12px;
   margin-bottom: 20px;
-  padding: 10px 0px;
+  padding: 20px 0px;
 `;
 
 const Box = styled.div`
@@ -333,7 +333,7 @@ const PencilInfoBox = styled.div`
 
 const CharacterInfoText = styled.div`
   color: #3a3a3a;
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0px 0px 20px 0px;
   padding: 0px 7px 5px 7px;
