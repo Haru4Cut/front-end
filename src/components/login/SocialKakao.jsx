@@ -14,13 +14,13 @@ const KakaoLogin = () => {
           <img
             src={"/images/kakao.png"}
             alt="카카오로그인"
-            onClick={() => (window.location.href = kakaoURL)}
+            onClick={() => (window.location.href = kakaoURL)} //클릭할 때 kakaoURL에 저장된 URL로 브라우저를 이동시키는 것을 의미
             style={{
               cursor: "pointer",
               height: "5vh",
               width: "60vw",
               marginTop: "10vh",
-            }} // Show cursor as pointer on hover
+            }}
           />
         </LoginWrap>
       </div>

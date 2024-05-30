@@ -17,6 +17,7 @@ const getJWTToken = async (authorizationCode) => {
     }
 
     const jwtToken = response.data.access_token;
+    console.log("jwtToken", jwtToken);
 
     // 원하는 작업 수행
   } catch (error) {
