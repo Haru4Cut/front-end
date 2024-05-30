@@ -52,8 +52,6 @@ export default function MyPage() {
   };
 
   const userId = localStorage.getItem("userId");
-  // test userId
-  //const userId = 1;
 
   const [character, setCharacter] = useState();
 
@@ -248,7 +246,7 @@ const NickNameWrap = styled.div`
 
 const NickNameText = styled.div`
   font-family: "KotraHope";
-  font-size: 26px;
+  font-size: 24px;
   color: #3a3a3a;
   text-align: center;
 `;
@@ -267,7 +265,7 @@ const NickNameInput = styled.input`
 `;
 
 const Text = styled.div`
-  font-size: 17px;
+  font-size: 15px;
   color: #858585;
   text-align: center;
   margin: 2px 15px 0px 8px;
@@ -290,7 +288,7 @@ const ProfileImgWrap = styled.div`
 `;
 
 const ProfileImg = styled.img`
-  width: 130px;
+  width: 125px;
 `;
 
 const CharacterInfoWrap = styled.div`
