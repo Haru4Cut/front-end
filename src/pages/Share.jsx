@@ -4,7 +4,7 @@ import moment from "moment";
 import Button from "../components/common/Button";
 import HomeIcon from "../assets/images/HomeIcon.svg";
 import DownloadIcon from "../assets/images/DownloadIcon.svg";
-import InstaLogo from "../assets/images/InstaLogo.svg";
+import CommmentIcon from "../assets/images/commentIcon.svg";
 import html2canvas from "html2canvas";
 import { ReactComponent as FavoriteIcon } from "../assets/images/FavoriteIcon.svg";
 import { saveAs } from "file-saver";
@@ -56,22 +56,24 @@ export default function Share() {
     fetchDiaries();
   }, [diaryid]);
 
-  const onClickShareButton = () => {
-    const target = document.getElementById("download");
-    if (!target) {
-      return alert("사진 저장에 실패했습니다.");
-    }
-    html2canvas(target, {
-      logging: true,
-      letterRendering: 1,
-      allowTaint: true,
-      useCORS: true,
-    }).then((canvas) => {
-      const dataUrl = canvas.toDataURL("image/png");
-      const fileName = "haru4cut.png";
-      share(dataUrl, fileName);
-    });
-  };
+  // const onClickShareButton = () => {
+  //   const target = document.getElementById("download");
+  //   if (!target) {
+  //     return alert("사진 저장에 실패했습니다.");
+  //   }
+  //   html2canvas(target, {
+  //     logging: true,
+  //     letterRendering: 1,
+  //     allowTaint: true,
+  //     useCORS: true,
+  //   }).then((canvas) => {
+  //     const dataUrl = canvas.toDataURL("image/png");
+  //     const fileName = "haru4cut.png";
+  //     share(dataUrl, fileName);
+  //   });
+  // };
+
+  const onClickShareButton = () => {};
 
   const onClickDownloadButton = () => {
     const target = document.getElementById("download");
@@ -137,11 +139,11 @@ export default function Share() {
       </DownWrap>
       <div>오늘의 하루네컷을 완성했어요!</div>
       <DownloadButtonWrap>
-        <Button width="143px" onClick={onClickShareButton}>
-          <Icon src={InstaLogo} />
-          공유하기
+        <Button width="150px" onClick={onClickShareButton}>
+          <Icon src={CommmentIcon} alt="코멘트" />
+          AI 코멘트
         </Button>
-        <Button width="143px" onClick={onClickDownloadButton}>
+        <Button width="138px" onClick={onClickDownloadButton}>
           <Icon src={DownloadIcon} />
           앨범에 저장
         </Button>
@@ -252,33 +254,7 @@ const Icon = styled.img`
   margin-right: 4px;
   margin-bottom: ${(props) => props.marginBottom || "0px"};
 `;
-// 4컷일 때 하트 아이콘
-const StyledFavoriteIcon = styled(FavoriteIcon)`
-  width: 24px;
-  height: 24px;
-  position: relative;
-  top: 115px;
-  left: -21px;
-  cursor: pointer;
-`;
-// 1컷일 때 하트 아이콘
-const StyledFavoriteIcon1 = styled(FavoriteIcon)`
-  width: 24px;
-  height: 24px;
-  position: relative;
-  top: 315px;
-  left: -30px;
-  cursor: pointer;
-`;
-// 2컷일 때 하트 아이콘
-const StyledFavoriteIcon2 = styled(FavoriteIcon)`
-  width: 24px;
-  height: 24px;
-  position: relative;
-  top: 120px;
-  left: -30px;
-  cursor: pointer;
-`;
+
 // 4컷일 때 다이어리 이미지
 const DiaryImage = styled.img`
   width: 120px;

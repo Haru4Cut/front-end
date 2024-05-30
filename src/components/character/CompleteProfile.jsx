@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
 import CompleteIcon from "../../assets/images/CompleteIcon.svg";
 import RefreshIcon from "../../assets/images/RefreshIcon.svg";
 import EditIcon from "../../assets/images/Edit_light.png";
-import QuestionIcon from "../../assets/images/Question_fill.svg";
 import PencilInfo from "../common/PencilInfo";
+
 export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [pencilPosition, setPencilPosition] = useState({ top: 0, left: 0 });
+  const pencilRef = useRef(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -16,6 +18,13 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
+  useEffect(() => {
+    if (pencilRef.current) {
+      const rect = pencilRef.current.getBoundingClientRect();
+      setPencilPosition({ top: rect.top, left: rect.left });
+    }
+  }, [pencilRef.current]);
 
   return (
     <CompleteWrap>
@@ -26,9 +35,7 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
       </SubText>
       <ProfileBox>
         {imageUrl ? (
-          <ProfileBox>
-            <ProfileImage src={imageUrl} alt="ProfileImage"></ProfileImage>
-          </ProfileBox>
+          <ProfileImage src={imageUrl} alt="ProfileImage" />
         ) : (
           // imageUrl이 없을 때
           <ErrorText>
@@ -42,7 +49,7 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
         title="프로필 다시 만들기에는 <b>1연필</b>이 소모돼요!"
         text="<div>하루네컷에서 사용되는 포인트로,</div> 마이페이지에서 결제가
         가능해요 :)"
-        top="520px"
+        position={{ top: pencilPosition.top - 140, left: pencilPosition.left - 140 }}
       />
       <Button
         backgroundColor="#9D9D9D"
@@ -50,9 +57,10 @@ export default function CompleteProfile({ imageUrl, onRefresh, onComplete }) {
         marginBottom="8px"
         onClick={onRefresh}
       >
-        <Icon src={RefreshIcon} />
+        <AgainIcon src={RefreshIcon} />
         <ButtonText>다시 만들기</ButtonText>
         <PencilWrap
+          ref={pencilRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -74,6 +82,7 @@ const CompleteWrap = styled.div`
   flex-direction: column;
   height: 100vh;
 `;
+
 const MainText = styled.div`
   color: #222222;
   font-size: 22px;
@@ -113,8 +122,14 @@ const ProfileBox = styled.div`
 const Icon = styled.img`
   margin-right: 5px;
 `;
+
+const AgainIcon = styled.img`
+margin-left: 40px;
+`;
+
 const ButtonText = styled.div`
   margin-right: 10px;
+  margin-left: 5px;
 `;
 
 const PencilWrap = styled.div`
@@ -125,8 +140,7 @@ const PencilWrap = styled.div`
   background-color: #5a5a5a;
   border-radius: 50px;
   padding: 2px 13px 2px 8px;
-  position: absolute;
-  right: 20px;
+  position: relative;
   cursor: pointer;
   z-index: 999;
   white-space: pre-wrap;
