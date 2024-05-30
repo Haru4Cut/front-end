@@ -124,7 +124,7 @@ export default function MyPage() {
           </Box>
           <PencilWrap ref={pencilWrapRef}>
             <PencilImage src={pencilImg} alt="연필" />
-            <PencilText>20</PencilText>
+            <PencilText>{character.pencils}</PencilText>
             <PencilInfo
               isHovered={isHovered}
               position={getPosition()}
@@ -254,7 +254,6 @@ const NickNameWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 `;
 
 const NickNameText = styled.div`
@@ -335,7 +334,7 @@ const CharacterInfoText = styled.div`
   color: #3a3a3a;
   font-size: 16px;
   font-weight: 600;
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 10px 0px;
   padding: 0px 7px 5px 7px;
   border-bottom: 1px solid #5f5f5f;
 `;
@@ -361,9 +360,9 @@ const AlertIcon = styled.img`
 `;
 const InfoTextWrap = styled.div`
   color: #3a3a3a;
-  font-size: 16px;
+  font-size: 15px;
   display: flex;
-  margin: 10px 0px;
+  margin: 8px 0px;
 `;
 
 const InfoBoldText = styled.div`
