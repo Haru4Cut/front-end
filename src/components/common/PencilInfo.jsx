@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import QuestionIcon from "../../assets/images/Question_fill.svg";
 
-const PencilInfo = ({ isHovered, top, title, text }) => {
+const PencilInfo = ({ isHovered, position, title, text }) => {
   return (
-    <StyledAlertBox isHovered={isHovered} top={top}>
+    <StyledAlertBox isHovered={isHovered} position={position}>
       <div dangerouslySetInnerHTML={{ __html: title }} />
       <QuestionBox>
         <Icon src={QuestionIcon} alt="물음표 아이콘" />
@@ -16,9 +16,10 @@ const PencilInfo = ({ isHovered, top, title, text }) => {
 };
 
 const StyledAlertBox = styled.div`
+width: 230px;
   position: absolute;
-  top: ${(props) => props.top || "550px"};
-  right: 10px;
+  top: ${(props) => `${props.position.top}px`};
+  left: ${(props) => `${props.position.left}px`};
   z-index: 998;
   border-radius: 5px;
   border: 2px solid #b4b4b4;

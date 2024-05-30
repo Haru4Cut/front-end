@@ -5,7 +5,6 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CompleteProfile from "../components/character/CompleteProfile";
-import { setIsCharacterCreated } from "../store";
 
 export default function Profile() {
   //test userId
@@ -20,7 +19,6 @@ export default function Profile() {
   console.log("characterData", characterData);
 
   const dispatch = useDispatch();
-  const isCharacterCreated = useSelector((state) => state.isCharacterCreated); // 캐릭터 생성 여부
 
   // 연동
   useEffect(() => {
@@ -72,7 +70,7 @@ export default function Profile() {
       .then((response) => {
         console.log(response.data);
         setRefreshCounter((prevCounter) => prevCounter + 1);
-        dispatch(setIsCharacterCreated(true)); // 캐릭터 생성 완료 시 캐릭터 생성 여부 true로 바꿈
+        localStorage.setItem("characterId", response.data.characterId);
         navigate("/main");
       })
       .catch((error) => {

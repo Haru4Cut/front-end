@@ -25,8 +25,14 @@ const Redirection = () => {
       console.log("로그인 성공", response.data);
       dispatch(setUserId(response.data.userId)); // userId를 Redux로 저장
 
-      // 새로 로그인한 경우 캐릭터 설정 페이지로 이동
-      navigate("/main");
+      // 캐릭터 아이디가 있으면 메인으로, 없으면 캐릭터 페이지로 이동
+      const characterId = localStorage.getItem("characterId");
+      if (characterId) {
+        navigate("/main");
+      } else {
+        navigate("/character");
+      }
+      
     } catch (error) {
       console.error("로그인 오류 발생", error);
       navigate("/login");

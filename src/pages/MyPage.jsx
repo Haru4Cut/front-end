@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import styled from "styled-components";
 import editIcon from "../assets/images/editIcon.svg";
 import checkIcon from "../assets/images/checkIcon.svg";
@@ -14,7 +14,7 @@ export default function MyPage() {
   const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
 
   const [isHovered, setIsHovered] = useState(false);
-
+  const pencilWrapRef = useRef(null);
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -69,6 +69,19 @@ export default function MyPage() {
     fetchDiaaryDate();
   }, []);
 
+  // 펜슬 호버 정보 위치
+  const getPosition = () => {
+    if (pencilWrapRef.current) {
+      const rect = pencilWrapRef.current.getBoundingClientRect();
+      return {
+        top: rect.top - 300, 
+        left: rect.left - 80
+      };
+    }
+    return { top: 0, left: 0 };
+  };
+
+
   return (
     <MyPageWrap>
       <Header>
@@ -109,12 +122,12 @@ export default function MyPage() {
           <Box>
             <CharacterInfoText>보유 연필</CharacterInfoText>
           </Box>
-          <PencilWrap>
+          <PencilWrap ref={pencilWrapRef}>
             <PencilImage src={pencilImg} alt="연필" />
             <PencilText>20</PencilText>
             <PencilInfo
               isHovered={isHovered}
-              top="5px"
+              position={getPosition()}
               title=""
               text="<div>하루네컷에서 사용되는 포인트로,</div> 하나의 사진을 만드는데 1연필이 쓰여요 :)"
             />

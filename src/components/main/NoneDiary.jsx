@@ -6,7 +6,6 @@ import Payment from "../common/Payment";
 export default function NoneDiary() {
   // 모달창 state
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const openModal = () => {
     setModalIsOpen(true);
   };
