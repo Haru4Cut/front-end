@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import styled, { css } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedBox } from "../../store";
 import CloseIcon from "../../assets/images/closeIcon.svg";
 import QuestionIcon from "../../assets/images/QuestionIcon.svg";
 import Button from "./Button";
 
 const Payment = ({ modalIsOpen, openModal, closeModal }) => {
   // 선택된 결제 Box
-  const [selectedBox, setSelectedBox] = useState(null);
+  //const [selectedBox, setSelectedBox] = useState(null);
+  const dispatch = useDispatch();
+  const selectedBox = useSelector((state) => state.selectedBox);
   // Box 클릭 시
   const handleBoxClick = (boxIndex) => {
-    setSelectedBox(boxIndex);
+    dispatch(setSelectedBox(boxIndex));
   };
   // 모달 스타일
   const customModalStyles = {
@@ -87,7 +91,8 @@ const Payment = ({ modalIsOpen, openModal, closeModal }) => {
               4컷 일기에는 4연필, 2컷 일기에는 2연필이 소모됩니다 :)
             </SubText>
           </IntroductionBox>
-          <Button marginTop="30px" width="260px">
+
+          <Button marginTop="30px" width="260px" to="/payment">
             결제하기
           </Button>
         </PaymentBox>

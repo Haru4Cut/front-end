@@ -2,16 +2,21 @@ import styled from "styled-components";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import FourInput from "./FourInput";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-//KwywordInput > Form > FourInputNcut
 const Form = (props) => {
+  // Redux에서 userId 가져오기
+
   //4input + 컷 정보 + 좌우 버튼
   const navigate = useNavigate();
+  // useDispatch를 사용하여 액션을 dispatch할 수 있음
+
   const cutNum = useSelector((state) => state.cutNum);
   const date = useSelector((state) => state.date);
-
+  //const userId = useSelector((state) => state.userId);
+  const userId = 17;
+  console.log("userId:", userId);
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);
   //const [imgUrl, setImgUrl] = useState(null);
@@ -49,7 +54,6 @@ const Form = (props) => {
     });
   }; //다음 cut이 cutNum을 넘어가면 더이상 안넘어가게 하는 로직
 
-  const userId = 1;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const requestData = cutForms.map((cut) => ({
@@ -78,7 +82,9 @@ const Form = (props) => {
       );
       console.log("서버 응답:", response.data);
 
-      navigate("/createdImg", { state: { responseData: response.data } });
+      navigate(`/diaries/${userId}/events`, {
+        state: { responseData: response.data },
+      });
     } catch (error) {
       console.error("서버 요청 오류:", error);
       // 오류 처리 로직 추가

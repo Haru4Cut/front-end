@@ -48,13 +48,13 @@ const OnboardingWrap = styled.div`
 const OnboardingMsg = styled.div`
   font-family: "KotraHope";
   color: #a8c9e7;
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: 0.1em;
   margin-bottom: 20vh;
 `;
 const StyledImg = styled.img`
-  width: 85%;
-  height: 20%;
+  width: 70%;
+  height: 25%;
   opacity: 0; /* 초기에는 투명하게 설정 */
   transition: opacity 2s; /* transition 효과 설정 */
 

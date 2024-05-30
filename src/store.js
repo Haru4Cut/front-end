@@ -38,7 +38,24 @@ let nickName = createSlice({
   },
 });
 
-// 캐릭터 생성 여부
+let selectedBox = createSlice({
+  name: "selectedBox",
+  initialState: null,
+  reducers: {
+    setSelectedBox: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+let userId = createSlice({
+  name: "userId",
+  initialState: null,
+  reducers: {
+    setUserId: (state, action) => action.payload,
+  },
+});
+
+//임의 추가
 let isCharacterCreated = createSlice({
   name: "isCharacterCreated",
   initialState: false,
@@ -54,7 +71,8 @@ export const { setDate } = date.actions;
 export const { setCharacterData } = characterData.actions;
 export const { setNickName } = nickName.actions;
 export const { setIsCharacterCreated } = isCharacterCreated.actions;
-
+export const { setSelectedBox } = selectedBox.actions;
+export const { setUserId } = userId.actions;
 export default configureStore({
   reducer: {
     cutNum: cutNum.reducer,
@@ -62,5 +80,7 @@ export default configureStore({
     characterData: characterData.reducer,
     nickName: nickName.reducer,
     isCharacterCreated: isCharacterCreated.reducer,
+    selectedBox: selectedBox.reducer,
+    userId: userId.reducer,
   },
 });

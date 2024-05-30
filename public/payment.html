@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Window</title>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  </head>
+  <body>
+    <h1>결제 진행 중...</h1>
+    <script>
+      window.addEventListener("message", function (event) {
+        if (event.data.type === "PAYMENT_DATA") {
+          const { payload } = event.data;
+          const { IMP } = window;
+          IMP.init("imp11122174");
+
+          IMP.request_pay(payload, function (rsp) {
+            if (rsp.success) {
+              alert("결제 성공");
+            } else {
+              alert(`결제 실패: ${rsp.error_msg}`);
+            }
+            window.opener.postMessage(
+              {
+                type: "PAYMENT_RESULT",
+                payload: rsp,
+              },
+              "*"
+            );
+          });
+        }
+      });
+
+      // Notify parent window that the payment window is ready
+      window.opener.postMessage("paymentWindowLoaded", "*");
+    </script>
+  </body>
+</html>
