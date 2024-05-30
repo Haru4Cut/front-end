@@ -75,8 +75,8 @@ export default function MemoryDiary() {
           <CalendarWrap>
             <Calendar src={CalendarIcon} alt="달력 아이콘" />
             <ContentText fontSize="14px">
-              추억일기가 존재하지 않아요 :( {"\n"}내가 쓴 일기에서 하트를 누르면
-              추억일기에 담을 수 있어요!
+              추억일기가 존재하지 않아요 :( {"\n"}하트를 누르면 추억일기에 담을
+              수 있어요!
             </ContentText>
             <Button
               backgroundColor="#8A8A8A"
