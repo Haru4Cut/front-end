@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const PaymentPage = () => {
-  const userId = useSelector((state) => state.userId);
+  const userId = 17;
+
   const selectedPencil = useSelector((state) => state.selectedBox);
 
   const generateMerchantUid = () => {
@@ -12,6 +13,7 @@ const PaymentPage = () => {
 
   useEffect(() => {
     // 포트원 라이브러리 추가
+
     let script = document.querySelector(
       `script[src="https://cdn.iamport.kr/v1/iamport.js"]`
     );

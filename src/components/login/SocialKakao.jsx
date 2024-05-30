@@ -17,9 +17,10 @@ const KakaoLogin = () => {
             onClick={() => (window.location.href = kakaoURL)} //클릭할 때 kakaoURL에 저장된 URL로 브라우저를 이동시키는 것을 의미
             style={{
               cursor: "pointer",
-              height: "5vh",
-              width: "50vw",
-              marginTop: "10vh",
+              height: "30px",
+              width: "150px",
+              marginTop: "100px",
+              marginBottom: "80px",
             }}
           />
         </LoginWrap>
@@ -44,6 +45,7 @@ const LoginWrap = styled.div`
 const LoginLogo = styled.div`
   font-family: "OleoScriptSwashCapsBold";
   color: #a8c9e7;
-  font-size: 2.5rem;
+  font-size: 2rem;
   letter-spacing: 0.1em;
+  margin-bottom: 50px;
 `;

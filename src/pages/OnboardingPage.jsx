@@ -41,14 +41,15 @@ const OnboardingWrap = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  height: 70vh;
+  width: 200px;
+  height: 500px;
   // margin: 20px 0; /* 여기에 마진을 추가 */margin: 20px 0; /* 여기에 마진을 추가 */
 `;
 
 const OnboardingMsg = styled.div`
   font-family: "KotraHope";
   color: #a8c9e7;
-  font-size: 1.5rem;
+  font-size: 1rem;
   letter-spacing: 0.1em;
   margin-bottom: 20vh;
 `;
@@ -71,8 +72,8 @@ const StartButton = styled(Link)`
   border-radius: 20px;
   padding: 12px 80px;
   text-align: center;
-  width: 50%;
-  //margin-bottom: 20vh;
+  width: 30%;
+
   cursor: pointer;
   font-family: Pretendard;
   opacity: 0; /* 초기에는 투명하게 설정 */
