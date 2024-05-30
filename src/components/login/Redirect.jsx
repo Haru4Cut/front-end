@@ -32,7 +32,6 @@ const Redirection = () => {
       } else {
         navigate("/character");
       }
-      
     } catch (error) {
       console.error("로그인 오류 발생", error);
       navigate("/login");
@@ -41,7 +40,7 @@ const Redirection = () => {
 
   useEffect(() => {
     fetchData();
-  }, [code]); // useEffect가 code에만 의존하도록 변경
+  }, []);
 
   return null;
 };

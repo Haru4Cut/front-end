@@ -18,7 +18,7 @@ const KakaoLogin = () => {
             style={{
               cursor: "pointer",
               height: "5vh",
-              width: "60vw",
+              width: "50vw",
               marginTop: "10vh",
             }}
           />
