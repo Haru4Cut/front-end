@@ -8,6 +8,7 @@ import DiaryEditIcon from "../assets/images/DiaryEditIcon.svg";
 import ShareIcon from "../assets/images/ShareIcon.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
 export default function Haru4CutDetail({ selectedDate }) {
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   const { diaryid } = useParams(); // 현재 diaryId
@@ -36,16 +37,9 @@ export default function Haru4CutDetail({ selectedDate }) {
       };
 
       // PATCH 요청 보내기
-      const response = await axios.patch(
+      const response = await axiosInstance.patch(
         `/diaries/${diaries.diaryId}`,
-        updatedDiary,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        }
+        updatedDiary
       );
 
       console.log("일기 수정", response);
@@ -85,20 +79,13 @@ export default function Haru4CutDetail({ selectedDate }) {
   // 현재 diaryid의 일기 가져오기
   const fetchDiaries = async () => {
     try {
-      const response = await axios.get(`/diaries/${diaryid}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": "true",
-        },
-      });
+      const response = await axiosInstance.get(`/diaries/${diaryid}`);
       console.log(`/diaries/${diaryid}`, response);
       setDiaries(response.data);
     } catch (error) {
       console.error(error);
     }
   };
-
   useEffect(() => {
     fetchDiaries();
   }, [diaryid]);

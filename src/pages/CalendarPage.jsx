@@ -7,7 +7,8 @@ import moment from "moment";
 import Button from "../components/common/Button";
 import axios from "axios";
 import NoneDiary from "../components/main/NoneDiary";
-
+import { useSelector } from "react-redux";
+import axiosInstance from "../api/axiosInstance";
 export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState();
   const [diaryExistDate, setDiaryExistData] = useState();
@@ -15,17 +16,20 @@ export default function CalendarPage() {
   const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
   const [diary, setDiary] = useState(); // 선택한 날짜의 diary
 
-  const userId = localStorage.getItem("userId"); // userId 로컬스토리에서 가져오기
+  const userId = useSelector((state) => state.userId);
 
   // 선택된 날짜의 diary 가져오기
   useEffect(() => {
-    const fetchDiaaryDate = async () => {
+    const fetchDiaryDate = async () => {
       try {
-        const response = await axios.get(`/users/${userId}/diarybydate`, {
-          params: {
-            date: moment(selectedDate).format("YYYY-MM-DD"),
-          },
-        });
+        const response = await axiosInstance.get(
+          `/users/${userId}/diarybydate`,
+          {
+            params: {
+              date: moment(selectedDate).format("YYYY-MM-DD"),
+            },
+          }
+        );
         console.log(response.data);
         setDiary(response.data);
       } catch (error) {
@@ -36,8 +40,8 @@ export default function CalendarPage() {
         }
       }
     };
-    fetchDiaaryDate();
-  }, [selectedDate]);
+    fetchDiaryDate();
+  }, [selectedDate, userId]);
 
   const extractDates = (diaryData) => {
     if (!diaryData) return []; // 데이터 없을 때
@@ -50,18 +54,17 @@ export default function CalendarPage() {
 
   // 전체 diary 가져오기
   useEffect(() => {
-    const fetchDiaaryDate = async () => {
+    const fetchDiaryData = async () => {
       try {
-        const response = await axios.get(`/users/${userId}/diaries`);
+        const response = await axiosInstance.get(`/users/${userId}/diaries`);
         console.log(response.data);
         setDiaryExistData(response.data);
       } catch (error) {
         console.error(error);
       }
     };
-    fetchDiaaryDate();
+    fetchDiaryData();
   }, [userId]);
-
   return (
     <CalendarWrap>
       <Header>

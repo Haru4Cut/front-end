@@ -4,7 +4,6 @@ import Button from "../components/common/Button";
 import CharacterSelectionText from "../components/character/CharacterSelectionText";
 import GenderSelection from "../components/character/GenderSelection";
 import AgeSelection from "../components/character/AgeSelection";
-import HairSelection from "../components/character/HairSelection";
 import SkinSelection from "../components/character/SkinSelection";
 import EtcSelection from "../components/character/EtcSelection";
 import SubmitButton from "../components/character/SubmitButton";

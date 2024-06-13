@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NoneDiary from "./NoneDiary";
 import ExistDiary from "./ExistDiary";
-import axios from "axios";
-
+import axiosInstance from "../../api/axiosInstance";
+import { useSelector } from "react-redux";
 export default function TodaysDiary() {
   const [diaryData, setDiaryData] = useState(null);
 
@@ -23,17 +23,20 @@ export default function TodaysDiary() {
     return year + "-" + month + "-" + day;
   }
   // const userId = 1;
-  const userId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.userId);
 
   // 날짜에 따른 일기 얻기
   useEffect(() => {
     const fetchDiarybydate = async () => {
       try {
-        const response = await axios.get(`/users/${userId}/diarybydate`, {
-          params: {
-            date: getToday2(),
-          },
-        });
+        const response = await axiosInstance.get(
+          `/users/${userId}/diarybydate`,
+          {
+            params: {
+              date: getToday2(),
+            },
+          }
+        );
         setDiaryData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -41,8 +44,7 @@ export default function TodaysDiary() {
       }
     };
     fetchDiarybydate();
-  }, []);
-
+  }, [userId]);
   return (
     <>
       <TodayDate>{getToday()}</TodayDate>

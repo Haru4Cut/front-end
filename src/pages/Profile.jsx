@@ -5,11 +5,11 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CompleteProfile from "../components/character/CompleteProfile";
+import axiosInstance from "../api/axiosInstance";
 
 export default function Profile() {
-  //test userId
-  // const userId = 1;
-  const userId = localStorage.getItem("userId");
+  //const userId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.userId);
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [imageUrl, setImageUrl] = useState(""); // 프로필 이미지 url 저장 상태
   const [refreshCounter, setRefreshCounter] = useState(0); // 새로고침 counter
@@ -22,24 +22,22 @@ export default function Profile() {
 
   // 연동
   useEffect(() => {
-    axios
-      .post(`/image/${userId}`, characterData, {
-        headers: {
-          Accept: "*/*",
-          "Content-Type": `application/json`,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": "true",
-        },
-      })
-      .then((response) => {
+    const fetchImageData = async () => {
+      try {
+        const response = await axiosInstance.post(
+          `/image/${userId}`,
+          characterData
+        );
         console.log(response.data);
         setImageUrl(response.data); // 이미지 URL 저장
         setLoading(false); // 로딩 상태 변경
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
         setLoading(false);
-      });
+      }
+    };
+
+    fetchImageData();
   }, [characterData, refreshCounter]);
 
   // 새로고침 버튼 클릭 시
@@ -57,16 +55,10 @@ export default function Profile() {
       characterImage: imageUrl,
     };
     console.log("characterCompleteData", characterCompleteData);
+
     // characterData 업데이트 및 새로고침
-    axios
-      .post(`/character/${userId}`, characterCompleteData, {
-        headers: {
-          Accept: "*/*",
-          "Content-Type": `application/json`,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": "true",
-        },
-      })
+    axiosInstance
+      .post(`/character/${userId}`, characterCompleteData)
       .then((response) => {
         console.log(response.data);
         setRefreshCounter((prevCounter) => prevCounter + 1);
@@ -77,6 +69,7 @@ export default function Profile() {
         console.error(error);
       });
   };
+
   return (
     <CharacterWrap>
       {loading ? (

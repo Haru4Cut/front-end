@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef  } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import editIcon from "../assets/images/editIcon.svg";
 import checkIcon from "../assets/images/checkIcon.svg";
@@ -9,6 +9,9 @@ import axios from "axios";
 import pencilImg from "../assets/images/EDIT.svg";
 import questionIcon from "../assets/images/Question_fill.svg";
 import PencilInfo from "../components/common/PencilInfo";
+import { useSelector } from "react-redux";
+import axiosInstance from "../api/axiosInstance";
+
 export default function MyPage() {
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
   const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
@@ -31,18 +34,9 @@ export default function MyPage() {
   // 닉네임 저장
   const onNickNameSave = async () => {
     try {
-      await axios.patch(
-        `/character/${userId}/nickName`,
-        { nickName: editedNickname },
-        {
-          headers: {
-            Accept: "*/*",
-            "Content-Type": `application/json`,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        }
-      );
+      await axiosInstance.patch(`/character/${userId}/nickName`, {
+        nickName: editedNickname,
+      });
       alert("닉네임이 변경되었습니다.");
       setIsNickNameEditing(false);
       console.log(editedNickname);
@@ -51,14 +45,14 @@ export default function MyPage() {
     }
   };
 
-  const userId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.userId);
 
   const [character, setCharacter] = useState();
 
   useEffect(() => {
-    const fetchDiaaryDate = async () => {
+    const fetchCharacter = async () => {
       try {
-        const response = await axios.get(`/character/${userId}`);
+        const response = await axiosInstance.get(`/character/${userId}`);
         console.log(response.data);
         setCharacter(response.data);
         setEditedNickname(response.data.nickName);
@@ -66,21 +60,20 @@ export default function MyPage() {
         console.error(error);
       }
     };
-    fetchDiaaryDate();
-  }, []);
+    fetchCharacter();
+  }, [userId]);
 
   // 펜슬 호버 정보 위치
   const getPosition = () => {
     if (pencilWrapRef.current) {
       const rect = pencilWrapRef.current.getBoundingClientRect();
       return {
-        top: rect.top - 330, 
-        left: rect.left - 80
+        top: rect.top - 330,
+        left: rect.left - 80,
       };
     }
     return { top: 0, left: 0 };
   };
-
 
   return (
     <MyPageWrap>
