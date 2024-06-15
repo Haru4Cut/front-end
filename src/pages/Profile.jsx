@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CompleteProfile from "../components/character/CompleteProfile";
 import axiosInstance from "../api/axiosInstance";
+import { setCharacterPresence } from "../store";
 
 export default function Profile() {
   //const userId = localStorage.getItem("userId");
@@ -19,6 +20,8 @@ export default function Profile() {
   console.log("characterData", characterData);
 
   const dispatch = useDispatch();
+  const isCharacterPresent = useSelector((state) => state.isCharacterPresent); // 캐릭터 존재 여부
+  console.log("isCharacterPresent", isCharacterPresent);
 
   // 연동
   useEffect(() => {
@@ -62,8 +65,9 @@ export default function Profile() {
       .then((response) => {
         console.log(response.data);
         setRefreshCounter((prevCounter) => prevCounter + 1);
-        localStorage.setItem("characterId", response.data.characterId);
-        navigate("/main");
+        localStorage.setItem("characterId", response.data.characterId); // 로컬스토리지에 characterId 저장
+        navigate("/main"); // 메인으로 이동
+        dispatch(setCharacterPresence(true)); // 캐릭터 존재 여부를 true로 바꿈
       })
       .catch((error) => {
         console.error(error);
