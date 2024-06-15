@@ -10,7 +10,7 @@ import { setCharacterPresence } from "../store";
 
 export default function Profile() {
   //const userId = localStorage.getItem("userId");
-  const userId = useSelector((state) => state.userId);
+  const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [imageUrl, setImageUrl] = useState(""); // 프로필 이미지 url 저장 상태
   const [refreshCounter, setRefreshCounter] = useState(0); // 새로고침 counter
@@ -21,7 +21,6 @@ export default function Profile() {
 
   const dispatch = useDispatch();
   const isCharacterPresent = useSelector((state) => state.isCharacterPresent); // 캐릭터 존재 여부
-  console.log("isCharacterPresent", isCharacterPresent);
 
   // 연동
   useEffect(() => {

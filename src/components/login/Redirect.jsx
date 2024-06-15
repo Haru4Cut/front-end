@@ -26,9 +26,9 @@ const Redirection = () => {
       console.log("로그인 성공", response.data);
       dispatch(setUserId(response.data.userId)); // userId를 Redux로 저장
 
-      // 로컬스토리지에 token 저장
+      // 로컬스토리지에 token, userId 저장
       localStorage.setItem("accessToken", response.data.accessToken);
-
+      localStorage.setItem("userId", response.data.userId);
       // 캐릭터 아이디가 있으면 메인으로, 없으면 캐릭터 페이지로 이동
       const characterId = localStorage.getItem("characterId");
       if (characterId) {

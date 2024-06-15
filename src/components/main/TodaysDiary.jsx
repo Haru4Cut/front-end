@@ -23,7 +23,7 @@ export default function TodaysDiary() {
     return year + "-" + month + "-" + day;
   }
   // const userId = 1;
-  const userId = useSelector((state) => state.userId);
+  const userId = localStorage.getItem("userId");
 
   // 날짜에 따른 일기 얻기
   useEffect(() => {

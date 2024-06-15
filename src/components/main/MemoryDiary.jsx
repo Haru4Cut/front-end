@@ -13,7 +13,7 @@ export default function MemoryDiary() {
   const [memoryDiary, setMemoryDiary] = useState({ imgLinks: [], date: [] });
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const userId = useSelector((state) => state.userId);
+  const userId = localStorage.getItem("userId");
 
   // 닉네임
   useEffect(() => {
