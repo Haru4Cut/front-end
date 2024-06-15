@@ -45,7 +45,7 @@ export default function MyPage() {
     }
   };
 
-  const userId = useSelector((state) => state.userId);
+  const userId = localStorage.getItem("userId");
 
   const [character, setCharacter] = useState();
 
