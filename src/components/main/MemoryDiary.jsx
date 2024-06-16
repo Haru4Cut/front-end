@@ -3,7 +3,8 @@ import styled from "styled-components";
 import CalendarIcon from "../../assets/images/calendarIller.svg";
 import axios from "axios";
 import Button from "../common/Button";
-
+import { useSelector } from "react-redux";
+import axiosInstance from "../../api/axiosInstance";
 // 사진 넘어가는 시간 5초
 const INTERVAL_TIME = 5000;
 
@@ -12,14 +13,13 @@ export default function MemoryDiary() {
   const [memoryDiary, setMemoryDiary] = useState({ imgLinks: [], date: [] });
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // const userId = 1;
   const userId = localStorage.getItem("userId");
 
   // 닉네임
   useEffect(() => {
     const fetchNickName = async () => {
       try {
-        const response = await axios.get(`/character/${userId}`);
+        const response = await axiosInstance.get(`/character/${userId}`);
         setNickName(response.data.nickname);
         console.log(response.data.nickname);
       } catch (error) {
@@ -33,7 +33,7 @@ export default function MemoryDiary() {
   useEffect(() => {
     const fetchMemoryDiaries = async () => {
       try {
-        const response = await axios.get(`/likes/${userId}`);
+        const response = await axiosInstance.get(`/likes/${userId}`);
         setMemoryDiary(response.data);
         console.log(response.data);
       } catch (error) {

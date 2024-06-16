@@ -6,11 +6,9 @@ import HomeIcon from "../assets/images/HomeIcon.svg";
 import DownloadIcon from "../assets/images/DownloadIcon.svg";
 import CommmentIcon from "../assets/images/commentIcon.svg";
 import html2canvas from "html2canvas";
-import { ReactComponent as FavoriteIcon } from "../assets/images/FavoriteIcon.svg";
 import { saveAs } from "file-saver";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-
+import axiosInstance from "../api/axiosInstance";
 export const share = (dataurl, imgName) => {
   let arr = dataurl.split(","),
     mime = arr[0].match(/:(.*?);/)[1],
@@ -40,13 +38,7 @@ export default function Share() {
   useEffect(() => {
     const fetchDiaries = async () => {
       try {
-        const response = await axios.get(`/diaries/${diaryid}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        });
+        const response = await axiosInstance.get(`/diaries/${diaryid}`);
         console.log(`/diaries/${diaryid}`, response);
         setDiaries(response.data);
       } catch (error) {
@@ -55,7 +47,6 @@ export default function Share() {
     };
     fetchDiaries();
   }, [diaryid]);
-
   // const onClickShareButton = () => {
   //   const target = document.getElementById("download");
   //   if (!target) {

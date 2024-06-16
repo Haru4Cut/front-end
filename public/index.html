@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js">
+    <script type="text/javascript">
       (function (l) {
         if (l.search) {
           var q = {};
@@ -28,12 +32,8 @@
         }
       })(window.location);
     </script>
-    <meta name="theme-color" content="#A8C9E7" />
-    <meta
-      name="description"
-      content="내 하루를 네컷으로 기록하세요, 하루네컷"
-    />
-
+    <meta name="theme-color" content="#9CBEDD" />
+    <meta name="description" content="하루네컷" />
     <title>하루네컷</title>
   </head>
   <body>
