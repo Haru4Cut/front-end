@@ -6,6 +6,7 @@ const LoginPage = () => {
     <div className="wrap">
       <LoginWrap>
         <LoginLogo>Haru4Cut</LoginLogo>
+
         <KakaoLogin />
       </LoginWrap>
     </div>
@@ -30,4 +31,9 @@ const LoginLogo = styled.div`
   color: #a8c9e7;
   font-size: 2.5rem;
   letter-spacing: 0.1em;
+`;
+
+const MiddleText = styled.div`
+  font-family: "PoetsenOne";
+  font-size: 1rem;
 `;
