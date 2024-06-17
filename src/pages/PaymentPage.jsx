@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 
 const PaymentPage = () => {
-  const userId = 17;
   const selectedPencil = useSelector((state) => state.selectedBox);
-
+  // Accessing userId from Redux store
+  const userId = useSelector((state) => state.userId);
   // 고유한 merchant_uid를 생성하는 함수
+  console.log("userid", userId);
   const generateMerchantUid = () => {
     return "HARU4CUT-" + Math.random().toString(36).substr(2, 9);
   };
@@ -51,7 +52,7 @@ const PaymentPage = () => {
         pay_method: payMethod,
         merchant_uid: merchantUid,
         name: "50연필(HARU4CUT)",
-        amount: 5000,
+        amount: 4500,
         m_redirect_url: "/s",
       };
     } else if (selectedPencil === 3) {
@@ -60,7 +61,7 @@ const PaymentPage = () => {
         pay_method: payMethod,
         merchant_uid: merchantUid,
         name: "100연필(HARU4CUT)",
-        amount: 10000,
+        amount: 8500,
         m_redirect_url: "/s",
       };
     }
@@ -72,9 +73,11 @@ const PaymentPage = () => {
       if (rsp.success) {
         console.log("결제 요청 성공");
         // 결제 성공 시 검증 함수 호출
-        const success = await verifyPayment(selectedPencil, rsp.imp_uid);
+        console.log("rsp", rsp);
+        const success_msg = await verifyPayment(selectedPencil, rsp.imp_uid);
         console.log("rsp.imp_uid", rsp.imp_uid);
-        if (success) {
+        if (success_msg) {
+          alert(success_msg);
           console.log("결제 성공");
         } else {
           console.log("결제 검증 실패");
@@ -108,11 +111,12 @@ const PaymentPage = () => {
   // 결제 검증을 수행하는 함수
   const verifyPayment = async (selectedPencil, impUid) => {
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `/verify/${selectedPencil}/${userId}/${impUid}`
       );
       console.log("결제 검증 성공");
-      return response.data.success;
+      console.log("response.data", response.data);
+      return response.data.message;
     } catch (error) {
       console.error("결제 검증 요청 에러:", error);
       return false;
