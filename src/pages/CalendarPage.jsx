@@ -28,7 +28,7 @@ export default function CalendarPage() {
             },
           }
         );
-        console.log(response.data);
+        console.log("이 날짜의 다이어리", response.data);
         setDiary(response.data);
       } catch (error) {
         if (error.message === "Request failed with status code 500") {
@@ -91,11 +91,33 @@ export default function CalendarPage() {
           ) : (
             <>
               <ImgWrap>
-                {diary.imgLinks.map((imgUrl, index) => (
+                {diary.imgLinks.length === 1 && (
                   <>
-                    <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
+                    {diary.imgLinks.map((imgUrl, index) => (
+                      <>
+                        <DiaryImage1 src={imgUrl} alt="하루네컷 이미지" />
+                      </>
+                    ))}
                   </>
-                ))}
+                )}
+                {diary.imgLinks.length === 2 && (
+                  <>
+                    {diary.imgLinks.map((imgUrl, index) => (
+                      <>
+                        <DiaryImage2 src={imgUrl} alt="하루네컷 이미지" />
+                      </>
+                    ))}
+                  </>
+                )}
+                {diary.imgLinks.length === 4 && (
+                  <>
+                    {diary.imgLinks.map((imgUrl, index) => (
+                      <>
+                        <DiaryImage4 src={imgUrl} alt="하루네컷 이미지" />
+                      </>
+                    ))}
+                  </>
+                )}
               </ImgWrap>
               <Button width="260px" to={`/haru4cut/${diary.diaryId}`}>
                 자세히 보기
@@ -137,7 +159,17 @@ const Date = styled.div`
   margin-top: 20px;
 `;
 
-const DiaryImage = styled.img`
+const DiaryImage1 = styled.img`
+  margin: 5px;
+  width: 120px;
+`;
+
+const DiaryImage2 = styled.img`
+  margin: 5px;
+  width: 180px;
+`;
+
+const DiaryImage4 = styled.img`
   margin: 5px;
   width: 100px;
 `;

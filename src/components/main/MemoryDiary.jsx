@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CalendarIcon from "../../assets/images/calendarIller.svg";
-import axios from "axios";
 import Button from "../common/Button";
-import { useSelector } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
 // 사진 넘어가는 시간 5초
 const INTERVAL_TIME = 5000;
