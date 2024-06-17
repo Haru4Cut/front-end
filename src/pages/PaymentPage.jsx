@@ -42,7 +42,7 @@ const PaymentPage = () => {
         pg: pgValue,
         pay_method: payMethod,
         merchant_uid: merchantUid,
-        name: "20연필(HARU4CUT)",
+        name: "30연필(HARU4CUT)",
         amount: 3000,
         m_redirect_url: "/s",
       };
