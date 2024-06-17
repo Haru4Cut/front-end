@@ -38,7 +38,7 @@ export default function HairColor({ setSelectedHairColor, selectedHairColor }) {
             handleClickHairColor(3);
           }}
         >
-          {selectedHairColor === 3 && <ClickedWrap />}
+          {selectedHairColor === 4 && <ClickedWrap />}
         </HairColorCircle>
       </HairColorWrap>
     </>

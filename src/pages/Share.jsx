@@ -9,6 +9,7 @@ import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import Comment from "../components/common/Comment";
 export const share = (dataurl, imgName) => {
   let arr = dataurl.split(","),
     mime = arr[0].match(/:(.*?);/)[1],
@@ -32,6 +33,14 @@ export const share = (dataurl, imgName) => {
 };
 
 export default function Share() {
+  // 모달창 state
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   const { diaryid } = useParams();
   const [diaries, setDiaries] = useState(null); // 일기 데이터 초기 상태를 null로 설정
 
@@ -63,8 +72,6 @@ export default function Share() {
   //     share(dataUrl, fileName);
   //   });
   // };
-
-  const onClickShareButton = () => {};
 
   const onClickDownloadButton = () => {
     const target = document.getElementById("download");
@@ -130,7 +137,7 @@ export default function Share() {
       </DownWrap>
       <div>오늘의 하루네컷을 완성했어요!</div>
       <DownloadButtonWrap>
-        <Button width="150px" onClick={onClickShareButton}>
+        <Button width="150px" onClick={openModal}>
           <Icon src={CommmentIcon} alt="코멘트" />
           AI 코멘트
         </Button>
@@ -143,6 +150,11 @@ export default function Share() {
         <Icon src={HomeIcon} marginBottom="3px" />
         홈으로 돌아가기
       </Button>
+      <Comment
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
     </MainWrap>
   );
 }

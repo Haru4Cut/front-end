@@ -167,7 +167,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                   to={`/haru4cut/${diaryid}/share`}
                 >
                   <StyledIcon src={ShareIcon} />
-                  일기 공유하기
+                  일기 완성하기
                 </Button>
               </>
             ) : (

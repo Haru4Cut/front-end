@@ -13,6 +13,7 @@ import HairStyle from "../components/character/HairStyle";
 import { setNickName } from "../store";
 import { useDispatch } from "react-redux";
 import { setCharacterMode } from "../store";
+import { useSelector } from "react-redux";
 export default function CharacterSelection() {
   const [selectionStep, setselectionStep] = useState(1);
   const [selectedGender, setSelectedGender] = useState(null);
@@ -129,9 +130,14 @@ export default function CharacterSelection() {
     ); // 4이면 피부색 선택, 기타
   }
 
-  const queryParams = new URLSearchParams(location.search);
-  const mode = queryParams.get("mode");
-  dispatch(setCharacterMode(mode));
+  const characterMode = useSelector((state) => state.characterMode);
+  console.log("characterMode", characterMode);
+  if (!characterMode) {
+    const queryParams = new URLSearchParams(location.search);
+    const mode = queryParams.get("mode");
+    console.log(mode);
+    dispatch(setCharacterMode(mode));
+  }
 
   return (
     <CharacterSelectionWrap>
