@@ -6,10 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CompleteProfile from "../components/character/CompleteProfile";
 import axiosInstance from "../api/axiosInstance";
-import { setCharacterPresence } from "../store";
 
 export default function Profile() {
-  //const userId = localStorage.getItem("userId");
   const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [imageUrl, setImageUrl] = useState(""); // 프로필 이미지 url 저장 상태
@@ -20,17 +18,16 @@ export default function Profile() {
   console.log("characterData", characterData);
 
   const dispatch = useDispatch();
-  const isCharacterPresent = useSelector((state) => state.isCharacterPresent); // 캐릭터 존재 여부
-
+  const characterMode = useSelector((state) => state.characterMode);
   // 연동
   useEffect(() => {
     const fetchImageData = async () => {
       try {
-        const response = await axiosInstance.post(
-          `/image/${userId}`,
-          characterData
-        );
-        console.log(response.data);
+        const response =
+          characterMode === "update"
+            ? await axiosInstance.patch(`/image/${userId}`, characterData)
+            : await axiosInstance.post(`/image/${userId}`, characterData);
+        console.log("그림 생성", response.data);
         setImageUrl(response.data); // 이미지 URL 저장
         setLoading(false); // 로딩 상태 변경
       } catch (error) {
@@ -40,7 +37,7 @@ export default function Profile() {
     };
 
     fetchImageData();
-  }, [characterData, refreshCounter]);
+  }, []);
 
   // 새로고침 버튼 클릭 시
   const handleRefresh = () => {
@@ -64,9 +61,7 @@ export default function Profile() {
       .then((response) => {
         console.log(response.data);
         setRefreshCounter((prevCounter) => prevCounter + 1);
-        localStorage.setItem("characterId", response.data.characterId); // 로컬스토리지에 characterId 저장
         navigate("/main"); // 메인으로 이동
-        dispatch(setCharacterPresence(true)); // 캐릭터 존재 여부를 true로 바꿈
       })
       .catch((error) => {
         console.error(error);

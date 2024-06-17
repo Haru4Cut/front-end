@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserId } from "../../store";
-
+import axiosInstance from "../../api/axiosInstance";
 const Redirection = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,11 +29,15 @@ const Redirection = () => {
       // 로컬스토리지에 token, userId 저장
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("userId", response.data.userId);
-      // 캐릭터 아이디가 있으면 메인으로, 없으면 캐릭터 페이지로 이동
-      const characterId = localStorage.getItem("characterId");
-      if (characterId) {
+
+      // 캐릭터 생성 여부를 판단하는 부분
+      try {
+        const characterResponse = await axiosInstance.get(
+          `/character/${localStorage.getItem("userId")}`
+        );
+        console.log(characterResponse);
         navigate("/main");
-      } else {
+      } catch (characterError) {
         navigate("/character");
       }
     } catch (error) {

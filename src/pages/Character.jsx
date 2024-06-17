@@ -11,7 +11,7 @@ export default function Character() {
         <img src={CharacterIcon} />
         <CharacterSelectionText />
       </CharacterBox>
-      <Button to="/character/selection">시작하기</Button>
+      <Button to="/character/selection?mode=create">시작하기</Button>
     </CharacterWrap>
   );
 }

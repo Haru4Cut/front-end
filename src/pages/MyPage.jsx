@@ -205,7 +205,11 @@ export default function MyPage() {
               </InfoBoldText>
             </InfoTextWrap>
             <Box marginTop="20px">
-              <Button width="230px" to="/character" height="38px">
+              <Button
+                width="230px"
+                to="/character/selection?mode=update"
+                height="38px"
+              >
                 캐릭터 변경하기
               </Button>
             </Box>

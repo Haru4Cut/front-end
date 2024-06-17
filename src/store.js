@@ -54,12 +54,13 @@ let userId = createSlice({
     setUserId: (state, action) => action.payload,
   },
 });
-// 캐릭터 존재 여부
-let isCharacterPresent = createSlice({
-  name: "isCharacterPresent",
-  initialState: false,
+
+// 캐릭터 생성모드 / 변경모드
+let characterMode = createSlice({
+  name: "characterMode",
+  initialState: "create",
   reducers: {
-    setCharacterPresence: (state, action) => {
+    setCharacterMode: (state, action) => {
       return action.payload;
     },
   },
@@ -71,7 +72,7 @@ export const { setCharacterData } = characterData.actions;
 export const { setNickName } = nickName.actions;
 export const { setSelectedBox } = selectedBox.actions;
 export const { setUserId } = userId.actions;
-export const { setCharacterPresence } = isCharacterPresent.actions;
+export const { setCharacterMode } = characterMode.actions;
 
 export default configureStore({
   reducer: {
@@ -81,6 +82,6 @@ export default configureStore({
     nickName: nickName.reducer,
     selectedBox: selectedBox.reducer,
     userId: userId.reducer,
-    isCharacterPresent: isCharacterPresent.reducer,
+    characterMode: characterMode.reducer,
   },
 });
