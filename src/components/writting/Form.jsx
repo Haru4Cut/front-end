@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import FourInput from "./FourInput";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import axiosInstance from "../../api/axiosInstance";
 const Form = (props) => {
   // Redux에서 userId 가져오기
 
@@ -68,7 +68,7 @@ const Form = (props) => {
     // 버튼을 누르자마자 '/loading' 페이지로 이동
     navigate("/loading");
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `/diaries/${userId}/events`,
         JSON.stringify(requestData),
         {
