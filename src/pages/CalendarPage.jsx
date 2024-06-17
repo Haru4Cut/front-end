@@ -15,7 +15,7 @@ export default function CalendarPage() {
   const [isheartToggle, SetIsheartToggle] = useState(true);
   const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
   const [diary, setDiary] = useState(); // 선택한 날짜의 diary
-  const userId = useSelector((state) => state.userId);
+  const userId = localStorage.getItem("userId");
   // 선택된 날짜의 diary 가져오기
   useEffect(() => {
     const fetchDiaryDate = async () => {
@@ -63,6 +63,7 @@ export default function CalendarPage() {
     };
     fetchDiaryData();
   }, [userId]);
+
   return (
     <CalendarWrap>
       <Header>
