@@ -13,7 +13,7 @@ export default function Haru4CutDetail({ selectedDate }) {
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   const { diaryid } = useParams(); // 현재 diaryId
 
-  const [heartStates, setHeartStates] = useState(Array(4).fill(true));
+  const [heartStates, setHeartStates] = useState(Array(4).fill(false));
   const defaultTextAreaValue = `자세한 이 날 스토리, 네컷일기에 대한 \n느낌 등 일기를 더 기록해보세요 :) \n\n기록할 것이 없다면 줄글 일기 없이\n사진만으로도 일기를 완성할 수 있어요!`;
 
   // 글자수 표시
@@ -58,12 +58,23 @@ export default function Haru4CutDetail({ selectedDate }) {
   const onShareButtonClick = () => {};
 
   // 좋아요
-  const onClickHeart = (index) => {
-    setHeartStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
+  const onClickHeart = async (index, imgUrl) => {
+    setHeartStates((prevHeartStates) => {
+      const newHeartStates = [...prevHeartStates];
+      newHeartStates[index] = !newHeartStates[index];
+      return newHeartStates;
     });
+    try {
+      const response = await axiosInstance.post(
+        `/likes/${localStorage.getItem("userId")}`,
+        {
+          url: imgUrl,
+        }
+      );
+      console.log(`/likes/userId}`, response);
+    } catch (error) {
+      console.error(error);
+    }
   };
   // diaries.text 값에 따라 textDiary 초기 값 설정
   useEffect(() => {
@@ -107,7 +118,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                     alt="하루네컷 이미지"
                   />
                   <StyledFavoriteIcon1
-                    onClick={() => onClickHeart(0)}
+                    onClick={() => onClickHeart(diaries.imgLinks[0])}
                     fill={heartStates[0] ? "#E54B4B" : "#C7C7C7"}
                     alt="heart icon"
                   />
@@ -124,7 +135,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                         key={index}
                       />
                       <StyledFavoriteIcon2
-                        onClick={() => onClickHeart(index)}
+                        onClick={() => onClickHeart(index, imgUrl)}
                         fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
                         alt="heart icon"
                       />
@@ -143,7 +154,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                         key={index}
                       />
                       <StyledFavoriteIcon
-                        onClick={() => onClickHeart(index)}
+                        onClick={() => onClickHeart(index, imgUrl)}
                         fill={heartStates[index] ? "#E54B4B" : "#C7C7C7"}
                         alt="heart icon"
                       />

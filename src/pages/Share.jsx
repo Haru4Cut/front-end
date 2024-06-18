@@ -56,22 +56,6 @@ export default function Share() {
     };
     fetchDiaries();
   }, [diaryid]);
-  // const onClickShareButton = () => {
-  //   const target = document.getElementById("download");
-  //   if (!target) {
-  //     return alert("사진 저장에 실패했습니다.");
-  //   }
-  //   html2canvas(target, {
-  //     logging: true,
-  //     letterRendering: 1,
-  //     allowTaint: true,
-  //     useCORS: true,
-  //   }).then((canvas) => {
-  //     const dataUrl = canvas.toDataURL("image/png");
-  //     const fileName = "haru4cut.png";
-  //     share(dataUrl, fileName);
-  //   });
-  // };
 
   const onClickDownloadButton = () => {
     const target = document.getElementById("download");
@@ -93,7 +77,7 @@ export default function Share() {
   };
 
   if (!diaries) {
-    return <div>Loading...</div>;
+    return <div>로딩중입니다.</div>;
   }
 
   return (

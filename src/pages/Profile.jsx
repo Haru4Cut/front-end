@@ -17,7 +17,8 @@ export default function Profile() {
   const navigate = useNavigate();
   console.log("characterData", characterData);
   const characterMode = useSelector((state) => state.characterMode);
-  console.log("모드", characterMode);
+  console.log("characterMode", characterMode);
+
   // 연동
   useEffect(() => {
     const fetchImageData = async () => {
@@ -34,7 +35,6 @@ export default function Profile() {
         setLoading(false);
       }
     };
-
     fetchImageData();
   }, []);
 
@@ -59,13 +59,13 @@ export default function Profile() {
       if (characterMode === "update") {
         const response = await axiosInstance.patch(
           `/character/${userId}`,
-          characterData
+          characterCompleteData
         );
         console.log(response.data);
       } else {
         const response = await axiosInstance.post(
           `/character/${userId}`,
-          characterData
+          characterCompleteData
         );
         console.log(response.data);
       }

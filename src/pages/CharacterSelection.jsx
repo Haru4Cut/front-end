@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/common/Button";
@@ -26,6 +26,14 @@ export default function CharacterSelection() {
   const PageNum = 4; // 총 선택 페이지 개수 4개
   const dispatch = useDispatch();
   const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const mode = queryParams.get("mode");
+    dispatch(setCharacterMode(mode));
+  }, []);
+  // const characterMode = useSelector((state) => state.characterMode);
+  // console.log("characterMode", characterMode);
 
   // 다음 페이지로 넘어가는 함수
   const handleNextStep = () => {
@@ -128,15 +136,6 @@ export default function CharacterSelection() {
         </SelectionBox>
       </>
     ); // 4이면 피부색 선택, 기타
-  }
-
-  const characterMode = useSelector((state) => state.characterMode);
-  console.log("characterMode", characterMode);
-  if (!characterMode) {
-    const queryParams = new URLSearchParams(location.search);
-    const mode = queryParams.get("mode");
-    console.log(mode);
-    dispatch(setCharacterMode(mode));
   }
 
   return (

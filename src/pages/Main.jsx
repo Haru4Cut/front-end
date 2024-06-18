@@ -13,10 +13,10 @@ export default function Main() {
   //       const data = {
   //         cutNum: 1,
   //         imgLinks: [
-  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/33-2024-06-17-0",
+  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/33-2024-04-18-0",
   //         ],
-  //         date: "2024-05-09",
-  //         text: "24년 5월 9일 입니다 일기 한 장 짜리를 테스트해보고 싶어요!",
+  //         date: "2024-04-18",
+  //         text: "24년 4444월 18일 입니다 친구랑 엽떡을 먹었습니다",
   //       };
 
   //       const response = await axiosInstance.post(`/diaries/${userId}`, data);

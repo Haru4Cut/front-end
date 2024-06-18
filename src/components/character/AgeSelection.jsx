@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 export default function AgeSelection({ setSelectedAge, selectedAge }) {
   const Age = ["10대", "2-30대", "4-50대", "60대 이상"];
   const characterMode = useSelector((state) => state.characterMode);
-  console.log(characterMode);
   const handleClickAge = (index) => {
     setSelectedAge(index + 1);
   };
