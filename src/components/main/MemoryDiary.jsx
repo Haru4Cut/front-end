@@ -31,7 +31,7 @@ export default function MemoryDiary() {
   useEffect(() => {
     const fetchMemoryDiaries = async () => {
       try {
-        const response = await axiosInstance.get(`/likes/${userId}`);
+        const response = await axiosInstance.get(`/likes/users/${userId}`);
         setMemoryDiary(response.data);
         console.log(response.data);
       } catch (error) {

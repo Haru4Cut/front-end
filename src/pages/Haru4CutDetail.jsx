@@ -13,7 +13,7 @@ export default function Haru4CutDetail({ selectedDate }) {
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   const { diaryid } = useParams(); // 현재 diaryId
 
-  const [heartStates, setHeartStates] = useState(Array(4).fill(false));
+  const [heartStates, setHeartStates] = useState([]);
   const defaultTextAreaValue = `자세한 이 날 스토리, 네컷일기에 대한 \n느낌 등 일기를 더 기록해보세요 :) \n\n기록할 것이 없다면 줄글 일기 없이\n사진만으로도 일기를 완성할 수 있어요!`;
 
   // 글자수 표시
@@ -71,8 +71,10 @@ export default function Haru4CutDetail({ selectedDate }) {
           url: imgUrl,
         }
       );
-      console.log(`/likes/userId}`, response);
+      console.log(imgUrl);
+      console.log(`/likes/userId`, response);
     } catch (error) {
+      console.log(imgUrl);
       console.error(error);
     }
   };
@@ -93,6 +95,17 @@ export default function Haru4CutDetail({ selectedDate }) {
       const response = await axiosInstance.get(`/diaries/${diaryid}`);
       console.log(`/diaries/${diaryid}`, response);
       setDiaries(response.data);
+
+      const initialHeartStates = Array(response.data.imgLinks.length).fill(
+        false
+      );
+      setHeartStates(initialHeartStates);
+      for (const imgLink of response.data.imgLinks) {
+        console.log(imgLink);
+        response = await axiosInstance.post(`/likes/events`, { url: imgLink });
+        console.log(response);
+        console.log(heartStates);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -118,7 +131,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                     alt="하루네컷 이미지"
                   />
                   <StyledFavoriteIcon1
-                    onClick={() => onClickHeart(diaries.imgLinks[0])}
+                    onClick={() => onClickHeart(0, diaries.imgLinks[0])}
                     fill={heartStates[0] ? "#E54B4B" : "#C7C7C7"}
                     alt="heart icon"
                   />
