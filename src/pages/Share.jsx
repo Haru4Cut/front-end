@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import Button from "../components/common/Button";
@@ -10,6 +10,8 @@ import { saveAs } from "file-saver";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import Comment from "../components/common/Comment";
+import { v4 as uuidv4 } from "uuid"; // uuid import
+
 export const share = (dataurl, imgName) => {
   let arr = dataurl.split(","),
     mime = arr[0].match(/:(.*?);/)[1],
@@ -43,6 +45,7 @@ export default function Share() {
   };
   const { diaryid } = useParams();
   const [diaries, setDiaries] = useState(null); // 일기 데이터 초기 상태를 null로 설정
+  const captureRef = useRef(null);
 
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -57,22 +60,19 @@ export default function Share() {
     fetchDiaries();
   }, [diaryid]);
 
-  const onClickDownloadButton = () => {
-    const target = document.getElementById("download");
+  const onClickDownloadButton = async () => {
+    const target = captureRef.current;
     if (!target) {
       return alert("사진 저장에 실패했습니다.");
     }
-    html2canvas(target, {
-      logging: true,
-      letterRendering: 1,
+    const canvas = await html2canvas(target, {
       allowTaint: true,
       useCORS: true,
-    }).then((canvas) => {
-      canvas.toBlob((blob) => {
-        if (blob !== null) {
-          saveAs(blob, "haru4cut.png");
-        }
-      });
+    });
+    canvas.toBlob((blob) => {
+      if (blob !== null) {
+        saveAs(blob, "haru4cut.png");
+      }
     });
   };
 
@@ -82,7 +82,7 @@ export default function Share() {
 
   return (
     <MainWrap>
-      <DownWrap id="download">
+      <DownWrap id="download" ref={captureRef}>
         <LogoWrap>
           <Logo>Haru4cut</Logo>
           <LogoUnderLine />
@@ -94,14 +94,22 @@ export default function Share() {
           <ImgWrap>
             {diaries.imgLinks && diaries.imgLinks.length === 1 && (
               <>
-                <DiaryImage1 src={diaries.imgLinks[0]} alt="하루네컷 이미지" />
+                <DiaryImage1
+                  src={`${diaries.imgLinks[0]}?timestamp=${uuidv4()}`}
+                  alt="하루네컷 이미지"
+                  crossOrigin="anonymous"
+                />
               </>
             )}
             {diaries.imgLinks && diaries.imgLinks.length === 2 && (
               <>
                 {diaries.imgLinks.map((imgUrl, index) => (
                   <React.Fragment key={index}>
-                    <DiaryImage2 src={imgUrl} alt="하루네컷 이미지" />
+                    <DiaryImage2
+                      src={`${imgUrl}?timestamp=${uuidv4()}`}
+                      alt="하루네컷 이미지"
+                      crossOrigin="anonymous"
+                    />
                   </React.Fragment>
                 ))}
               </>
@@ -110,7 +118,11 @@ export default function Share() {
               <>
                 {diaries.imgLinks.map((imgUrl, index) => (
                   <React.Fragment key={index}>
-                    <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
+                    <DiaryImage
+                      src={`${imgUrl}?timestamp=${uuidv4()}`}
+                      alt="하루네컷 이미지"
+                      crossOrigin="anonymous"
+                    />
                   </React.Fragment>
                 ))}
               </>
@@ -142,6 +154,7 @@ export default function Share() {
     </MainWrap>
   );
 }
+
 const MainWrap = styled.div`
   display: flex;
   justify-content: center;
