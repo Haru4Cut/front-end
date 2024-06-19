@@ -100,12 +100,17 @@ export default function Haru4CutDetail({ selectedDate }) {
         false
       );
       setHeartStates(initialHeartStates);
-      for (const imgLink of response.data.imgLinks) {
-        console.log(imgLink);
-        response = await axiosInstance.post(`/likes/events`, { url: imgLink });
-        console.log(response);
-        console.log(heartStates);
-      }
+      response.data.imgLinks.forEach(async (imgLink, index) => {
+        console.log(index, imgLink);
+        const response = await axiosInstance.post(`/likes/events`, {
+          url: imgLink,
+        });
+        console.log(index, "의 response", response);
+        if (response.data === 1) {
+          setHeartStates[index] = true;
+        }
+        console.log("heartStates", heartStates);
+      });
     } catch (error) {
       console.error(error);
     }

@@ -18,8 +18,8 @@ export default function MemoryDiary() {
     const fetchNickName = async () => {
       try {
         const response = await axiosInstance.get(`/character/${userId}`);
-        setNickName(response.data.nickname);
-        console.log(response.data.nickname);
+        setNickName(response.data.nickName);
+        console.log(response.data.nickName);
       } catch (error) {
         console.error(error);
       }
@@ -61,14 +61,14 @@ export default function MemoryDiary() {
 
       <div>
         {memoryDiary.imgLinks.length > 0 ? (
-          <>
+          <MemoryWrap>
             <ContentText>
               그동안의 네컷일기 속에 담긴 {"\n"}
               추억을 감상하세요
             </ContentText>
             <MemoryImg src={memoryDiary.imgLinks[currentSlide]} />
             <Date>{memoryDiary.date[currentSlide]}</Date>
-          </>
+          </MemoryWrap>
         ) : (
           <CalendarWrap>
             <Calendar src={CalendarIcon} alt="달력 아이콘" />
@@ -114,8 +114,13 @@ const NickNameText = styled.div`
   color: #5370d4;
   margin-right: 3px;
 `;
+const MemoryWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
 const MemoryImg = styled.img`
-  width: 165px;
+  height: 150px;
 `;
 const Date = styled.div`
   align-items: flex-end;
