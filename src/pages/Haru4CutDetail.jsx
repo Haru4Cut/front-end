@@ -90,6 +90,7 @@ export default function Haru4CutDetail({ selectedDate }) {
   }, [diaries.text]);
 
   // 현재 diaryid의 일기 가져오기
+  // 현재 diaryid의 일기 가져오기
   const fetchDiaries = async () => {
     try {
       const response = await axiosInstance.get(`/diaries/${diaryid}`);
@@ -100,21 +101,30 @@ export default function Haru4CutDetail({ selectedDate }) {
         false
       );
       setHeartStates(initialHeartStates);
+
       response.data.imgLinks.forEach(async (imgLink, index) => {
-        console.log(index, imgLink);
-        const response = await axiosInstance.post(`/likes/events`, {
-          url: imgLink,
-        });
-        console.log(index, "의 response", response);
-        if (response.data === 1) {
-          setHeartStates[index] = true;
+        try {
+          console.log(index, imgLink);
+          const response = await axiosInstance.post(`/likes/events`, {
+            url: imgLink,
+          });
+          console.log(index, "의 response", response);
+          if (response.data === 1) {
+            setHeartStates((prevHeartStates) => {
+              const newHeartStates = [...prevHeartStates];
+              newHeartStates[index] = true;
+              return newHeartStates;
+            });
+          }
+        } catch (error) {
+          console.error(`/like/events 에러 ${imgLink}`, error);
         }
-        console.log("heartStates", heartStates);
       });
     } catch (error) {
-      console.error(error);
+      console.error(`/diaries/${diaryid} 에러`, error);
     }
   };
+
   useEffect(() => {
     fetchDiaries();
   }, [diaryid]);

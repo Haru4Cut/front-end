@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CalendarIcon from "../../assets/images/calendarIller.svg";
 import Button from "../common/Button";
 import axiosInstance from "../../api/axiosInstance";
+import { Link } from "react-router-dom";
 // 사진 넘어가는 시간 5초
 const INTERVAL_TIME = 5000;
 
@@ -34,6 +35,7 @@ export default function MemoryDiary() {
         const response = await axiosInstance.get(`/likes/users/${userId}`);
         setMemoryDiary(response.data);
         console.log(response.data);
+        fetchDataForDates(memoryDiary.date);
       } catch (error) {
         console.error(error);
       }
@@ -53,6 +55,20 @@ export default function MemoryDiary() {
     }
   }, [memoryDiary]);
 
+  // 추억일기 날짜의 diaryid 얻기
+  const fetchDataForDates = async (dates) => {
+    try {
+      const requests = dates.map((date) =>
+        axiosInstance.get(`/users/${userId}/diarybydate`, { params: { date } })
+      );
+      const responses = await Promise.all(requests);
+      const data = responses.map((response) => response.data);
+      console.log("데이터", data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <MemoryDiaryText>
@@ -66,8 +82,10 @@ export default function MemoryDiary() {
               그동안의 네컷일기 속에 담긴 {"\n"}
               추억을 감상하세요
             </ContentText>
-            <MemoryImg src={memoryDiary.imgLinks[currentSlide]} />
-            <Date>{memoryDiary.date[currentSlide]}</Date>
+            <MemoryDateWrap to="/">
+              <MemoryImg src={memoryDiary.imgLinks[currentSlide]} />
+              <Date>{memoryDiary.date[currentSlide]}</Date>
+            </MemoryDateWrap>
           </MemoryWrap>
         ) : (
           <CalendarWrap>
@@ -118,6 +136,10 @@ const MemoryWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
+const MemoryDateWrap = styled(Link)`
+  cursor: pointer;
+  text-decoration: none;
 `;
 const MemoryImg = styled.img`
   height: 150px;
