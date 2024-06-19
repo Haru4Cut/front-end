@@ -46,7 +46,7 @@ export default function MemoryDiary() {
   }, [userId]);
 
   useEffect(() => {
-    if (memoryDiary.imgLinks.length > 0) {
+    if (memoryDiary.imgLinks.length > 1) {
       const interval = setInterval(() => {
         setIsFadingOut(true); // 페이드아웃 시작
         setTimeout(() => {
