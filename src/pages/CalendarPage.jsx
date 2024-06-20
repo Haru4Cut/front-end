@@ -10,7 +10,7 @@ import NoneDiary from "../components/main/NoneDiary";
 import { useSelector } from "react-redux";
 import axiosInstance from "../api/axiosInstance";
 export default function CalendarPage() {
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(null);
   const [diaryExistDate, setDiaryExistData] = useState();
   const [isheartToggle, SetIsheartToggle] = useState(true);
   const heartIconColor = isheartToggle ? "#E54B4B" : "#C7C7C7";
@@ -31,7 +31,10 @@ export default function CalendarPage() {
         console.log("이 날짜의 다이어리", response.data);
         setDiary(response.data);
       } catch (error) {
-        if (error.message === "Request failed with status code 500") {
+        if (
+          error.message === "Request failed with status code 500" ||
+          "Request failed with status code 400"
+        ) {
           setDiary(null); // 500 에러가 발생하면 일기가 없는 것으로 처리
         } else {
           console.error(error);

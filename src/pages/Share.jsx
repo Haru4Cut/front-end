@@ -10,7 +10,7 @@ import { saveAs } from "file-saver";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import Comment from "../components/common/Comment";
-import { v4 as uuidv4 } from "uuid"; // uuid import
+import { v4 as uuidv4 } from "uuid";
 
 export const share = (dataurl, imgName) => {
   let arr = dataurl.split(","),

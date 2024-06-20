@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import CloseIcon from "../../assets/images/closeIcon.svg";
 import CommentIcon from "../../assets/images/commentIcon.svg";
+
 const Comment = ({ modalIsOpen, openModal, closeModal }) => {
   // 모달 스타일
   const customModalStyles = {
@@ -39,10 +40,10 @@ const Comment = ({ modalIsOpen, openModal, closeModal }) => {
       >
         <CloseButton src={CloseIcon} alt="닫기" onClick={closeModal} />
         <AIcommentWrap>
-          <img src={CommentIcon} alt="AI 코멘트" />
-          <AICommentText>
+          <AnimatedIcon src={CommentIcon} alt="AI 코멘트" />
+          <AnimatedAICommentText>
             AI 친구의 일기 코멘트가 {"\n"}도착했습니다!
-          </AICommentText>
+          </AnimatedAICommentText>
         </AIcommentWrap>
       </Modal>
     </div>
@@ -58,6 +59,33 @@ const CloseButton = styled.img`
   right: 22px;
 `;
 
+const growShrink = keyframes`
+  0% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+// 애니메이션 적용
+const AnimatedIcon = styled.img`
+  margin-top: 20px;
+  animation: ${growShrink} 2s ease-in-out;
+`;
+
 const AIcommentWrap = styled.div`
   display: flex;
   align-items: center;
@@ -66,10 +94,36 @@ const AIcommentWrap = styled.div`
   flex-direction: column;
 `;
 
-const AICommentText = styled.div`
+const AnimatedAICommentText = styled.div`
   color: #626793;
   text-align: center;
   font-size: 20px;
   font-weight: 700;
   white-space: pre-wrap;
+  line-height: 150%;
+  margin-top: 10px;
+  opacity: 0;
+  animation: ${fadeIn} 2s 2s forwards;
+`;
+
+const CommentBox = styled.div`
+  position: relative;
+  width: 435px;
+  height: 200px;
+  padding: 0px;
+  background: #ffffff;
+  border-radius: 10px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    border-color: #ffffff transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -15px;
+    left: 77px;
+  }
 `;

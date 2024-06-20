@@ -11,6 +11,7 @@ import questionIcon from "../assets/images/Question_fill.svg";
 import PencilInfo from "../components/common/PencilInfo";
 import { useSelector } from "react-redux";
 import axiosInstance from "../api/axiosInstance";
+import { v4 as uuidv4 } from "uuid";
 
 export default function MyPage() {
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
@@ -103,7 +104,7 @@ export default function MyPage() {
                 </>
               )}
             </NickNameWrap>
-            <ProfileImg src={character.characterImage} />
+            <ProfileImg src={`${character.characterImage}?${uuidv4()}`} />
           </>
         ) : (
           <LoadingSpinner src={LoadingImage} alt="로딩중" />
