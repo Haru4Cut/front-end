@@ -15,7 +15,7 @@ const Form = (props) => {
   const cutNum = useSelector((state) => state.cutNum);
   const date = useSelector((state) => state.date);
   //const userId = useSelector((state) => state.userId);
-  const userId = 17;
+  const userId = 33;
   console.log("userId:", userId);
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);

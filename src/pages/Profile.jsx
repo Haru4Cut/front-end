@@ -16,17 +16,17 @@ export default function Profile() {
   const nickName = useSelector((state) => state.nickName);
   const navigate = useNavigate();
   console.log("characterData", characterData);
-
-  const dispatch = useDispatch();
   const characterMode = useSelector((state) => state.characterMode);
+  console.log("characterMode", characterMode);
+
   // 연동
   useEffect(() => {
     const fetchImageData = async () => {
       try {
-        const response =
-          characterMode === "update"
-            ? await axiosInstance.patch(`/image/${userId}`, characterData)
-            : await axiosInstance.post(`/image/${userId}`, characterData);
+        const response = await axiosInstance.post(
+          `/image/${userId}`,
+          characterData
+        );
         console.log("그림 생성", response.data);
         setImageUrl(response.data); // 이미지 URL 저장
         setLoading(false); // 로딩 상태 변경
@@ -35,7 +35,6 @@ export default function Profile() {
         setLoading(false);
       }
     };
-
     fetchImageData();
   }, []);
 
@@ -46,7 +45,7 @@ export default function Profile() {
   };
 
   // 캐릭터 완성 버튼 클릭 시
-  const handleComplete = () => {
+  const handleComplete = async () => {
     // characterData에 nickName, imageUrl 추가
     const characterCompleteData = {
       ...characterData,
@@ -55,17 +54,26 @@ export default function Profile() {
     };
     console.log("characterCompleteData", characterCompleteData);
 
-    // characterData 업데이트 및 새로고침
-    axiosInstance
-      .post(`/character/${userId}`, characterCompleteData)
-      .then((response) => {
+    try {
+      // characterData 업데이트 및 새로고침
+      if (characterMode === "update") {
+        const response = await axiosInstance.patch(
+          `/character/${userId}`,
+          characterCompleteData
+        );
         console.log(response.data);
-        setRefreshCounter((prevCounter) => prevCounter + 1);
-        navigate("/main"); // 메인으로 이동
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      } else {
+        const response = await axiosInstance.post(
+          `/character/${userId}`,
+          characterCompleteData
+        );
+        console.log(response.data);
+      }
+      setRefreshCounter((prevCounter) => prevCounter + 1);
+      navigate("/main"); // 메인으로 이동
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

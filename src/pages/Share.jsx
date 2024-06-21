@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import Button from "../components/common/Button";
@@ -9,6 +9,9 @@ import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import Comment from "../components/common/Comment";
+import { v4 as uuidv4 } from "uuid";
+
 export const share = (dataurl, imgName) => {
   let arr = dataurl.split(","),
     mime = arr[0].match(/:(.*?);/)[1],
@@ -32,8 +35,17 @@ export const share = (dataurl, imgName) => {
 };
 
 export default function Share() {
+  // 모달창 state
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   const { diaryid } = useParams();
   const [diaries, setDiaries] = useState(null); // 일기 데이터 초기 상태를 null로 설정
+  const captureRef = useRef(null);
 
   useEffect(() => {
     const fetchDiaries = async () => {
@@ -47,51 +59,30 @@ export default function Share() {
     };
     fetchDiaries();
   }, [diaryid]);
-  // const onClickShareButton = () => {
-  //   const target = document.getElementById("download");
-  //   if (!target) {
-  //     return alert("사진 저장에 실패했습니다.");
-  //   }
-  //   html2canvas(target, {
-  //     logging: true,
-  //     letterRendering: 1,
-  //     allowTaint: true,
-  //     useCORS: true,
-  //   }).then((canvas) => {
-  //     const dataUrl = canvas.toDataURL("image/png");
-  //     const fileName = "haru4cut.png";
-  //     share(dataUrl, fileName);
-  //   });
-  // };
 
-  const onClickShareButton = () => {};
-
-  const onClickDownloadButton = () => {
-    const target = document.getElementById("download");
+  const onClickDownloadButton = async () => {
+    const target = captureRef.current;
     if (!target) {
       return alert("사진 저장에 실패했습니다.");
     }
-    html2canvas(target, {
-      logging: true,
-      letterRendering: 1,
+    const canvas = await html2canvas(target, {
       allowTaint: true,
       useCORS: true,
-    }).then((canvas) => {
-      canvas.toBlob((blob) => {
-        if (blob !== null) {
-          saveAs(blob, "haru4cut.png");
-        }
-      });
+    });
+    canvas.toBlob((blob) => {
+      if (blob !== null) {
+        saveAs(blob, "haru4cut.png");
+      }
     });
   };
 
   if (!diaries) {
-    return <div>Loading...</div>;
+    return <div>로딩중입니다.</div>;
   }
 
   return (
     <MainWrap>
-      <DownWrap id="download">
+      <DownWrap id="download" ref={captureRef}>
         <LogoWrap>
           <Logo>Haru4cut</Logo>
           <LogoUnderLine />
@@ -103,14 +94,22 @@ export default function Share() {
           <ImgWrap>
             {diaries.imgLinks && diaries.imgLinks.length === 1 && (
               <>
-                <DiaryImage1 src={diaries.imgLinks[0]} alt="하루네컷 이미지" />
+                <DiaryImage1
+                  src={`${diaries.imgLinks[0]}?timestamp=${uuidv4()}`}
+                  alt="하루네컷 이미지"
+                  crossOrigin="anonymous"
+                />
               </>
             )}
             {diaries.imgLinks && diaries.imgLinks.length === 2 && (
               <>
                 {diaries.imgLinks.map((imgUrl, index) => (
                   <React.Fragment key={index}>
-                    <DiaryImage2 src={imgUrl} alt="하루네컷 이미지" />
+                    <DiaryImage2
+                      src={`${imgUrl}?timestamp=${uuidv4()}`}
+                      alt="하루네컷 이미지"
+                      crossOrigin="anonymous"
+                    />
                   </React.Fragment>
                 ))}
               </>
@@ -119,7 +118,11 @@ export default function Share() {
               <>
                 {diaries.imgLinks.map((imgUrl, index) => (
                   <React.Fragment key={index}>
-                    <DiaryImage src={imgUrl} alt="하루네컷 이미지" />
+                    <DiaryImage
+                      src={`${imgUrl}?timestamp=${uuidv4()}`}
+                      alt="하루네컷 이미지"
+                      crossOrigin="anonymous"
+                    />
                   </React.Fragment>
                 ))}
               </>
@@ -130,7 +133,7 @@ export default function Share() {
       </DownWrap>
       <div>오늘의 하루네컷을 완성했어요!</div>
       <DownloadButtonWrap>
-        <Button width="150px" onClick={onClickShareButton}>
+        <Button width="150px" onClick={openModal}>
           <Icon src={CommmentIcon} alt="코멘트" />
           AI 코멘트
         </Button>
@@ -139,13 +142,20 @@ export default function Share() {
           앨범에 저장
         </Button>
       </DownloadButtonWrap>
-      <Button backgroundColor="#9D9D9D" marginBottom="20px" to="/">
+      <Button backgroundColor="#9D9D9D" marginBottom="20px" to="/main">
         <Icon src={HomeIcon} marginBottom="3px" />
         홈으로 돌아가기
       </Button>
+      <Comment
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        closeModal={closeModal}
+        diaryid={diaryid}
+      />
     </MainWrap>
   );
 }
+
 const MainWrap = styled.div`
   display: flex;
   justify-content: center;
