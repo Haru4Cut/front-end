@@ -3,8 +3,30 @@ import Modal from "react-modal";
 import styled, { keyframes } from "styled-components";
 import CloseIcon from "../../assets/images/closeIcon.svg";
 import CommentIcon from "../../assets/images/commentIcon.svg";
+import axiosInstance from "../../api/axiosInstance";
+const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
+  const [comment, setComment] = useState(null);
+  console.log(diaryid);
 
-const Comment = ({ modalIsOpen, openModal, closeModal }) => {
+  // 선택된 날짜의 diary 가져오기
+  useEffect(() => {
+    const fetchComment = async () => {
+      try {
+        const response = await axiosInstance.get(`/comments/get/${diaryid}`);
+        console.log("다이어리의 코멘트", response.data);
+      } catch (error) {
+        console.error(error);
+        try {
+          const response = await axiosInstance.get(`/comments/${diaryid}`, {});
+          console.log("코멘트를 불러옵니다", response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    fetchComment();
+  }, [diaryid]);
+
   // 모달 스타일
   const customModalStyles = {
     overlay: {
@@ -44,6 +66,7 @@ const Comment = ({ modalIsOpen, openModal, closeModal }) => {
           <AnimatedAICommentText>
             AI 친구의 일기 코멘트가 {"\n"}도착했습니다!
           </AnimatedAICommentText>
+          <CommentBox>ddd</CommentBox>
         </AIcommentWrap>
       </Modal>
     </div>
@@ -107,23 +130,13 @@ const AnimatedAICommentText = styled.div`
 `;
 
 const CommentBox = styled.div`
-  position: relative;
-  width: 435px;
-  height: 200px;
-  padding: 0px;
-  background: #ffffff;
-  border-radius: 10px;
-
-  &:after {
-    content: "";
-    position: absolute;
-    border-style: solid;
-    border-width: 15px 15px 0;
-    border-color: #ffffff transparent;
-    display: block;
-    width: 0;
-    z-index: 1;
-    bottom: -15px;
-    left: 77px;
-  }
+  background-color: #a8c9e7;
+  color: white;
+  font-size: 18px;
+  font-family: "KotraHope";
+  width: 80%;
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
 `;

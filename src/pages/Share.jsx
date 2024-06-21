@@ -142,7 +142,7 @@ export default function Share() {
           앨범에 저장
         </Button>
       </DownloadButtonWrap>
-      <Button backgroundColor="#9D9D9D" marginBottom="20px" to="/">
+      <Button backgroundColor="#9D9D9D" marginBottom="20px" to="/main">
         <Icon src={HomeIcon} marginBottom="3px" />
         홈으로 돌아가기
       </Button>
@@ -150,6 +150,7 @@ export default function Share() {
         modalIsOpen={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
+        diaryid={diaryid}
       />
     </MainWrap>
   );
