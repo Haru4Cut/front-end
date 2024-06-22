@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import FourInput from "./FourInput";
 import { useNavigate } from "react-router-dom";
@@ -14,8 +13,8 @@ const Form = (props) => {
 
   const cutNum = useSelector((state) => state.cutNum);
   const date = useSelector((state) => state.date);
-  //const userId = useSelector((state) => state.userId);
-  const userId = 17;
+  const userId = useSelector((state) => state.userId);
+
   console.log("userId:", userId);
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);
@@ -70,15 +69,15 @@ const Form = (props) => {
     try {
       const response = await axiosInstance.post(
         `/diaries/${userId}/events`,
-        JSON.stringify(requestData),
-        {
-          headers: {
-            Accept: "*/*",
-            "Content-Type": `application/json`,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        }
+        JSON.stringify(requestData)
+        // {
+        //   headers: {
+        //     Accept: "*/*",
+        //     "Content-Type": `application/json`,
+        //     "Access-Control-Allow-Origin": "*",
+        //     "Access-Control-Allow-Credentials": "true",
+        //   },
+        // }
       );
       console.log("서버 응답:", response.data);
 
