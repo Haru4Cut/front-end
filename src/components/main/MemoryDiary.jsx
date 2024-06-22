@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CalendarIcon from "../../assets/images/calendarIller.svg";
-import axios from "axios";
 import Button from "../common/Button";
-import { useSelector } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
+import { Link } from "react-router-dom";
+
 // 사진 넘어가는 시간 5초
 const INTERVAL_TIME = 5000;
 
 export default function MemoryDiary() {
   const [nickName, setNickName] = useState("");
   const [memoryDiary, setMemoryDiary] = useState({ imgLinks: [], date: [] });
+  const [memoryDiaryId, setMemoryDiaryId] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isFadingOut, setIsFadingOut] = useState(false);
 
   const userId = localStorage.getItem("userId");
 
@@ -20,8 +22,8 @@ export default function MemoryDiary() {
     const fetchNickName = async () => {
       try {
         const response = await axiosInstance.get(`/character/${userId}`);
-        setNickName(response.data.nickname);
-        console.log(response.data.nickname);
+        setNickName(response.data.nickName);
+        console.log(response.data.nickName);
       } catch (error) {
         console.error(error);
       }
@@ -33,7 +35,7 @@ export default function MemoryDiary() {
   useEffect(() => {
     const fetchMemoryDiaries = async () => {
       try {
-        const response = await axiosInstance.get(`/likes/${userId}`);
+        const response = await axiosInstance.get(`/likes/users/${userId}`);
         setMemoryDiary(response.data);
         console.log(response.data);
       } catch (error) {
@@ -44,16 +46,42 @@ export default function MemoryDiary() {
   }, [userId]);
 
   useEffect(() => {
-    if (memoryDiary.imgLinks.length > 0) {
+    if (memoryDiary.imgLinks.length > 1) {
       const interval = setInterval(() => {
-        setCurrentSlide(
-          (prevSlide) => (prevSlide + 1) % memoryDiary.imgLinks.length
-        );
+        setIsFadingOut(true); // 페이드아웃 시작
+        setTimeout(() => {
+          setCurrentSlide(
+            (prevSlide) => (prevSlide + 1) % memoryDiary.imgLinks.length
+          );
+          setIsFadingOut(false); // 페이드인 시작
+        }, 500); // 500ms 후에 페이드인으로 변경
       }, INTERVAL_TIME);
 
       return () => clearInterval(interval);
     }
   }, [memoryDiary]);
+
+  useEffect(() => {
+    if (memoryDiary.date.length > 0) {
+      fetchDataForDates(memoryDiary.date);
+    }
+  }, [memoryDiary.date]);
+
+  // 추억일기 날짜의 diaryid 얻기
+  const fetchDataForDates = async (dates) => {
+    try {
+      const requests = dates.map((date) =>
+        axiosInstance.get(`/users/${userId}/diarybydate`, { params: { date } })
+      );
+      const responses = await Promise.all(requests);
+      const data = responses.map((response) => response.data);
+      console.log("데이터", data);
+      const diaryIds = data.map((diary) => diary.diaryId); // diaryId를 추출하여 배열로 저장
+      setMemoryDiaryId(diaryIds);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -63,14 +91,19 @@ export default function MemoryDiary() {
 
       <div>
         {memoryDiary.imgLinks.length > 0 ? (
-          <>
+          <MemoryWrap>
             <ContentText>
               그동안의 네컷일기 속에 담긴 {"\n"}
               추억을 감상하세요
             </ContentText>
-            <MemoryImg src={memoryDiary.imgLinks[currentSlide]} />
-            <Date>{memoryDiary.date[currentSlide]}</Date>
-          </>
+            <MemoryDateWrap to={`/haru4cut/${memoryDiaryId[currentSlide]}`}>
+              <MemoryImg
+                src={memoryDiary.imgLinks[currentSlide]}
+                className={isFadingOut ? "fadeOut" : "fadeIn"} // 페이드아웃/페이드인 클래스 추가/제거
+              />
+              <Date>{memoryDiary.date[currentSlide]}</Date>
+            </MemoryDateWrap>
+          </MemoryWrap>
         ) : (
           <CalendarWrap>
             <Calendar src={CalendarIcon} alt="달력 아이콘" />
@@ -116,8 +149,25 @@ const NickNameText = styled.div`
   color: #5370d4;
   margin-right: 3px;
 `;
+const MemoryWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+const MemoryDateWrap = styled(Link)`
+  cursor: pointer;
+  text-decoration: none;
+`;
 const MemoryImg = styled.img`
-  width: 165px;
+  height: 150px;
+  &.fadeOut {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  &.fadeIn {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
 `;
 const Date = styled.div`
   align-items: flex-end;

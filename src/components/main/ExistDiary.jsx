@@ -8,9 +8,33 @@ export default function ExistDiary({ data }) {
   return (
     <ExistDiaryWrap>
       <ImgWrap>
-        {imgLinks.map((imgUrl, index) => (
-          <DiaryImage key={index} src={imgUrl} alt="하루네컷 이미지" />
-        ))}
+        {imgLinks.length === 1 && (
+          <>
+            {imgLinks.map((imgUrl, index) => (
+              <>
+                <DiaryImage1 src={imgUrl} alt="하루네컷 이미지" />
+              </>
+            ))}
+          </>
+        )}
+        {imgLinks.length === 2 && (
+          <>
+            {imgLinks.map((imgUrl, index) => (
+              <>
+                <DiaryImage2 src={imgUrl} alt="하루네컷 이미지" />
+              </>
+            ))}
+          </>
+        )}
+        {imgLinks.length === 4 && (
+          <>
+            {imgLinks.map((imgUrl, index) => (
+              <>
+                <DiaryImage4 src={imgUrl} alt="하루네컷 이미지" />
+              </>
+            ))}
+          </>
+        )}
       </ImgWrap>
       <DiaryButton to={`/haru4cut/${data.diaryId}`}>자세히 보기</DiaryButton>
     </ExistDiaryWrap>
@@ -37,10 +61,19 @@ const DiaryButton = styled(Link)`
   cursor: pointer;
   font-family: Pretendard;
 `;
+const DiaryImage1 = styled.img`
+  margin: 5px;
+  width: 120px;
+`;
 
-const DiaryImage = styled.img`
-  width: 108px;
-  margin: 3px;
+const DiaryImage2 = styled.img`
+  margin: 5px;
+  width: 180px;
+`;
+
+const DiaryImage4 = styled.img`
+  margin: 5px;
+  width: 100px;
 `;
 
 const ImgWrap = styled.div`
