@@ -13,7 +13,7 @@ const Redirection = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `/users/login/${code}`,
         {},
         {
