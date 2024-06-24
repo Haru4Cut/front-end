@@ -31,8 +31,12 @@ function App() {
         <Route path="/main" element={<Main />} /> {/* 메인 페이지 */}
         <Route path="/mypage" element={<MyPage />} /> {/* 마이 페이지 */}
         <Route path="/login" element={<LoginPage />} /> {/* 마이 페이지 */}
+        <Route
+          exact
+          path="/login/oauth2/code/kakao"
+          element={<Redirection />}
+        />
         <Route path="/payment" element={<PaymentPage />} /> {/* 결제 페이지 */}
-        <Route path="/login/oauth2/code/kakao" element={<Redirection />} />
         <Route path="/calendar" element={<Calendar />} /> {/* 캘린더 페이지 */}
         <Route path="/haru4cut/:diaryid" element={<Haru4CutDetail />} />
         <Route path="/haru4cut/:diaryid/share" element={<Share />} />

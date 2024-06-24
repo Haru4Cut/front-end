@@ -9,8 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 );
