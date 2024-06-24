@@ -18,7 +18,7 @@ import OnboardingPage from "./pages/OnboardingPage";
 import Calendar from "./pages/CalendarPage";
 import Haru4CutDetail from "./pages/Haru4CutDetail";
 import Share from "./pages/Share";
-import Redirection from "./components/login/Redirect";
+import Redirection from "../src/components/login/Redirect";
 import CompleteImg from "./components/writting/CompleteImg";
 import PaymentPage from "./pages/PaymentPage";
 
