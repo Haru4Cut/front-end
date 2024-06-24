@@ -2,13 +2,14 @@ import axios from "axios";
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: "/", // 기본 URL
+  baseURL: "http://52.79.154.88:8080", // 기본 URL
   headers: {
     Accept: "*/*",
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": "true",
   },
+  withCredentials: true, // 이 설정을 추가하여 CORS 관련 문제를 해결할 수 있음
 });
 
 // request 인터셉터를 설정하여 요청을 보내기 전에 토큰을 추가
