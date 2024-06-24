@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { setUserId } from "../store";
+//import axios from "axios";
+
+import { useDispatch, useSelector } from "react-redux";
 const OnboardingPage = () => {
+  const dispatch = useDispatch();
   const [fade, setFade] = useState("start");
   const [buttonFade, setButtonFade] = useState("");
-
+  dispatch(setUserId(34)); // userId를 Redux로 저장
+  const userId = useSelector((state) => state.userId);
+  console.log("userId", userId);
   useEffect(() => {
     setFade("end"); // 이미지의 fade 상태를 "end"로 변경하여 transition 시작
     const timeout = setTimeout(() => {

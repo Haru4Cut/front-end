@@ -10,7 +10,7 @@ const Redirection = () => {
   const hasFetchedData = useRef(false);
 
   const code = new URL(window.location.href).searchParams.get("code");
-
+  console.log("code", code);
   const fetchData = async () => {
     try {
       const response = await axiosInstance.post(`/users/login/${code}`);
