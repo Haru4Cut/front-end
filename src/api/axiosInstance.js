@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: "", // 기본 URL
+  baseURL: "https://haru4cut.github.io/front-end/", // 기본 URL
   headers: {
     Accept: "*/*",
     "Content-Type": "application/json",

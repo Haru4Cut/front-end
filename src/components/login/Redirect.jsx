@@ -6,16 +6,16 @@ import { setUserId } from "../../store";
 
 const Redirection = () => {
   console.log("hi");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const hasFetchedData = useRef(false);
 
-  const code = new URL(window.location.href).searchParams.get("code");
-  console.log("code", code);
   const fetchData = async () => {
     try {
+      const code = new URL(window.location.href).searchParams.get("code");
       const response = await axiosInstance.post(`/users/login/${code}`);
-
+      console.log("code", code);
       console.log("로그인 성공", response.data);
       navigate("/main");
       dispatch(setUserId(response.data.userId)); // userId를 Redux로 저장
@@ -46,7 +46,7 @@ const Redirection = () => {
       fetchData();
       hasFetchedData.current = true;
     }
-  }, []); // 빈 배열을 넣어 한 번만 실행되도록 설정
+  }); // 빈 배열을 넣어 한 번만 실행되도록 설정
 
   return <div>Redirecting...</div>;
 };
