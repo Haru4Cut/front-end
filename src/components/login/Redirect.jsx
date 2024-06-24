@@ -25,7 +25,7 @@ const Redirection = () => {
         },
       };
       const response = await axiosInstance.post(
-        `https://52.79.154.88:8080/users/login/${code}`,
+        `http://52.79.154.88:8080/users/login/${code}`,
         {},
         {
           headers: {
