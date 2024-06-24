@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import axiosInstance from "../../api/axiosInstance";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserId } from "../../store";
 
@@ -14,8 +15,26 @@ const Redirection = () => {
   const fetchData = async () => {
     try {
       const code = new URL(window.location.href).searchParams.get("code");
-      const response = await axiosInstance.post(`/users/login/${code}`);
       console.log("code", code);
+      const accessToken = localStorage.getItem("accessToken");
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      };
+      const response = await axios.post(
+        `/users/login/${code}`,
+        {},
+        {
+          headers: {
+            ...config.headers,
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
       console.log("로그인 성공", response.data);
       navigate("/main");
       dispatch(setUserId(response.data.userId)); // userId를 Redux로 저장
