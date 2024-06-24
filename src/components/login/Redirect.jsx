@@ -24,7 +24,7 @@ const Redirection = () => {
           "Access-Control-Allow-Credentials": "true",
         },
       };
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `https://52.79.154.88:8080/users/login/${code}`,
         {},
         {

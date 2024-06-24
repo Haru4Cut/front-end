@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: "http://52.79.154.88:8080", // 기본 URL
+  baseURL: "", // 기본 URL
   headers: {
     Accept: "*/*",
     "Content-Type": "application/json",
