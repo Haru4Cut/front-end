@@ -129,7 +129,7 @@ const PaymentPage = () => {
       <MainWrap>
         {/* 카카오페이 버튼을 클릭하면 onclickPay 함수 호출 */}
         <KakaoPayWrap>
-          <KakaoPay style={{ width: "150px" }} />
+          <KakaoPay style={{ width: "130px" }} />
           <PayButton
             onClick={() => onclickPay("kakaopay.TC0ONETIME", "kakaopay")}
           >
@@ -145,7 +145,6 @@ const PaymentPage = () => {
             에서 간편하고 안전하게 결제!
           </PayButton>
         </KakaoPayWrap>
-        <Footer>Haru4cut</Footer>
       </MainWrap>
     </>
   );
@@ -171,7 +170,7 @@ const PayButton = styled.div`
   background-color: #ffeb00;
   border-radius: 50px;
   font-size: 10px;
-  margin-top: 70px;
+  margin-top: 90px;
   cursor: pointer;
 `;
 const KakaoPayWrap = styled.div`
@@ -183,14 +182,14 @@ const KakaoPayWrap = styled.div`
   height: 500px;
   margin-bottom: 100px;
 `;
-const Footer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: grey;
-  width: 100vw;
-  height: 15vh;
-  position: fixed;
-  bottom: 0;
-  background-color: #e8e8e8;
-`;
+// const Footer = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   color: grey;
+//   width: 100vw;
+//   height: 10vh;
+//   position: fixed;
+//   bottom: 0;
+//   background-color: #e8e8e8;
+// `;

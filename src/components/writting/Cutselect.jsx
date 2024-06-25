@@ -97,12 +97,11 @@ const CutSelectWrap = styled.div`
 `;
 
 const FrameContainer = styled.div`
-  //background-color: pink;
   width: 75vw; /* 프레임의 초기 너비 설정 */
   height: 50vh; /* 프레임의 초기 높이 설정 */
   margin-top: 5vh;
   margin-bottom: 5vh;
-  //overflow: hidden; /* 프레임을 넘는 컨텐츠 숨김 */
+
   display: flex;
   justify-content: center;
   align-items: center;

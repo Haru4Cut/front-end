@@ -41,7 +41,7 @@ const DateSelect = () => {
   return (
     <div>
       <DateSelectWrap>
-        <h2>날짜를 입력하세요</h2>
+        <h3>날짜를 입력하세요</h3>
         <DateContainer>
           <StyledSelect value={selectedYear} onChange={handleYearChange}>
             {Array.from(

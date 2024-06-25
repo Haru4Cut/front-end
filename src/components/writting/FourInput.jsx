@@ -118,25 +118,24 @@ const InputWrap = styled.div`
   // background-color: blue;
 `;
 const InputGroup = styled.div`
-  width: 50vw;
+  //width: 50vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-content: space-around;
-  margin-top: 3vh;
+  margin-top: 30px;
   // margin-right: 5vw;
   //align-items: flex-end; /* 오른쪽 정렬을 위해 수정 */
 `;
 const CategoryTitle = styled.div`
   margin-bottom: 10px;
-  width: 60%;
+  margin-left: 20px;
 `;
 const StyledInput = styled.input`
   border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
-  width: 70%;
-  height: 5vh;
-  border-radius: 30px;
-  padding-left: 20px;
+  height: 40px;
+  border-radius: 20px;
+  padding-left: 10px;
   background-color: rgba(239, 244, 252, 1);
   font-family: "Pretendard";
   color: #585858;
@@ -146,10 +145,10 @@ const StyledInput = styled.input`
 const StyledSelect = styled.select`
   border-radius: 30px;
   border: ${({ isFocused }) => (isFocused ? "2px solid blue" : 0)};
-  width: 70%;
   background-color: rgba(239, 244, 252, 1);
-  padding-left: 10px;
-  height: 5vh;
+  padding-left: 20px;
+
+  height: 40px;
   font-family: "Pretendard";
   width: 230px;
   color: #585858;
