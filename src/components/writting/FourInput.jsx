@@ -136,8 +136,11 @@ const StyledInput = styled.input`
   width: 70%;
   height: 5vh;
   border-radius: 30px;
-  padding-left: 10px;
+  padding-left: 20px;
   background-color: rgba(239, 244, 252, 1);
+  font-family: "Pretendard";
+  color: #585858;
+  width: 200px;
 `;
 
 const StyledSelect = styled.select`
@@ -147,6 +150,9 @@ const StyledSelect = styled.select`
   background-color: rgba(239, 244, 252, 1);
   padding-left: 10px;
   height: 5vh;
+  font-family: "Pretendard";
+  width: 230px;
+  color: #585858;
 `;
 const CutInfoText = styled.div`
   font-size: 1.5rem;

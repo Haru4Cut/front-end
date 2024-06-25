@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import axiosInstance from "../api/axiosInstance";
-
+import styled from "styled-components";
+import { ReactComponent as KakaoPay } from "../assets/images/kakaopay/03_SVG/combination.svg";
 const PaymentPage = () => {
   const selectedPencil = useSelector((state) => state.selectedBox);
   // Accessing userId from Redux store
@@ -125,12 +126,71 @@ const PaymentPage = () => {
 
   return (
     <>
-      {/* 카카오페이 버튼을 클릭하면 onclickPay 함수 호출 */}
-      <button onClick={() => onclickPay("kakaopay.TC0ONETIME", "kakaopay")}>
-        카카오페이
-      </button>
+      <MainWrap>
+        {/* 카카오페이 버튼을 클릭하면 onclickPay 함수 호출 */}
+        <KakaoPayWrap>
+          <KakaoPay style={{ width: "150px" }} />
+          <PayButton
+            onClick={() => onclickPay("kakaopay.TC0ONETIME", "kakaopay")}
+          >
+            <span
+              style={{
+                fontWeight: "bold",
+                fontSize: "12px",
+                paddingRight: "3px",
+              }}
+            >
+              카카오페이{" "}
+            </span>
+            에서 간편하고 안전하게 결제!
+          </PayButton>
+        </KakaoPayWrap>
+        <Footer>Haru4cut</Footer>
+      </MainWrap>
     </>
   );
 };
 
 export default PaymentPage;
+const MainWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+`;
+
+const PayButton = styled.div`
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+  width: 200px;
+  height: 40px;
+  font-family: Pretendard;
+  background-color: #ffeb00;
+  border-radius: 50px;
+  font-size: 10px;
+  margin-top: 70px;
+  cursor: pointer;
+`;
+const KakaoPayWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 500px;
+  margin-bottom: 100px;
+`;
+const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+  width: 100vw;
+  height: 15vh;
+  position: fixed;
+  bottom: 0;
+  background-color: #e8e8e8;
+`;

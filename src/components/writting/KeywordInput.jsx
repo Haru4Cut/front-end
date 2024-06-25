@@ -46,7 +46,7 @@ const TopBox = styled.div`
 
 const TopText = styled.div`
   font-family: "KotraHope";
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-size: 2rem;
 `;
 
