@@ -16,7 +16,9 @@ const Redirection = () => {
 
       if (code) {
         try {
-          const response = await axiosInstance.post(`/users/login/${code}`);
+          const response = await axiosInstance.post(
+            `https://haru4cut.site/users/login/${code}`
+          );
           console.log("로그인 성공", response.data);
 
           // userId를 Redux로 저장
