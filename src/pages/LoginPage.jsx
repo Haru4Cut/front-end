@@ -1,7 +1,19 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import KakaoLogin from "../components/login/SocialKakao";
 import { ReactComponent as PhotoLogo } from "../../src/assets/images/photo.svg";
+
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const code = new URL(window.location.href).searchParams.get("code");
+    if (code) {
+      navigate("/login/oauth2/code/kakao");
+    }
+  }, [navigate]);
+
   return (
     <div>
       <LoginWrap>

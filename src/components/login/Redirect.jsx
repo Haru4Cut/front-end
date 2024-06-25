@@ -1,22 +1,21 @@
+// Redirection.js
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setUserId } from "../../store";
 
 const Redirection = () => {
-  console.log("hi");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const hasFetchedData = useRef(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        if (!hasFetchedData.current) {
-          const code = new URL(window.location.href).searchParams.get("code");
-          console.log("code", code);
+      const code = new URL(window.location.href).searchParams.get("code");
+      console.log("code", code);
 
+      if (code) {
+        try {
           const response = await axiosInstance.post(`/users/login/${code}`);
           console.log("로그인 성공", response.data);
 
@@ -38,17 +37,15 @@ const Redirection = () => {
             console.error("캐릭터 정보 조회 오류", characterError);
             navigate("/character");
           }
-
-          hasFetchedData.current = true;
+        } catch (error) {
+          console.error("로그인 오류 발생", error);
+          navigate("/login");
         }
-      } catch (error) {
-        console.error("로그인 오류 발생", error);
-        navigate("/login");
       }
     };
 
     fetchData();
-  }, []); // 빈 배열을 넣어 한 번만 실행되도록 설정
+  }, [navigate, dispatch]);
 
   return <div>Redirecting...</div>;
 };
