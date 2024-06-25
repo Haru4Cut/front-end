@@ -19,7 +19,7 @@ const Redirection = () => {
       if (code) {
         try {
           const response = await axios.post(
-            `/users/login/${code}`,
+            `${process.env.REACT_APP_API_URL}/users/login/${code}`,
             {},
             {
               headers: {
