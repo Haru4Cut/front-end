@@ -1,5 +1,5 @@
 {
-  "homepage": "haru4cut.site",
+  "homepage": "https://haru4cut.site",
   "name": "haru4cut-fe",
   "version": "0.1.0",
   "private": true,
@@ -61,5 +61,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "haru4cut.site"
+  "proxy": "https://haru4cut.site"
 }
