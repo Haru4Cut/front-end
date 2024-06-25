@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUserId } from "../../store";
 
 const Redirection = () => {
+  console.log("hi");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const hasFetchedData = useRef(false);
