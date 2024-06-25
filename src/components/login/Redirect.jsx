@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setUserId } from "../../store";
+import axios from "axios";
 
 const Redirection = () => {
+  console.log("test");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,8 +18,18 @@ const Redirection = () => {
 
       if (code) {
         try {
-          const response = await axiosInstance.post(
-            `https://haru4cut.site/users/login/${code}`
+          const response = await axios.post(
+            `/users/login/${code}`,
+            {},
+            {
+              headers: {
+                Accept: "*/*",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // 로컬 스토리지에서 토큰을 가져와서 Authorization 헤더에 추가
+              },
+            }
           );
           console.log("로그인 성공", response.data);
 

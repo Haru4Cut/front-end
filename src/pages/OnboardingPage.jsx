@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { setUserId } from "../store";
 //import axios from "axios";
-
+import { ReactComponent as LogoSquare } from "../../src/assets/images/LogoSquare.svg";
 import { useDispatch, useSelector } from "react-redux";
 const OnboardingPage = () => {
   const dispatch = useDispatch();
@@ -24,11 +24,7 @@ const OnboardingPage = () => {
   return (
     <div className="wrap">
       <OnboardingWrap>
-        <StyledImg
-          className={fade}
-          src={"/images/koreanlogo.png"}
-          alt="Korean Logo"
-        />
+        <LogoSquare className={fade} />
 
         <OnboardingMsg>내 하루를 네컷으로 기록하세요</OnboardingMsg>
         <StartButton className={buttonFade} to="/login">
