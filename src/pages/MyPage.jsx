@@ -78,13 +78,12 @@ export default function MyPage() {
     if (questionIconRef.current) {
       const rect = questionIconRef.current.getBoundingClientRect();
       return {
-        top: rect.top - 40, // 아이콘 바로 위쪽
-        left: rect.left + rect.width / 2, // 아이콘의 중앙 정렬
+        top: rect.top - 60,
+        left: rect.left - 50,
       };
     }
     return { top: 0, left: 0 };
   };
-
   return (
     <MyPageWrap>
       <Header>
