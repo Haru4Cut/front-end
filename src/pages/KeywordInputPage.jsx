@@ -14,7 +14,7 @@ const KeywordInputPage = () => {
   const date = useSelector((state) => state.date);
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);
-
+  const userId = useSelector((state) => state.userId);
   useEffect(() => {
     setCutForms(
       Array.from({ length: cutNum }, (_, index) => ({
@@ -65,7 +65,7 @@ const KeywordInputPage = () => {
     console.log("rq", JSON.stringify(requestData));
     // 버튼을 누르자마자 '/loading' 페이지로 이동
     navigate("/loading");
-    const userId = 1;
+
     try {
       const response = await axios.post(
         `/diaries/${userId}/events`,

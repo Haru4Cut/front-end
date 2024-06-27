@@ -4,8 +4,8 @@ import Header from "../components/common/Header";
 import { useSelector, useDispatch } from "react-redux";
 const CutSelectPage = () => {
   const dispatch = useDispatch();
-  const userIds = useSelector((state) => state.userId);
-  console.log("userIdinmains:", userIds);
+  const userId = useSelector((state) => state.userId);
+  console.log("userIdinmains:", userId);
   return (
     <div className="wrap">
       <Header />
