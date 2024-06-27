@@ -59,7 +59,7 @@ const CutSelect = () => {
             alt={`${cutNum}cut`}
           />
         </FrameContainer>
-        <SubmitButton to="/writing/date">선택</SubmitButton>
+        <SubmitButton to="/writting/date">선택</SubmitButton>
       </CutSelectWrap>
     </div>
   );
