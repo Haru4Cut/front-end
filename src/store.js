@@ -49,7 +49,7 @@ let selectedBox = createSlice({
 });
 let userId = createSlice({
   name: "userId",
-  initialState: "",
+  initialState: null,
   reducers: {
     setUserId: (state, action) => action.payload,
   },
