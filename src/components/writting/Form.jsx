@@ -31,7 +31,7 @@ const Form = (props) => {
         orderNum: index,
       }))
     );
-  }, [cutNum, date]);
+  }, []);
   const handleInputChange = (currentCutIdx, field, value) => {
     const newCutForms = [...cutForms];
     newCutForms[currentCutIdx][field] = value;

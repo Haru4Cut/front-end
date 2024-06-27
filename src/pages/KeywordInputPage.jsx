@@ -16,6 +16,8 @@ const KeywordInputPage = () => {
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);
   const userId = useSelector((state) => state.userId);
+  console.log("userid", userId);
+  console.log("Date", date);
   useEffect(() => {
     setCutForms(
       Array.from({ length: cutNum }, (_, index) => ({
