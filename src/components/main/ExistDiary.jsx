@@ -46,10 +46,12 @@ const ExistDiaryWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 const DiaryButton = styled(Link)`
   width: 95px;
+  height: 38px;
   text-align: center;
   text-decoration: none;
   font-size: 14px;

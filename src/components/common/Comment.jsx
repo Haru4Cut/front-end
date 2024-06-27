@@ -52,8 +52,8 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
       left: "0",
     },
     content: {
-      width: "60%",
-      height: "50%",
+      width: "80%",
+      height: "60%",
       zIndex: "150",
       position: "absolute",
       top: "50%",
