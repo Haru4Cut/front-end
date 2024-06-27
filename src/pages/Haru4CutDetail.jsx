@@ -8,7 +8,6 @@ import DiaryEditIcon from "../assets/images/DiaryEditIcon.svg";
 import ShareIcon from "../assets/images/ShareIcon.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import axiosInstance from "../api/axiosInstance";
 export default function Haru4CutDetail({ selectedDate }) {
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
@@ -20,7 +19,7 @@ export default function Haru4CutDetail({ selectedDate }) {
   // 글자수 표시
   const [textDiary, setTextDiary] = useState("");
   const [inputCount, setInputCount] = useState(0);
-  const userId = localStorage.getItem("userId");
+
   // 일기 완성 후 표시 여부
   const [showDiary, setShowDiary] = useState(true);
   const onInputHandler = (e) => {
@@ -38,8 +37,8 @@ export default function Haru4CutDetail({ selectedDate }) {
       };
 
       // PATCH 요청 보내기
-      const response = await axiosInstance.post(
-        `/diaries/${userId}`,
+      const response = await axiosInstance.patch(
+        `/diaries/${diaries.diaryId}`,
         updatedDiary
       );
 

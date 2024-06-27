@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axiosInstance from "../../api/axiosInstance";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserId } from "../../store";
 
 const Redirection = () => {
@@ -34,7 +34,6 @@ const Redirection = () => {
 
           // userId를 Redux로 저장
           dispatch(setUserId(response.data.userId));
-          console.log("response.data.userId", response.data.userId);
 
           // 로컬스토리지에 token, userId 저장
           localStorage.setItem("accessToken", response.data.accessToken);

@@ -11,7 +11,7 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
 
   console.log(diaryid);
 
-  // 선택된 날짜의 diary 가져오기
+  // 선택된 날짜의 다이어리 코멘트 가져오기
   useEffect(() => {
     const fetchComment = async () => {
       try {
@@ -31,12 +31,11 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
     fetchComment();
   }, [diaryid]);
 
-  // Show comment after delay
   useEffect(() => {
     if (comment) {
       const timer = setTimeout(() => {
         setShowComment(true);
-      }, 4000); // Adjust the delay as needed (matches the animation delay)
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [comment]);
@@ -53,8 +52,8 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
       left: "0",
     },
     content: {
-      width: "70%",
-      height: "70%",
+      width: "60%",
+      height: "50%",
       zIndex: "150",
       position: "absolute",
       top: "50%",
@@ -81,9 +80,9 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
             AI 친구의 일기 코멘트가 {"\n"}도착했습니다!
           </AnimatedAICommentText>
           {showComment && (
-            <AnimatedCommentBox>
-              <StyledComment>{comment}</StyledComment>
-            </AnimatedCommentBox>
+            <CommentWrap>
+              <AnimatedCommentBox>{comment}</AnimatedCommentBox>
+            </CommentWrap>
           )}
         </AIcommentWrap>
       </Modal>
@@ -148,23 +147,24 @@ const AnimatedAICommentText = styled.div`
   animation: ${fadeIn} 2s 2s forwards;
 `;
 
+const CommentWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 100%;
+`;
+
 const AnimatedCommentBox = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #a8c9e7;
   color: white;
   font-size: 19px;
   line-height: 150%;
   font-family: "KotraHope";
   width: 80%;
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 20px;
   border-radius: 15px;
-  height: 80%;
   opacity: 0;
   animation: ${fadeIn} 2s 4s forwards;
-`;
-const StyledComment = styled.div`
-  text-align: center;
+  padding: 20px;
 `;
