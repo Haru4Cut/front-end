@@ -37,8 +37,8 @@ export default function Haru4CutDetail({ selectedDate }) {
       };
 
       // PATCH 요청 보내기
-      const response = await axiosInstance.patch(
-        `/diaries/${diaries.diaryId}`,
+      const response = await axiosInstance.post(
+        `/diaries/${userId}`,
         updatedDiary
       );
 
