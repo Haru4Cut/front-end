@@ -49,7 +49,7 @@ const ContentText = styled.div`
   font-weight: 400;
   line-height: 18px;
   white-space: pre-wrap;
-  margin: 18px 0px 28px 0px;
+  margin: 10px 0px 15px 0px;
 `;
 
 const DiaryButton = styled(Link)`

@@ -20,7 +20,7 @@ export default function Haru4CutDetail({ selectedDate }) {
   // 글자수 표시
   const [textDiary, setTextDiary] = useState("");
   const [inputCount, setInputCount] = useState(0);
-  const userId = useSelector((state) => state.user.userId);
+  const userId = localStorage.getItem("userId");
   // 일기 완성 후 표시 여부
   const [showDiary, setShowDiary] = useState(true);
   const onInputHandler = (e) => {

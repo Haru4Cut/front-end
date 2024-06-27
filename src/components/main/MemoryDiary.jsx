@@ -141,7 +141,7 @@ const ContentText = styled.div`
   font-weight: 400;
   line-height: 20px;
   white-space: pre-wrap;
-  margin: 5px 0px 14px 0px;
+  margin: 5px 0px 10px 0px;
   font-size: ${(props) => props.fontSize || "13px"};
 `;
 const NickNameText = styled.div`
