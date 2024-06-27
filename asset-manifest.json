@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/front-end/static/css/main.04e683d2.css",
-    "main.js": "/front-end/static/js/main.8fa89614.js",
+    "main.js": "/front-end/static/js/main.0bc8c08d.js",
     "static/media/KOTRAHOPE.ttf": "/front-end/static/media/KOTRAHOPE.a239803da24b52b850f9.ttf",
     "static/media/diaryImg.svg": "/front-end/static/media/diaryImg.6682157930e4bd5cd231d4d8bbb53860.svg",
     "static/media/CharacterIcon.svg": "/front-end/static/media/CharacterIcon.d0bd4371358c95700631f52ec277be20.svg",
@@ -39,10 +39,10 @@
     "static/media/closeIcon.svg": "/front-end/static/media/closeIcon.2325d001bc414a2f6d333ff3311c1641.svg",
     "static/media/leftIcon.svg": "/front-end/static/media/leftIcon.f56d8355dd016ba29f370deb082c149d.svg",
     "main.04e683d2.css.map": "/front-end/static/css/main.04e683d2.css.map",
-    "main.8fa89614.js.map": "/front-end/static/js/main.8fa89614.js.map"
+    "main.0bc8c08d.js.map": "/front-end/static/js/main.0bc8c08d.js.map"
   },
   "entrypoints": [
     "static/css/main.04e683d2.css",
-    "static/js/main.8fa89614.js"
+    "static/js/main.0bc8c08d.js"
   ]
 }
