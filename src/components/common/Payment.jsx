@@ -52,7 +52,6 @@ const Payment = ({ modalIsOpen, openModal, closeModal }) => {
         <CloseButton src={CloseIcon} alt="닫기" onClick={closeModal} />
         <PaymentBox>
           <Text color="#6C6C6C">
-            <Text>일기 생성 무료체험 3회가 끝났습니다 :( </Text> {"\n"}
             <Text fontWeight="600" fontSize="15px">
               일기를 더 생성하려면 {"\n"}
               <HighlightedText>연필을 구매</HighlightedText>해서 사용해보세요!
