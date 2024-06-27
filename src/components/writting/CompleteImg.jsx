@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
@@ -12,6 +12,7 @@ const CompleteImg = () => {
   const location = useLocation();
   const { responseData, requestData } = location.state || {};
   const keyword = requestData;
+  const navigate = useNavigate();
   console.log("Response Data:", responseData);
   console.log("Request Data:", requestData);
   console.log("CompleteImg:", responseData);
@@ -33,6 +34,7 @@ const CompleteImg = () => {
         text: textDiary,
       },
     };
+    ///haru4cut/:diaryid/share
     console.log("payload", payload);
     try {
       const response = await axiosInstance.post(`/diaries/${userId}`, payload, {
@@ -42,6 +44,8 @@ const CompleteImg = () => {
       });
 
       console.log("Response:", response.data);
+      const diaryid = response.data.diaryId;
+      navigate(`/haru4cut/${diaryid}/share`);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -68,7 +72,7 @@ const CompleteImg = () => {
     <MainWrap>
       <TodaysDiaryWrap>
         <Todays4CutDiary>오늘의 네컷일기</Todays4CutDiary>
-        <Date>24.03.17</Date>
+        <Date>{date}</Date>
         <ImgWrap>
           {diaries.length === 1 && (
             <DiaryImage1 src={diaries[0].url} alt="하루네컷 이미지" />
