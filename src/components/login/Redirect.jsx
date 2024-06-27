@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setUserId } from "../../store";
-import axios from "axios";
 
 const Redirection = () => {
   console.log("test");
@@ -18,7 +17,7 @@ const Redirection = () => {
 
       if (code) {
         try {
-          const response = await axios.post(
+          const response = await axiosInstance.post(
             `https://haru4cut.site/users/login/${code}`,
             {},
             {

@@ -2,55 +2,68 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import FourInput from "./FourInput";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
+import { ReactComponent as PrevBtn } from "../../assets/images/PrevButton.svg";
+import { ReactComponent as NextBtn } from "../../assets/images/NextButton.svg";
+
 const Form = (props) => {
-  // Redux에서 userId 가져오기
-
-  //4input + 컷 정보 + 좌우 버튼
   const navigate = useNavigate();
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [date, setDate] = useState(localStorage.getItem("date"));
+  const [cutNum, setCutNum] = useState(localStorage.getItem("cutNum"));
 
-  const cutNum = useSelector((state) => state.cutNum);
-  const date = useSelector((state) => state.date);
-  const userId = useSelector((state) => state.userId);
-
-  console.log("userId:", userId);
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
   const [cutForms, setCutForms] = useState([]);
-  //const [imgUrl, setImgUrl] = useState(null);
+
+  console.log("userId", userId);
+
+  console.log("date", date);
+
+  console.log("cutNum", cutNum);
   useEffect(() => {
-    setCutForms(
-      Array.from({ length: cutNum }, (_, index) => ({
-        //props.cutNum의 길이만큼 새로운 배열을 생성
-        other: "", //배열의 각 요소는 other, place, action, emotion 프로퍼티를 가진 객체
-        place: "",
-        action: "",
-        emotion: 1, //이때, emotion 프로퍼티는 기본값으로 1이 설정
-        date: date,
-        // 현재 날짜를 기본값으로 설정
-        orderNum: index,
-      }))
-    );
-  }, []);
+    if (cutNum) {
+      const initialCutForms = Array.from(
+        { length: parseInt(cutNum) },
+        (_, index) => ({
+          other: "",
+          place: "", // 초기값 설정
+          action: "",
+          emotion: 1,
+          date: date,
+          orderNum: index,
+        })
+      );
+      setCutForms(initialCutForms);
+    }
+  }, [cutNum, date]);
+
   const handleInputChange = (currentCutIdx, field, value) => {
-    const newCutForms = [...cutForms];
-    newCutForms[currentCutIdx][field] = value;
-    setCutForms(newCutForms);
+    if (currentCutIdx >= 0 && currentCutIdx < cutForms.length) {
+      const newCutForms = cutForms.map((cut, index) =>
+        index === currentCutIdx ? { ...cut, [field]: value } : cut
+      );
+      setCutForms(newCutForms);
+    }
   };
+
   const handleEmotionChange = (selectedOption, index) => {
-    const newCutForms = [...cutForms];
-    newCutForms[index].emotion = parseInt(selectedOption);
-    setCutForms(newCutForms);
+    if (index >= 0 && index < cutForms.length) {
+      const newCutForms = cutForms.map((cut, idx) =>
+        idx === index ? { ...cut, emotion: parseInt(selectedOption) } : cut
+      );
+      setCutForms(newCutForms);
+    }
   };
-  const handlePrevButtonClick = (prevIndex) => {
+
+  const handlePrevButtonClick = () => {
     setCurrentCutIdx((prevIndex) => Math.max(prevIndex - 1, 0));
   };
+
   const handleNextButtonClick = () => {
-    setCurrentCutIdx((prevIndex) => {
-      const nextIndex = prevIndex + 1;
-      return nextIndex >= cutNum ? prevIndex : nextIndex;
-    });
-  }; //다음 cut이 cutNum을 넘어가면 더이상 안넘어가게 하는 로직
+    setCurrentCutIdx((prevIndex) =>
+      Math.min(prevIndex + 1, parseInt(cutNum) - 1)
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,11 +73,11 @@ const Form = (props) => {
       keywords: [cut.other, cut.place, cut.action],
       date: cut.date,
       orderNum: cut.orderNum,
-      // 변경된 부분-> cut의 date 속성을 직접 백엔드에 보냄
     }));
-    console.log("rq", JSON.stringify(requestData));
-    // 버튼을 누르자마자 '/loading' 페이지로 이동
+    console.log("Request Data:", JSON.stringify(requestData));
+
     navigate("/loading");
+
     try {
       const response = await axiosInstance.post(
         `/diaries/${userId}/events`,
@@ -84,7 +97,7 @@ const Form = (props) => {
   return (
     <TotalWrap>
       <FormWrap>
-        <PrevButton
+        <PrevBtn
           src={"/images/PrevButton.png"}
           onClick={handlePrevButtonClick}
         />
@@ -94,12 +107,11 @@ const Form = (props) => {
           handleInputChange={handleInputChange}
           handleEmotionChange={handleEmotionChange}
         />
-        <NextButton
+        <NextBtn
           src={"/images/Nextbutton.png"}
           onClick={handleNextButtonClick}
         />
       </FormWrap>
-
       <SubmitButton onClick={handleSubmit}>제출하기</SubmitButton>
     </TotalWrap>
   );
@@ -111,17 +123,17 @@ const FormWrap = styled.div`
   display: flex;
   margin-bottom: 30px;
 `;
+
 const PrevButton = styled.img`
   width: 30px;
   height: 30px;
   cursor: pointer;
-  //margin-top: 50%; /* Add margin to move the arrow image slightly downwards */
 `;
+
 const NextButton = styled.img`
   width: 30px;
   height: 30px;
   cursor: pointer;
-  //margin-top: 50%; /* Add margin to move the arrow image slightly downwards */
 `;
 
 const SubmitButton = styled.div`
@@ -136,6 +148,7 @@ const SubmitButton = styled.div`
   font-family: Pretendard;
   margin-top: 10px;
 `;
+
 const TotalWrap = styled.div`
   display: flex;
   flex-direction: column;
