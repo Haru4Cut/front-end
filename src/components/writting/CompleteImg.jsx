@@ -35,7 +35,7 @@ const CompleteImg = () => {
     };
     console.log("payload", payload);
     try {
-      const response = await axiosInstance.post(`/diary/${userId}`, payload, {
+      const response = await axiosInstance.post(`/diaries/${userId}`, payload, {
         headers: {
           "Content-Type": "application/json",
         },
