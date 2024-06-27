@@ -12,12 +12,13 @@ const CompleteImg = () => {
   const location = useLocation();
   const { responseData } = location.state || {}; // 추가: location.state가 없을 경우 기본값 설정
   console.log("CompleteImg:", responseData);
-  const date = useSelector((state) => state.diary.date);
+  //const date = useSelector((state) => state.diary.date);
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   // 글자수 표시
   const [textDiary, setTextDiary] = useState("");
   const [inputCount, setInputCount] = useState(0);
   const [userId, setUserId] = useState(localStorage.getItem("userId")); // 로컬 스토리지에서 userId 가져오기
+  const [date, setDate] = useState(localStorage.getItem("date")); // 로컬 스토리지에서 userId 가져오기
   // 일기 완성하기 버튼
   const onCompleteButtonClick = async () => {
     const payload = {
