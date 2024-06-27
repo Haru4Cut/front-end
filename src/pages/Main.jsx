@@ -13,10 +13,10 @@ export default function Main() {
   //       const data = {
   //         cutNum: 1,
   //         imgLinks: [
-  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/34-2024-06-27-0",
+  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/34-2024-06-15-0",
   //         ],
-  //         date: "2024-06-27",
-  //         text: "오늘은 친구들이랑 강남 더클에서 클라이밍을 했다. 밤새고 클라이밍하니까 도파민에 미쳐서 재미있었다!",
+  //         date: "2024-06-15",
+  //         text: "오늘은 집에서 냉면을 먹었다. 더웠는데 너무 시원해서 기분이 좋았다!",
   //       };
 
   //       const response = await axiosInstance.post(`/diaries/${userId}`, data);
