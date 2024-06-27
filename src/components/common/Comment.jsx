@@ -14,6 +14,7 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
       try {
         const response = await axiosInstance.get(`/comments/get/${diaryid}`);
         console.log("다이어리의 코멘트", response.data);
+        setComment(response.data.contents);
       } catch (error) {
         console.error(error);
         try {
@@ -66,7 +67,7 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
           <AnimatedAICommentText>
             AI 친구의 일기 코멘트가 {"\n"}도착했습니다!
           </AnimatedAICommentText>
-          <CommentBox>ddd</CommentBox>
+          <CommentBox>{comment}</CommentBox>
         </AIcommentWrap>
       </Modal>
     </div>
