@@ -12,7 +12,7 @@ const StyledButton = styled(Link)`
   margin-top: ${(props) => props.marginTop || "0px"};
   background-color: ${(props) => props.backgroundColor || "#5370d4"};
   color: ${(props) => props.textColor || "white"};
-  color: white;
+  padding: ${(props) => props.padding};
   font-size: 15px;
   font-weight: 500;
   border-radius: 20px;

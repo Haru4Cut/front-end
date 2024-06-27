@@ -122,7 +122,11 @@ export default function CalendarPage() {
                   </>
                 )}
               </ImgWrap>
-              <Button width="260px" to={`/haru4cut/${diary.diaryId}`}>
+              <Button
+                width="260px"
+                to={`/haru4cut/${diary.diaryId}`}
+                padding="11px 69px"
+              >
                 자세히 보기
               </Button>
             </>
@@ -153,6 +157,7 @@ const CalendarDiaryBox = styled.div`
   height: 43%;
   margin-top: 10px;
   padding: 5px 0px 10px 0px;
+  margin-bottom: 20px;
 `;
 
 const Date = styled.div`

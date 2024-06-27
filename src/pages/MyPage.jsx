@@ -11,12 +11,12 @@ import PencilInfo from "../components/common/PencilInfo";
 import axiosInstance from "../api/axiosInstance";
 import { v4 as uuidv4 } from "uuid";
 import Payment from "../components/common/Payment";
+
 export default function MyPage() {
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
   const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
-
   const [isHovered, setIsHovered] = useState(false);
-  const pencilWrapRef = useRef(null);
+  const questionIconRef = useRef(null);
 
   // 모달창 state
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -73,13 +73,13 @@ export default function MyPage() {
     fetchCharacter();
   }, [userId]);
 
-  // 펜슬 호버 정보 위치
+  // 툴팁 위치
   const getPosition = () => {
-    if (pencilWrapRef.current) {
-      const rect = pencilWrapRef.current.getBoundingClientRect();
+    if (questionIconRef.current) {
+      const rect = questionIconRef.current.getBoundingClientRect();
       return {
-        top: rect.top - 330,
-        left: rect.left - 80,
+        top: rect.top - 40, // 아이콘 바로 위쪽
+        left: rect.left + rect.width / 2, // 아이콘의 중앙 정렬
       };
     }
     return { top: 0, left: 0 };
@@ -125,7 +125,7 @@ export default function MyPage() {
           <Box>
             <CharacterInfoText>보유 연필</CharacterInfoText>
           </Box>
-          <PencilWrap ref={pencilWrapRef}>
+          <PencilWrap>
             <PencilImage src={pencilImg} alt="연필" />
             <PencilText>{character?.pencils}</PencilText>
             <PencilInfo
@@ -137,21 +137,21 @@ export default function MyPage() {
             <AlertIcon
               src={questionIcon}
               alt="물음표 아이콘"
+              ref={questionIconRef}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             />
           </PencilWrap>
           <Box marginTop="10px">
-            <Button
+            <PencilButton
               width="230px"
               height="38px"
-              to="/"
               marginBottom="35px"
               backgroundColor="#6b6b6b"
               onClick={openModal}
             >
               연필 충전하기
-            </Button>
+            </PencilButton>
           </Box>
         </PencilInfoBox>
         <Box>
@@ -414,4 +414,24 @@ const LoadingSpinnerCharacter = styled.img`
 
 const LoadingSpinner = styled.img`
   width: 40px;
+`;
+
+const PencilButton = styled.div`
+  width: ${(props) => props.width || "290px"};
+  height: ${(props) => props.height || "45px"};
+  margin-bottom: ${(props) => props.marginBottom || "0px"};
+  margin-top: ${(props) => props.marginTop || "0px"};
+  background-color: ${(props) => props.backgroundColor || "#5370d4"};
+  color: ${(props) => props.textColor || "white"};
+  padding: ${(props) => props.padding};
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
 `;

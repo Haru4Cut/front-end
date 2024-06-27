@@ -51,7 +51,6 @@ const ExistDiaryWrap = styled.div`
 
 const DiaryButton = styled(Link)`
   width: 95px;
-  height: 38px;
   text-align: center;
   text-decoration: none;
   font-size: 14px;
