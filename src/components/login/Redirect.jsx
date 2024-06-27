@@ -19,7 +19,7 @@ const Redirection = () => {
       if (code) {
         try {
           const response = await axios.post(
-            `${process.env.REACT_APP_API_URL}/users/login/${code}`,
+            `https://haru4cut.site/users/login/${code}`,
             {},
             {
               headers: {

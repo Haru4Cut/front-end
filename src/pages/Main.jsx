@@ -11,15 +11,12 @@ export default function Main() {
   //   const postData = async () => {
   //     try {
   //       const data = {
-  //         cutNum: 4,
+  //         cutNum: 1,
   //         imgLinks: [
-  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/33-2024-06-21-0",
-  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/33-2024-06-21-1",
-  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/33-2024-06-21-2",
-  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/33-2024-06-21-3",
+  //           "https://s3.ap-northeast-2.amazonaws.com/haru4cut/%ED%8F%B4%EB%8D%94%EB%AA%85/34-2024-06-27-0",
   //         ],
-  //         date: "2024-06-21",
-  //         text: "오늘은 친구랑 카페에서 공부를 하다가 사당역 클라이밍장에서 클라이밍을 했다. 그 후 치킨집에서 동아리 친구들과 치맥을 했다. 즐거운 하루였다 ^-^",
+  //         date: "2024-06-27",
+  //         text: "오늘은 친구들이랑 강남 더클에서 클라이밍을 했다. 밤새고 클라이밍하니까 도파민에 미쳐서 재미있었다!",
   //       };
 
   //       const response = await axiosInstance.post(`/diaries/${userId}`, data);
