@@ -147,6 +147,7 @@ export default function Share() {
         marginBottom="20px"
         to="/main"
         height="38px"
+        padding="5px 0px"
       >
         <Icon src={HomeIcon} marginBottom="3px" />
         홈으로 돌아가기
@@ -169,6 +170,7 @@ const MainWrap = styled.div`
   height: 100vh;
   color: #8c8c8c;
   font-size: 14px;
+  padding-bottom: 10px;
 `;
 const DownWrap = styled.div`
   display: flex;
