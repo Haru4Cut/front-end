@@ -68,4 +68,5 @@ const Todays4CutDiary = styled.div`
   color: #3a3a3a;
   font-size: 24px;
   margin-top: 10px;
+  padding-top: 5px;
 `;

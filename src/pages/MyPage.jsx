@@ -258,6 +258,7 @@ const Header = styled.div`
 `;
 
 const MyPageText = styled.div`
+  height: 40px;
   position: absolute;
   left: 50%;
   top: 50%;
