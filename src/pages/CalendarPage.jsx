@@ -126,6 +126,7 @@ export default function CalendarPage() {
                 width="260px"
                 to={`/haru4cut/${diary.diaryId}`}
                 padding="11px 0px"
+                height="20px"
               >
                 자세히 보기
               </Button>
