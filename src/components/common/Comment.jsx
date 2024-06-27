@@ -52,8 +52,8 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
       left: "0",
     },
     content: {
-      width: "60%",
-      height: "50%",
+      width: "80%",
+      height: "60%",
       zIndex: "150",
       position: "absolute",
       top: "50%",
@@ -161,10 +161,10 @@ const AnimatedCommentBox = styled.div`
   line-height: 150%;
   font-family: "KotraHope";
   width: 80%;
-  margin-top: 40px;
+  margin-top: 20px;
   padding: 20px;
   border-radius: 15px;
   opacity: 0;
   animation: ${fadeIn} 2s 4s forwards;
-  padding: 20px;
+  padding: 20px 40px;
 `;
