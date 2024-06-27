@@ -60,9 +60,8 @@ const TodaysDiaryWrap = styled.div`
   flex-direction: column;
   border-radius: 30px;
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
-  width: 80%;
-  height: 45%;
-  padding: 20px;
+  width: 85%;
+  height: 50%;
 `;
 const MemoryDiaryWrap = styled.div`
   display: flex;
@@ -72,9 +71,8 @@ const MemoryDiaryWrap = styled.div`
   justify-content: center;
   flex-direction: column;
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
-  width: 80%;
-  height: 33%;
+  width: 85%;
+  height: 38%;
   margin-top: 12px;
   margin-bottom: 20px;
-  padding: 20px;
 `;
