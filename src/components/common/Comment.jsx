@@ -9,8 +9,6 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
   const [comment, setComment] = useState(null);
   const [showComment, setShowComment] = useState(false);
 
-  console.log(diaryid);
-
   // 선택된 날짜의 다이어리 코멘트 가져오기
   useEffect(() => {
     const fetchComment = async () => {
@@ -18,27 +16,22 @@ const Comment = ({ modalIsOpen, openModal, closeModal, diaryid }) => {
         const response = await axiosInstance.get(`/comments/get/${diaryid}`);
         console.log("다이어리의 코멘트", response.data);
         setComment(response.data.contents);
+        setShowComment(true);
       } catch (error) {
         console.error(error);
         try {
           const response = await axiosInstance.get(`/comments/${diaryid}`, {});
           console.log("코멘트를 불러옵니다", response.data);
+          setComment(response.data.contents);
         } catch (error) {
           console.error(error);
         }
+      } finally {
+        setShowComment(true);
       }
     };
     fetchComment();
   }, [diaryid]);
-
-  useEffect(() => {
-    if (comment) {
-      const timer = setTimeout(() => {
-        setShowComment(true);
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [comment]);
 
   // 모달 스타일
   const customModalStyles = {
@@ -144,7 +137,7 @@ const AnimatedAICommentText = styled.div`
   line-height: 150%;
   margin-top: 10px;
   opacity: 0;
-  animation: ${fadeIn} 2s 2s forwards;
+  animation: ${fadeIn} 1s 2s forwards;
 `;
 
 const CommentWrap = styled.div`
@@ -165,6 +158,6 @@ const AnimatedCommentBox = styled.div`
   padding: 20px;
   border-radius: 15px;
   opacity: 0;
-  animation: ${fadeIn} 2s 4s forwards;
+  animation: ${fadeIn} 1s 3s forwards;
   padding: 20px 40px;
 `;
