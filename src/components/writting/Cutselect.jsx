@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { setCutNum } from "../../store";
+import { useDispatch } from "react-redux";
 
 const CutSelect = () => {
   const [clickedIdx, setClickedIdx] = useState(0);
-  const cutNum = useSelector((state) => {
-    return state.cutNum;
-  }); // Redux 상태를 읽어옴
+  const [cutNum, setLocalCutNum] = useState(
+    parseInt(localStorage.getItem("cutNum")) || 1 // localStorage에서 가져오는 값은 정수로 파싱
+  );
+
   const dispatch = useDispatch();
 
   const handleCutClick = (index) => {
@@ -18,7 +18,7 @@ const CutSelect = () => {
     switch (index) {
       case 0:
         num = 1;
-        break; // 각 case 블록의 마지막에 break를 추가
+        break;
       case 1:
         num = 2;
         break;
@@ -28,10 +28,13 @@ const CutSelect = () => {
       default:
         break;
     }
-    dispatch(setCutNum(num));
-    console.log(num);
+    setLocalCutNum(num);
+    localStorage.setItem("cutNum", num); // 정수로 저장
+    console.log("num", num);
   };
+
   const buttons = ["1cut", "2cut", "4cut"];
+
   return (
     <div>
       <CutSelectWrap>
@@ -43,7 +46,8 @@ const CutSelect = () => {
               onClick={() => {
                 handleCutClick(index);
               }}
-              clicked={clickedIdx == index}
+              clicked={clickedIdx === index}
+              key={index} // key prop을 추가
             >
               {clickedcut}
             </CutButton>
@@ -55,7 +59,7 @@ const CutSelect = () => {
             alt={`${cutNum}cut`}
           />
         </FrameContainer>
-        <SubmitButton to="/writting/date">선택</SubmitButton>
+        <SubmitButton to="/writing/date">선택</SubmitButton>
       </CutSelectWrap>
     </div>
   );
@@ -78,7 +82,7 @@ const SubmitButton = styled(Link)`
 
 const CutButton = styled(Button)`
   background: ${(props) =>
-    props.clicked ? " rgba(83, 112, 212, 1)" : "rgba(232, 234, 236, 1)"};
+    props.clicked ? "rgba(83, 112, 212, 1)" : "rgba(232, 234, 236, 1)"};
   color: ${(props) => (props.clicked ? "white" : "rgba(140, 140, 140, 1)")};
   border: none;
   margin-left: 4vw;

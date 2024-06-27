@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setDate } from "../../store";
-const DateSelect = () => {
-  const dispatch = useDispatch();
-  const date = useSelector((state) => state.date);
 
+const DateSelect = () => {
+  console.log("DateSelect");
+  const [date, setDate] = useState("");
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
@@ -18,8 +16,9 @@ const DateSelect = () => {
 
   useEffect(() => {
     const formattedDate = formatDate(selectedYear, selectedMonth, selectedDay);
-    dispatch(setDate(formattedDate));
-    console.log(formattedDate);
+    setDate(formattedDate);
+    console.log("formattedDate", formattedDate);
+    localStorage.setItem("date", formattedDate); // 로컬 스토리지에 date 저장
   }, [selectedYear, selectedMonth, selectedDay]);
 
   const handleYearChange = (e) => {

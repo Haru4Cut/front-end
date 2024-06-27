@@ -1,22 +1,17 @@
 import styled from "styled-components";
 import Header from "../components/common/Header";
 import DateSelect from "../components/writting/DateSelect";
-import { useLocation } from "react-router-dom";
+
 const DateSelectPage = () => {
   // const location = useLocation();
   // const cutNum = location.state && location.state.cutNum;
+  console.log("DateSelectPage");
   return (
     <div className="wrap">
       <Header />
       <DateSelectWrap>
         <div>
           <DateSelect />
-
-          <div>
-            {" "}
-            {/* cutNum이 존재할 경우에만 출력합니다. */}
-            {/* {cutNum && <p>Cut Number: {cutNum}</p>} */}
-          </div>
         </div>
       </DateSelectWrap>
     </div>
