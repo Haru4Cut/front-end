@@ -170,7 +170,7 @@ const MainWrap = styled.div`
   height: 100vh;
   color: #8c8c8c;
   font-size: 14px;
-  padding-bottom: 10px;
+  padding: 20px 0px;
 `;
 const DownWrap = styled.div`
   display: flex;
@@ -214,6 +214,7 @@ const TodaysDiaryWrap = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 30px;
+  padding: 10px 0px;
   width: 85%;
   height: 80%;
   margin-bottom: 20px;
