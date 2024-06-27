@@ -13,7 +13,7 @@ const CompleteImg = () => {
   const { responseData } = location.state || {}; // 추가: location.state가 없을 경우 기본값 설정
   console.log("CompleteImg:", responseData);
   const userId = useSelector((state) => state.user.userId);
-
+  console.log("userIdddd:", userId);
   const date = useSelector((state) => state.diary.date);
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
   // 글자수 표시
