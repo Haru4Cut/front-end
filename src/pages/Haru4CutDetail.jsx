@@ -199,6 +199,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                   onClick={onEditButtonClick}
                   marginBottom="6px"
                   height="38px"
+                  padding="5px 0px"
                 >
                   <StyledIcon src={DiaryEditIcon} />
                   일기 수정하기
@@ -209,6 +210,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                   marginBottom="6px"
                   to={`/haru4cut/${diaryid}/share`}
                   height="38px"
+                  padding="5px 0px"
                 >
                   <StyledIcon src={ShareIcon} />
                   일기 완성하기
