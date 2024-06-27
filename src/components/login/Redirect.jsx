@@ -60,7 +60,7 @@ const Redirection = () => {
     };
 
     fetchData();
-  }, []);
+  }, [navigate, dispatch]);
   const userId = useSelector((state) => state.user.userId);
   console.log("userIdddd:", userId);
 
