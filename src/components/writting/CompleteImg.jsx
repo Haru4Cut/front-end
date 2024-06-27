@@ -10,7 +10,10 @@ import Header from "../common/Header";
 const CompleteImg = () => {
   const defaultTextAreaValue = `자세한 이 날 스토리, 네컷일기에 대한 \n느낌 등 일기를 더 기록해보세요 :) \n\n기록할 것이 없다면 줄글 일기 없이\n사진만으로도 일기를 완성할 수 있어요!`;
   const location = useLocation();
-  const { responseData } = location.state || {}; // 추가: location.state가 없을 경우 기본값 설정
+  const { responseData, requestData } = location.state || {};
+  const keyword = requestData;
+  console.log("Response Data:", responseData);
+  console.log("Request Data:", requestData);
   console.log("CompleteImg:", responseData);
   //const date = useSelector((state) => state.diary.date);
   const [diaries, setDiaries] = useState([]); // 해당 날짜의 일기 데이터
@@ -22,12 +25,15 @@ const CompleteImg = () => {
   // 일기 완성하기 버튼
   const onCompleteButtonClick = async () => {
     const payload = {
-      cutNum: diaries.length,
-      imgLinks: diaries.map((diary) => diary.url),
-      date: date, // Example date, you can update it as needed
-      text: textDiary,
+      keywords: keyword,
+      etc: {
+        cutNum: diaries.length,
+        imgLinks: diaries.map((diary) => diary.url),
+        date: date, // Example date, you can update it as needed
+        text: textDiary,
+      },
     };
-
+    console.log("payload", payload);
     try {
       const response = await axiosInstance.post(`/diary/${userId}`, payload, {
         headers: {
