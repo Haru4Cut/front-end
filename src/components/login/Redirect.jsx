@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserId } from "../../store";
-import axios from "axios";
 
 const Redirection = () => {
   console.log("test");
@@ -18,7 +17,7 @@ const Redirection = () => {
 
       if (code) {
         try {
-          const response = await axios.post(
+          const response = await axiosInstance.post(
             `https://haru4cut.site/users/login/${code}`,
             {},
             {
@@ -61,8 +60,6 @@ const Redirection = () => {
 
     fetchData();
   }, [navigate, dispatch]);
-  const userId = useSelector((state) => state.user.userId);
-  console.log("userIdddd:", userId);
 
   return <div>Redirecting...</div>;
 };

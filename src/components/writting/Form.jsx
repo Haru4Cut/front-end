@@ -12,7 +12,7 @@ const Form = (props) => {
 
   const cutNum = useSelector((state) => state.cutNum);
   const date = useSelector((state) => state.date);
-  const userId = useSelector((state) => state.userId);
+  const [userId, setUserId] = useState(localStorage.getItem("userId")); // 로컬 스토리지에서 userId 가져오기
 
   console.log("userId:", userId);
   const [currentCutIdx, setCurrentCutIdx] = useState(0);
