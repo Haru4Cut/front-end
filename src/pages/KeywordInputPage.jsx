@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Form from "../components/writting/Form";
 
 import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 
 const KeywordInputPage = () => {
   const navigate = useNavigate();
@@ -67,17 +68,9 @@ const KeywordInputPage = () => {
     navigate("/loading");
 
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `/diaries/${userId}/events`,
-        JSON.stringify(requestData),
-        {
-          headers: {
-            Accept: "*/*",
-            "Content-Type": `application/json`,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-          },
-        }
+        JSON.stringify(requestData)
       );
       console.log("서버 응답:", response.data);
       // 응답을 받은 후 '/createdimage' 페이지로 이동
