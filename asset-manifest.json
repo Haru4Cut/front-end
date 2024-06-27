@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/front-end/static/css/main.04e683d2.css",
-    "main.js": "/front-end/static/js/main.88e254b2.js",
+    "main.js": "/front-end/static/js/main.92de8c2f.js",
     "static/media/KOTRAHOPE.ttf": "/front-end/static/media/KOTRAHOPE.a239803da24b52b850f9.ttf",
     "static/media/diaryImg.svg": "/front-end/static/media/diaryImg.6682157930e4bd5cd231d4d8bbb53860.svg",
     "static/media/CharacterIcon.svg": "/front-end/static/media/CharacterIcon.6c6ea275cd45f0e7eddbc722fbdefe34.svg",
@@ -21,6 +21,7 @@
     "static/media/photo.svg": "/front-end/static/media/photo.e9e2e50b331fd4f924386c31ead58834.svg",
     "static/media/LogoSquare.svg": "/front-end/static/media/LogoSquare.840ce76c8b560e35d4cb3ce8337b05be.svg",
     "static/media/kakaologin.svg": "/front-end/static/media/kakaologin.f3f790c137dfbf734851e9d108821046.svg",
+    "static/media/fourcut.svg": "/front-end/static/media/fourcut.587922ae09c97ef7bdfb798218d3ac34.svg",
     "static/media/editIcon.svg": "/front-end/static/media/editIcon.bc52847914512cd559e35ba515df901b.svg",
     "static/media/DiaryEditIcon.svg": "/front-end/static/media/DiaryEditIcon.0e3053d3a0ae85dd255202388c53762a.svg",
     "static/media/combination.svg": "/front-end/static/media/combination.2784ea7f3d989d9fb00fafa3a44c404f.svg",
@@ -36,13 +37,17 @@
     "static/media/DownloadIcon.svg": "/front-end/static/media/DownloadIcon.b610240b5938f2cdc054dde3b9f4d35f.svg",
     "static/media/QuestionIcon.svg": "/front-end/static/media/QuestionIcon.4e4a17eca5ba46e3cb0c4c9d808238e9.svg",
     "static/media/MyPageIcon.svg": "/front-end/static/media/MyPageIcon.165ef43318d04056bae2f95fc017c570.svg",
+    "static/media/twocut.svg": "/front-end/static/media/twocut.48113b1b62c6f0c167648c418d58de93.svg",
     "static/media/closeIcon.svg": "/front-end/static/media/closeIcon.2325d001bc414a2f6d333ff3311c1641.svg",
+    "static/media/onecut.svg": "/front-end/static/media/onecut.2c83f9692c8deef83f91c0732e9c9060.svg",
+    "static/media/PrevButton.svg": "/front-end/static/media/PrevButton.d79f759777bd803c6db53cafb5cdc84a.svg",
+    "static/media/NextButton.svg": "/front-end/static/media/NextButton.07c50ce219df7d0e857d1711e299e3b7.svg",
     "static/media/leftIcon.svg": "/front-end/static/media/leftIcon.f56d8355dd016ba29f370deb082c149d.svg",
     "main.04e683d2.css.map": "/front-end/static/css/main.04e683d2.css.map",
-    "main.88e254b2.js.map": "/front-end/static/js/main.88e254b2.js.map"
+    "main.92de8c2f.js.map": "/front-end/static/js/main.92de8c2f.js.map"
   },
   "entrypoints": [
     "static/css/main.04e683d2.css",
-    "static/js/main.88e254b2.js"
+    "static/js/main.92de8c2f.js"
   ]
 }
