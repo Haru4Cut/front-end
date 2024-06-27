@@ -187,7 +187,7 @@ const ImgWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 240px;
+  width: 220px;
   margin: 10px 0px 10px 0px;
 `;
 

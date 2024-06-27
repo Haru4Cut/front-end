@@ -214,7 +214,7 @@ const TodaysDiaryWrap = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 30px;
-  padding: 10px 0px;
+  padding: 20px 0px;
   width: 85%;
   height: 80%;
   margin-bottom: 20px;

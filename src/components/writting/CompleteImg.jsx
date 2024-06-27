@@ -140,7 +140,7 @@ const SubmitButton = styled.div`
   cursor: pointer;
   font-family: Pretendard;
   margin-bottom: 20px;
-  height: 38px;
+  height: 20px;
 `;
 const Todays4CutDiary = styled.div`
   align-items: center;
