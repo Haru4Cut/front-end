@@ -126,6 +126,7 @@ export default function CalendarPage() {
                 width="260px"
                 to={`/haru4cut/${diary.diaryId}`}
                 padding="11px 0px"
+                height="20px"
               >
                 자세히 보기
               </Button>
@@ -154,7 +155,7 @@ const CalendarDiaryBox = styled.div`
   border-radius: 20px;
   filter: drop-shadow(0px 1px 2px rgba(27, 29, 31, 0.1));
   width: 85%;
-  height: 43%;
+  height: 45%;
   margin-top: 10px;
   padding: 5px 0px 10px 0px;
   margin-bottom: 20px;
@@ -169,17 +170,17 @@ const Date = styled.div`
 
 const DiaryImage1 = styled.img`
   margin: 5px;
-  width: 120px;
+  width: 110px;
 `;
 
 const DiaryImage2 = styled.img`
   margin: 5px;
-  width: 180px;
+  width: 160px;
 `;
 
 const DiaryImage4 = styled.img`
   margin: 5px;
-  width: 100px;
+  width: 9dvb;
 `;
 
 const ImgWrap = styled.div`
