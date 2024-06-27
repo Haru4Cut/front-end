@@ -3,7 +3,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-
+import { ReactComponent as OneCut } from "../../assets/images/onecut.svg";
+import { ReactComponent as TwoCut } from "../../assets/images/twocut.svg";
+import { ReactComponent as FourCut } from "../../assets/images/fourcut.svg";
 const CutSelect = () => {
   const [clickedIdx, setClickedIdx] = useState(0);
   const [cutNum, setLocalCutNum] = useState(
@@ -54,10 +56,10 @@ const CutSelect = () => {
           ))}
         </div>
         <FrameContainer>
-          <FrameImage
-            src={`/images/${cutNum}cutframe.png`}
-            alt={`${cutNum}cut`}
-          />
+          {/* if 문을 사용하여 cutNum에 따라 다른 SVG 이미지를 조건부로 렌더링 */}
+          {cutNum === 1 && <OneCut />}
+          {cutNum === 2 && <TwoCut />}
+          {cutNum === 4 && <FourCut />}
         </FrameContainer>
         <SubmitButton to="/writting/date">선택</SubmitButton>
       </CutSelectWrap>

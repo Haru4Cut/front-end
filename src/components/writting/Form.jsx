@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import FourInput from "./FourInput";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
+import { ReactComponent as PrevBtn } from "../../assets/images/PrevButton.svg";
+import { ReactComponent as NextBtn } from "../../assets/images/NextButton.svg";
 
 const Form = (props) => {
   const navigate = useNavigate();
@@ -95,7 +97,7 @@ const Form = (props) => {
   return (
     <TotalWrap>
       <FormWrap>
-        <PrevButton
+        <PrevBtn
           src={"/images/PrevButton.png"}
           onClick={handlePrevButtonClick}
         />
@@ -105,7 +107,7 @@ const Form = (props) => {
           handleInputChange={handleInputChange}
           handleEmotionChange={handleEmotionChange}
         />
-        <NextButton
+        <NextBtn
           src={"/images/Nextbutton.png"}
           onClick={handleNextButtonClick}
         />
