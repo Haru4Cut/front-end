@@ -26,13 +26,10 @@ const CompleteImg = () => {
   // 일기 완성하기 버튼
   const onCompleteButtonClick = async () => {
     const payload = {
-      keywords: keyword,
-      etc: {
-        cutNum: diaries.length,
-        imgLinks: diaries.map((diary) => diary.url),
-        date: date, // Example date, you can update it as needed
-        text: textDiary,
-      },
+      text: textDiary,
+      imgLinks: diaries.map((diary) => diary.url),
+      cutNum: diaries.length,
+      date: date, // Example date, you can update it as needed
     };
     ///haru4cut/:diaryid/share
     console.log("payload", payload);
