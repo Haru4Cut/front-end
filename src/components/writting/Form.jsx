@@ -86,7 +86,7 @@ const Form = (props) => {
       console.log("서버 응답:", response.data);
 
       navigate(`/diaries/${userId}/events`, {
-        state: { responseData: response.data },
+        state: { responseData: response.data, requestData: requestData },
       });
     } catch (error) {
       console.error("서버 요청 오류:", error);
