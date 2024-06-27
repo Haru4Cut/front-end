@@ -22,7 +22,7 @@ export default function Header() {
 
 const HeaderWrap = styled.div`
   display: flex;
-  margin: 40px 60px 21px 60px;
+  margin: 18px 60px 20px 60px;
   align-items: center;
   width: 80%;
 `;

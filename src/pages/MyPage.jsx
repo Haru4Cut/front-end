@@ -10,13 +10,23 @@ import questionIcon from "../assets/images/Question_fill.svg";
 import PencilInfo from "../components/common/PencilInfo";
 import axiosInstance from "../api/axiosInstance";
 import { v4 as uuidv4 } from "uuid";
-
+import Payment from "../components/common/Payment";
 export default function MyPage() {
   const [isNickNameEditing, setIsNickNameEditing] = useState(false); // 닉네임 수정중임을 나타내는 상태
   const [editedNickname, setEditedNickname] = useState(""); // 수정된 닉네임을 저장하는 상태
 
   const [isHovered, setIsHovered] = useState(false);
   const pencilWrapRef = useRef(null);
+
+  // 모달창 state
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -48,6 +58,7 @@ export default function MyPage() {
 
   const [character, setCharacter] = useState();
 
+  // 캐릭터 정보 받아오기
   useEffect(() => {
     const fetchCharacter = async () => {
       try {
@@ -137,6 +148,7 @@ export default function MyPage() {
               to="/"
               marginBottom="35px"
               backgroundColor="#6b6b6b"
+              onClick={openModal}
             >
               연필 충전하기
             </Button>
@@ -217,6 +229,11 @@ export default function MyPage() {
           <LoadingSpinnerCharacter src={LoadingImage} alt="로딩중" />
         )}
       </CharacterInfoWrap>
+      <Payment
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
     </MyPageWrap>
   );
 }
@@ -231,7 +248,8 @@ const MyPageWrap = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  height: 80px;
+  height: 100px;
+  padding: 10px 0px;
   margin-top: 10px;
   position: relative;
   font-family: "KotraHope";
@@ -296,7 +314,8 @@ const ProfileImgWrap = styled.div`
 `;
 
 const ProfileImg = styled.img`
-  width: 125px;
+  width: 115px;
+  margin-top: 10px;
 `;
 
 const CharacterInfoWrap = styled.div`

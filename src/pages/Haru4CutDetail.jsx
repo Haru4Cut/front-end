@@ -195,7 +195,11 @@ export default function Haru4CutDetail({ selectedDate }) {
             {showDiary ? (
               <>
                 <DiaryText>{diaries.text}</DiaryText>
-                <Button onClick={onEditButtonClick} marginBottom="6px">
+                <Button
+                  onClick={onEditButtonClick}
+                  marginBottom="6px"
+                  height="38px"
+                >
                   <StyledIcon src={DiaryEditIcon} />
                   일기 수정하기
                 </Button>
@@ -204,6 +208,7 @@ export default function Haru4CutDetail({ selectedDate }) {
                   backgroundColor="#8A8A8A"
                   marginBottom="6px"
                   to={`/haru4cut/${diaryid}/share`}
+                  height="38px"
                 >
                   <StyledIcon src={ShareIcon} />
                   일기 완성하기
@@ -253,7 +258,7 @@ const TodaysDiaryWrap = styled.div`
   margin-bottom: 20px;
 `;
 const Date = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   color: #5b8fbe;
   font-weight: 600;
   margin-top: 20px;
@@ -264,7 +269,7 @@ const Todays4CutDiary = styled.div`
   font-family: "KotraHope";
   color: #3a3a3a;
   font-size: 28px;
-  margin-top: 10px;
+  margin-top: 5px;
 `;
 // 4컷일 때 다이어리 이미지
 const DiaryImage = styled.img`
