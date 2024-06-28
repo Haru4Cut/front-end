@@ -44,7 +44,11 @@ const CompleteImg = () => {
       const diaryid = response.data.diaryId;
       navigate(`/haru4cut/${diaryid}/share`);
     } catch (error) {
-      console.error("Error:", error);
+      if (error.response && error.response.status === 409) {
+        alert("오늘의 일기를 이미 작성하셨습니다.");
+      } else {
+        console.error("Error:", error);
+      }
     }
   };
 
