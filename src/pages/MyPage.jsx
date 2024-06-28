@@ -78,8 +78,8 @@ export default function MyPage() {
     if (questionIconRef.current) {
       const rect = questionIconRef.current.getBoundingClientRect();
       return {
-        top: rect.top - 60,
-        left: rect.left - 50,
+        top: rect.top - 80,
+        left: rect.left - 70,
       };
     }
     return { top: 0, left: 0 };
