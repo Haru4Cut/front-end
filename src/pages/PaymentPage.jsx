@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import axiosInstance from "../api/axiosInstance";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as KakaoPay } from "../assets/images/kakaopay/03_SVG/combination.svg";
 const PaymentPage = () => {
   const selectedPencil = useSelector((state) => state.selectedBox);
+  const navigate = useNavigate();
   // Accessing userId from Redux store
   const userId = useSelector((state) => state.userId);
   // 고유한 merchant_uid를 생성하는 함수
@@ -80,6 +82,8 @@ const PaymentPage = () => {
         if (success_msg) {
           alert(success_msg);
           console.log("결제 성공");
+          //경로이동
+          navigate(`/main`);
         } else {
           console.log("결제 검증 실패");
           alert("결제 검증에 실패했습니다. 다시 시도해주세요.");
